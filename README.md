@@ -12,7 +12,7 @@ Projeto desenvolvido para aplicar os conhecimentos adquiridos ao longo do Ciclo 
 - Prettier
 - Figma
 
-## Participam desse projeto os seguintes integrantes:
+## Integrantes do grupo:
 
 - Antônio Francisco Alves dos Santos
 - Daniel Barbosa Rocha
