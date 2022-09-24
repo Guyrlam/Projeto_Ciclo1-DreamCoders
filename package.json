@@ -1,0 +1,31 @@
+{
+  "name": "Projeto Ciclo1: DreamCoders",
+  "version": "1.0.0",
+  "description": "Projeto criado para a finalização do primeiro ciclo do Alpha Edtech.",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon ./src/server.js",
+    "prettier": "npx prettier --write --ignore-unknown ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Guyrlam/Projeto_Ciclo1-DreamCoders.git"
+  },
+  "author": "Antônio Francisco Alves dos Santos, Daniel Barbosa Rocha, Guyrlam Silva Duque, Ronaldo Scarpate.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Guyrlam/Projeto_Ciclo1-DreamCoders/issues"
+  },
+  "homepage": "https://github.com/Guyrlam/Projeto_Ciclo1-DreamCoders#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20",
+    "prettier": "^2.7.1"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "fs": "^0.0.1-security",
+    "pg": "^8.8.0"
+  }
+}
