@@ -2,7 +2,7 @@
   "name": "Projeto Ciclo1: DreamCoders",
   "version": "1.0.0",
   "description": "Projeto criado para a finalização do primeiro ciclo do Alpha Edtech.",
-  "main": "server.js",
+  "main": "./server/server.js",
   "scripts": {
     "start": "nodemon ./src/server.js",
     "prettier": "npx prettier --write --ignore-unknown ."
