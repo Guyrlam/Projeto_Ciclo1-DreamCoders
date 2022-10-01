@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon ./src/server.js",
     "prettier": "npx prettier --write --ignore-unknown .",
-    "eslint": "npx eslint --fix src --ext .js"
+    "eslint": "npx eslint --fix ./ --ext .js"
   },
   "repository": {
     "type": "git",
