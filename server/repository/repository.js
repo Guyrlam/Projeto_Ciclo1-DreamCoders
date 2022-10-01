@@ -24,4 +24,4 @@ async function rollback(client) {
     await client.query('ROLLBACK');
 }
 
-module.exports = { pool, begin, commit, rollback };
+module.exports = { client, begin, commit, rollback };
