@@ -1,7 +1,7 @@
 const { Pool } = require('pg');
 require('dotenv').config();
 
-const client = new Pool({
+const pool = new Pool({
     user: process.env.PGUSER,
     password: process.env.PGPASSWORD,
     host: process.env.PGHOST,
@@ -24,4 +24,4 @@ async function rollback(client) {
     await client.query('ROLLBACK');
 }
 
-module.exports = { client, begin, commit, rollback };
+module.exports = { pool, begin, commit, rollback };
