@@ -46,7 +46,7 @@ CREATE TABLE public.Images (
 	id uuid NOT NULL PRIMARY KEY default gen_random_uuid(),
 	file_name varchar(80) NOT NULL,
 	file_path TEXT NOT NULL,
-	added_at timestamptz,
+	added_at timestamptz default now(),
 	deleted_at timestamptz
 );
 
