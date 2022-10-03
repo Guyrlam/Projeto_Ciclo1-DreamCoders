@@ -1,4 +1,4 @@
-const { pool } = require('../server')
+const { pool } = require('./repository')
 
 const newCategory = {
     text: "insert into categories(category) values($1);",
