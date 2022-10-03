@@ -80,8 +80,7 @@ CREATE TABLE public.Book (
 	category_id uuid NOT NULL,
     FOREIGN KEY (category_id) REFERENCES Categories(id),
 	synopsis TEXT NOT NULL,
-	sale BOOLEAN NOT NULL,
-	swao BOOLEAN NOT NULL,
+	active BOOLEAN NOT NULL,
 	created_at timestamptz default now(),
 	updated_at timestamptz,
 	deleted_at timestamptz
@@ -105,7 +104,7 @@ CREATE TABLE public.Book_images (
     FOREIGN KEY (book_id) REFERENCES Book(id),
 	image_id uuid NOT NULL,
     FOREIGN KEY (image_id) REFERENCES Images(id),
-	CONSTRAINT book_images_pk PRIMARY KEY default gen_random_uuid() (book_id,image_id)
+	CONSTRAINT book_images_pk PRIMARY KEY (book_id,image_id)
 );
 
 --default values
