@@ -5,29 +5,41 @@ require('dotenv').config();
 const app = express();
 const { NDPORT, NDHOST } = process.env;
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/uploads', express.static(`./server/uploads/`));
+
 const diskStorage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, `${__dirname}/uploads/`);
+        cb(null, `./server/uploads/`);
     },
     filename: (req, file, cb) => {
         cb(null, new Date().toISOString().replace(/:/g, '-') + file.originalname);
     },
 });
 
+const imageFilter = (re, file, cb) => {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+        cb(null, true);
+    } else {
+        cb(null, false);
+    }
+};
+
 const upload = multer({
     storage: diskStorage,
     limits: {
         fileSize: 1024 * 1024 * 5,
     },
+    fileFilter: imageFilter,
 });
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
 app.post('/', upload.single('user-image'), (req, res) => {
-    console.log(req.file);
-    /* console.log(req.foto); */
-    res.json({ response: 'ok' });
+    const obj = {
+        texto: req.body,
+        image: req.file,
+    };
+    res.json(obj);
 });
 
 app.listen(NDPORT, () => {
