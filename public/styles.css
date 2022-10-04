@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Spectral+SC:wght@700&display=swap');
 
+/* ----- defining palette colors ----- */
 :root {
-    /* defining palette colors */
     --green: #12492F;
     --dark-blue-green: #0A2F35;
     --orange: #F56038;
@@ -14,10 +14,11 @@
     padding: 0;
     margin: 0;
     list-style: none;
-    ;
+    text-decoration: none;
+    outline: none;
 }
 
-
+/* general content */
 body {
     background-color: var(--dark-blue-green);
     font-family: 'Source Sans Pro', sans-serif;
@@ -35,6 +36,24 @@ body {
     font-size: 36px;
 }
 
+a:link {
+    transition: 400ms;
+    color: initial;
+}
+
+a:hover {
+    font-weight: bold;
+    transition: 200ms;
+}
+
+button {
+    background-color: var(--orange);
+    border-radius: 10px;
+    width: 50px;
+    word-break: keep-all;
+    text-overflow: clip;
+}
+
 section,
 nav {
     display: flex;
@@ -44,6 +63,10 @@ nav {
 ul {
     display: inherit;
     gap: inherit;
-    justify-content: space-evenly;
+    justify-content: space-around;
     /* background-color: var(--dark-pale); */
+}
+
+main {
+    color: #FFF;
 }
