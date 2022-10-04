@@ -6,7 +6,6 @@ const insert = {
 };
 
 async function newImage(array) {
-    console.log(array);
     insert.values = array;
     await pool.query(insert);
 }

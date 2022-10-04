@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { insertWriter } = require('../controllers/writer-controller')
+const { insertWriter } = require('../controllers/writer-controller');
 
 const writerRoute = Router();
 

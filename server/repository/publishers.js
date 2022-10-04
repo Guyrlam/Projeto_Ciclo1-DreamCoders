@@ -1,13 +1,13 @@
-const { pool } = require('./repository')
+const { pool } = require('./repository');
 
 const Publisher = {
-    text: "insert into publishers(publisher) values($1);",
-    values: []
+    text: 'insert into publishers(publisher) values($1);',
+    values: [],
+};
+
+async function newPublisher(array) {
+    Publisher.values = array;
+    await pool.query(Publisher);
 }
 
-async function newPublisher(array){
-    Publisher.values = array
-    await pool.query(Publisher)
-}
-
-module.exports = { newPublisher }
+module.exports = { newPublisher };
