@@ -5,9 +5,9 @@ const insert = {
 
 const select = {
     text: `SELECT 
-    $1 
+    id 
     FROM Images
-    WHERE filename = $2`,
+    WHERE file_name = $1`,
     values: [],
 };
 
@@ -17,8 +17,9 @@ async function newImage(name, path, client) {
 }
 
 async function selectByName(property, filename, client) {
-    select.values = [property, filename];
-    await client.query(select);
+    select.values = [filename];
+    const response = await client.query(select);
+    return response.rows[0].id;
 }
 
 module.exports = { newImage, selectByName };

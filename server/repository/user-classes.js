@@ -1,7 +1,7 @@
 const select = {
     text: `SELECT 
     id 
-    FROM Classes
+    FROM user_classes
     WHERE class = $1`,
     values: [],
 };
@@ -9,7 +9,7 @@ const select = {
 async function selectClassID(userType, client) {
     select.values = [userType];
     const response = await client.query(select);
-    return response;
+    return response.rows[0].id;
 }
 
 module.exports = { selectClassID };

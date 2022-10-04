@@ -2,7 +2,7 @@
 CREATE DATABASE Tunel_do_Saber;
 
 ---Criação das tabelas no Schema public
-CREATE TABLE public.Class (
+CREATE TABLE public.User_classes (
 	id uuid NOT NULL PRIMARY KEY default gen_random_uuid(),
 	class varchar(80) NOT NULL,
 	created_at timestamptz default now(),
@@ -57,7 +57,7 @@ CREATE TABLE public.User_profile (
     image_id uuid NOT NULL,
     FOREIGN KEY (image_id) REFERENCES Images(id),
 	class_id uuid NOT NULL,
-    FOREIGN KEY (class_id) REFERENCES Class(id),
+    FOREIGN KEY (class_id) REFERENCES User_classes(id),
 	email varchar(80) NOT NULL,
 	telephone varchar(11),
 	password varchar(80) NOT NULL,
@@ -110,5 +110,5 @@ CREATE TABLE public.Book_images (
 );
 
 --default values
-INSERT INTO Class(class) VALUES('cliente'), ('administrador');
+INSERT INTO User_classes(class) VALUES('cliente'), ('administrador');
 INSERT INTO Book_conditions(condition) VALUES('antigo'), ('novo'), ('seminovo');

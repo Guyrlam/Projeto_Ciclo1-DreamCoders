@@ -42,7 +42,7 @@ app.use('/uploads', express.static(`./server/uploads/`));
 app.use('/publisher', publisherRoute);
 app.use('/writers', writerRoute);
 app.use('/categories', categoryRoute);
-app.use('/user', userRoute);
+app.use('/user', upload.single('image'), userRoute);
 
 app.listen(NDPORT, () => {
     // eslint-disable-next-line no-console

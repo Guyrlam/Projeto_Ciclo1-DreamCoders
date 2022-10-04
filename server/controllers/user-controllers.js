@@ -1,6 +1,6 @@
 const { addUser } = require('../services/user-services');
 
-async function insertImage(req, res) {
+async function insertUser(req, res) {
     const services = await addUser(req.body, req.file);
 
     if (services.Error !== null) {
@@ -14,4 +14,4 @@ async function insertImage(req, res) {
     }
 }
 
-module.exports = { insertImage };
+module.exports = { insertUser };
