@@ -12,7 +12,7 @@
 
 <body>
     <header>
-        <section class="green-text">
+        <section class="green-text" id="header-top">
             <a href="http://">
                 <p>HOME</p>
             </a>
@@ -20,19 +20,29 @@
                 <p>CONTATO</p>
             </a>
         </section>
-        <section>
-            <h1 class="white-text">Túnel do Saber</h1>
-            <div>
-                <nav class="search">
-
-                </nav>
-                <input type="text" placeholder="O que você está procurando?">
-                <img src="./assets/search-icon.svg" alt="inserir termo de pesquisa">
-                <button>Fazer Login</button>
+        <section id="header-middle">
+            <div id="header-title">
+                <h1 class="white-text" id="tunel-do-saber">Túnel do Saber</h1>
             </div>
+
+            <div id="header-search">
+                <div id="header-search-filter">
+                    <img src="./assets/icon-filter.png" alt="" class="icon-search">
+                </div>
+                <input type="text" placeholder="O que você está procurando?" id="header-search-bar">
+                <button id="header-search-button">
+                    <img src="./assets/search-icon.svg" alt="inserir termo de pesquisa" class="icon-search">
+                </button>
+
+            </div>
+            <div id="header-login">
+                <button id="header-button-login">Fazer Login</button>
+            </div>
+
+
         </section>
-        <nav class="green-text">
-            <ul>
+        <nav class="green-text" id="header-bottom">
+            <ul id="header-ul">
                 <li>*~Categorias~*</li>
 
                 <a href="http://">
@@ -56,16 +66,18 @@
 
     <main>
         <section>
-            <div>
-                <p>Contribua para que a cultura do livro físico viva. Compartilhe sua coleção com o mundo!</p>
-                <p>Sabe aquele livro parado em sua estante há meses ou até anos? Já pensou em trocá-lo com outras
+            <div id="main-text">
+                <h1 id="title-main-text">Contribua para que a cultura do livro físico viva. Compartilhe sua coleção com
+                    o mundo!</h1>
+                <p id="p-main-text">Sabe aquele livro parado em sua estante há meses ou até anos? Já pensou em trocá-lo
+                    com outras
                     pessoas e
                     permitir que ambos os envolvidos desfrutem das incríveis experiências que esses itens podem
                     proporcionar? Se
                     ficou interessado, crie já seu perfil e venha participar da nossa comunidade!</p>
-                <button>Cadastre-se</button>
+                <button id="button-main" class="button-border-radius">Cadastre-se</button>
             </div>
-            <img src="./assets/main-image.svg" alt="contribua para a cultura da troca de livros">
+            <img src="./assets/main-image.svg" alt="contribua para a cultura da troca de livros" id="main-img">
         </section>
 
         <section class="signup-modal">
