@@ -5,6 +5,7 @@ require('dotenv').config();
 const { imagesRoute } = require('./routes/image-router');
 const { publisherRoute } = require('./routes/publisher-router');
 const { writerRoute } = require('./routes/writer-route')
+const { categoryRoute } = require('./routes/category-route')
 
 const app = express();
 const { NDPORT, NDHOST } = process.env;
@@ -41,6 +42,7 @@ app.use('/uploads', express.static(`./server/uploads/`));
 app.use('/images', upload.single('image'), imagesRoute);
 app.use('/publisher', publisherRoute)
 app.use('/writers', writerRoute)
+app.use('/categories', categoryRoute)
 
 app.listen(NDPORT, () => {
     // eslint-disable-next-line no-console

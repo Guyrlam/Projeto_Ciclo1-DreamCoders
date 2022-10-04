@@ -10,5 +10,4 @@ async function newPublisher(array){
     await pool.query(Publisher)
 }
 
-
 module.exports = { newPublisher }
