@@ -1,14 +1,13 @@
-const { pool } = require('./repository')
+const { pool } = require('./repository');
 
 const Writer = {
-    text: "insert into writers(writer) values($1);",
-    values: []
+    text: 'insert into writers(writer) values($1);',
+    values: [],
+};
+
+async function newWriter(array) {
+    Writer.values = array;
+    await pool.query(Writer);
 }
 
-async function newWriter(array){
-    Writer.values = array
-    await pool.query(Writer)
-
-}
-
-module.exports = { newWriter }
+module.exports = { newWriter };

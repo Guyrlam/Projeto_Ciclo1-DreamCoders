@@ -2,8 +2,10 @@ const express = require('express');
 const multer = require('multer');
 require('dotenv').config();
 
-const { imagesRoute } = require('./routes/image-router');
 const { publisherRoute } = require('./routes/publisher-router');
+const { writerRoute } = require('./routes/writer-route');
+const { categoryRoute } = require('./routes/category-route');
+const { userRoute } = require('./routes/user-router');
 
 const app = express();
 const { NDPORT, NDHOST } = process.env;
@@ -37,14 +39,14 @@ const upload = multer({
 });
 
 app.use('/uploads', express.static(`./server/uploads/`));
-app.use('/images', upload.single('image'), imagesRoute);
-app.use('/publisher', publisherRoute)
-
+app.use('/publisher', publisherRoute);
+app.use('/writers', writerRoute);
+app.use('/categories', categoryRoute);
+app.use('/user', upload.single('image'), userRoute);
 
 app.listen(NDPORT, () => {
     // eslint-disable-next-line no-console
     console.log(`Server started at http://${NDHOST}:${NDPORT}`);
 });
-
 
 module.exports = { app, upload };
