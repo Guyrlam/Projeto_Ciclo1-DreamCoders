@@ -1,13 +1,24 @@
-const { pool } = require('./repository');
-
 const insert = {
     text: 'INSERT INTO Images(file_name, file_path) VALUES($1, $2)',
     values: [],
 };
 
-async function newImage(array) {
-    insert.values = array;
-    await pool.query(insert);
+const select = {
+    text: `SELECT 
+    $1 
+    FROM Images
+    WHERE filename = $2`,
+    values: [],
+};
+
+async function newImage(name, path, client) {
+    insert.values = [name, path];
+    await client.query(insert);
 }
 
-module.exports = { newImage };
+async function selectByName(property, filename, client) {
+    select.values = [property, filename];
+    await client.query(select);
+}
+
+module.exports = { newImage, selectByName };

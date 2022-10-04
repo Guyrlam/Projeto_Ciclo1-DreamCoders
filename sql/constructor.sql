@@ -53,6 +53,7 @@ CREATE TABLE public.Images (
 CREATE TABLE public.User_profile (
 	id uuid NOT NULL PRIMARY KEY default gen_random_uuid(),
 	name varchar(80) NOT NULL,
+	description varchar(80),
     image_id uuid NOT NULL,
     FOREIGN KEY (image_id) REFERENCES Images(id),
 	class_id uuid NOT NULL,
@@ -60,6 +61,7 @@ CREATE TABLE public.User_profile (
 	email varchar(80) NOT NULL,
 	telephone varchar(11),
 	password varchar(80) NOT NULL,
+	approved boolean,
 	created_at timestamptz default now(),
 	updated_at timestamptz,
 	deleted_at timestamptz

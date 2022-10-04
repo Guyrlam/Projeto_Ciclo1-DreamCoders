@@ -1,10 +1,17 @@
 const { addUser } = require('../services/user-services');
 
 async function insertImage(req, res) {
-    const response = await addUser(req.file);
+    const services = await addUser(req.body, req.file);
 
-    if(response.Error ==)
-    res.status(200).json(verification);
+    if (services.Error !== null) {
+        res.status(services.status).json(services.Error);
+    } else {
+        const message = {
+            message: 'Usuário adicionado com sucesso',
+        };
+
+        res.status(200).json(message);
+    }
 }
 
 module.exports = { insertImage };
