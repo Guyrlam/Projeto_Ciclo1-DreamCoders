@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Spectral+SC:wght@700&display=swap');
+
+/* ----- defining palette colors ----- */
+:root {
+    --green: #12492F;
+    --dark-blue-green: #0A2F35;
+    --orange: #F56038;
+    --dark-pale: #F7A325;
+    --pale: #FFCA7A;
+    --blue: #2A08FB;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-decoration: none;
+    outline: none;
+}
+
+/* general content */
+body {
+    background-color: var(--dark-blue-green);
+    font-family: 'Source Sans Pro', sans-serif;
+
+}
+
+.green-text {
+    color: var(--green);
+    background-color: var(--dark-pale);
+}
+
+.white-text {
+    color: #FFF;
+    font-family: 'Spectral SC', serif;
+    font-size: 36px;
+}
+
+a:link {
+    transition: 400ms;
+    color: initial;
+}
+
+a:hover {
+    font-weight: bold;
+    transition: 200ms;
+}
+
+button {
+    background-color: var(--orange);
+    border-radius: 10px;
+    width: 50px;
+    word-break: keep-all;
+    text-overflow: clip;
+}
+
+section,
+nav {
+    display: flex;
+    gap: 80px;
+}
+
+ul {
+    display: inherit;
+    gap: inherit;
+    justify-content: space-around;
+    /* background-color: var(--dark-pale); */
+}
+
+main {
+    color: #FFF;
+    display: flex;
+    justify-content: center;
+    padding: 3%;
+}
+
+#feed {
+    
+    width: 90.848%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;  
+}
+.book-feed {
+    height: 323px;
+    width: 226px;
+    
+    display: flex;
+    
+}
+
+img{
+    width: 100%;
+    height: 100%;
+}
