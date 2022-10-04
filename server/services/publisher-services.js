@@ -1,9 +1,9 @@
-const { newWriter } = require('../repository/writers');
+const { newPublisher } = require('../repository/publishers');
 
-async function addWriter(data) {
+async function addPublisher(data) {
     const array = [data.name];
-    await newWriter(array);
-    return 'Autor adicionado com sucesso!';
+    await newPublisher(array);
+    return 'Editora adicionada com sucesso!';
 }
 
-module.exports = { addWriter };
+module.exports = { addPublisher };
