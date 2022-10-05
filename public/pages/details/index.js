@@ -1,7 +1,6 @@
 export default () => {
     console.log('details template')
     const container = document.createElement('div')
-
     const template = `
     <section id="details">
             <div id="book-photos">
@@ -40,3 +39,4 @@ export default () => {
     container.innerHTML = template
     return container
 }
+

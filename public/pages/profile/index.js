@@ -1,6 +1,8 @@
 export default () => {
+
     console.log('profile template')
     const container = document.createElement('div')
+
     const template = `
     <section id="profile">
             <div id="profile-details">
@@ -33,7 +35,7 @@ export default () => {
                 </div>
             </div>
         </section>
-    `
-    container.innerHTML = template
-    return container
-}
+    `;
+    container.innerHTML = template;
+    return container;
+};

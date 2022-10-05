@@ -1,6 +1,8 @@
 export default () => {
+
     console.log('home template')
     const container = document.createElement('div')
+
     const template = `
     <section>
             <div id="main-text">
@@ -16,7 +18,7 @@ export default () => {
             </div>
             <img src="./assets/main-image.svg" alt="contribua para a cultura da troca de livros" id="main-img">
         </section>
-    `
-    container.innerHTML = template
-    return container
-}
+    `;
+    container.innerHTML = template;
+    return container;
+};

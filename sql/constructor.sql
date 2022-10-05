@@ -82,7 +82,7 @@ CREATE TABLE public.Book (
 	category_id uuid NOT NULL,
     FOREIGN KEY (category_id) REFERENCES Categories(id),
 	synopsis TEXT NOT NULL,
-	active BOOLEAN NOT NULL,
+	approved boolean,
 	created_at timestamptz default now(),
 	updated_at timestamptz,
 	deleted_at timestamptz
