@@ -1,6 +1,8 @@
 export default () => {
-    console.log('oi');
-    const container = document.createElement('div');
+
+    console.log('home template')
+    const container = document.createElement('div')
+
     const template = `
     <section>
             <div id="main-text">

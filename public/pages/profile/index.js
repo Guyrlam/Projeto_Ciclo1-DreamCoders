@@ -1,6 +1,8 @@
 export default () => {
-    console.log('oi');
-    const container = document.createElement('div');
+
+    console.log('profile template')
+    const container = document.createElement('div')
+
     const template = `
     <section id="profile">
             <div id="profile-details">

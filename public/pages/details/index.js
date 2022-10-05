@@ -1,20 +1,7 @@
 export default () => {
-<<<<<<< HEAD
-    console.log('oi');
-    const container = document.createElement('div');
-    const template = `
-    <section>
-        <h1>Aqui estará os detalhes dos livros</h1>
-    </section>
-    `;
-    container.innerHTML = template;
-    return container;
-};
-=======
-    console.log('oi')
+    console.log('details template')
     const container = document.createElement('div')
-
-    const template =  `
+    const template = `
     <section id="details">
             <div id="book-photos">
                 <div id="small-photos-book">
@@ -52,4 +39,4 @@ export default () => {
     container.innerHTML = template
     return container
 }
->>>>>>> main
+

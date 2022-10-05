@@ -1,6 +1,7 @@
 export default () => {
-    console.log('oi');
-    const container = document.createElement('div');
+    console.log('books template')
+    const container = document.createElement('div')
+
     const template = `
     <section id="books">
         
