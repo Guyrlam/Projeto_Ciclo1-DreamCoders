@@ -1,7 +1,7 @@
 export default () => {
-    console.log('oi')
-    const container = document.createElement('div')
-    const template =  `
+    console.log('oi');
+    const container = document.createElement('div');
+    const template = `
     <section>
             <div id="main-text">
                 <h1 id="title-main-text">Contribua para que a cultura do livro físico viva. Compartilhe sua coleção com
@@ -16,7 +16,7 @@ export default () => {
             </div>
             <img src="./assets/main-image.svg" alt="contribua para a cultura da troca de livros" id="main-img">
         </section>
-    `
-    container.innerHTML = template
-    return container
-}
+    `;
+    container.innerHTML = template;
+    return container;
+};

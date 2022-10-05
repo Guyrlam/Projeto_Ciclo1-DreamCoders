@@ -1,11 +1,8 @@
 const express = require('express');
 const multer = require('multer');
-require('dotenv').config();
-
-const { publisherRoute } = require('./routes/publisher-router');
-const { writerRoute } = require('./routes/writer-route');
-const { categoryRoute } = require('./routes/category-route');
 const { userRoute } = require('./routes/user-router');
+const { bookRoute } = require('./routes/book-router');
+require('dotenv').config();
 
 const app = express();
 const { NDPORT, NDHOST } = process.env;
@@ -13,6 +10,7 @@ const { NDPORT, NDHOST } = process.env;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// multer configurations
 const diskStorage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, `./server/uploads/`);
@@ -38,12 +36,12 @@ const upload = multer({
     fileFilter: imageFilter,
 });
 
+// routes
 app.use('/uploads', express.static(`./server/uploads/`));
-app.use('/publisher', publisherRoute);
-app.use('/writers', writerRoute);
-app.use('/categories', categoryRoute);
 app.use('/user', upload.single('image'), userRoute);
+app.use('/book', upload.array('image', 4), bookRoute);
 
+// server
 app.listen(NDPORT, () => {
     // eslint-disable-next-line no-console
     console.log(`Server started at http://${NDHOST}:${NDPORT}`);

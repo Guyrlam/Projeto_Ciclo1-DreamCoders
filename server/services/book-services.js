@@ -3,11 +3,10 @@ const { insertUser } = require('../repository/users');
 const { newImage, selectByName } = require('../repository/images');
 const { selectClassID } = require('../repository/user-classes');
 const {
-    addUserVerification,
-    dataBaseVerification,
-} = require('../validators/user-validators');
+    addBookVerification
+} = require('../validators/book-validators');
 
-async function addUser(data, image) {
+async function addBook(data, image) {
     const response = {
         Error: null,
     };
@@ -15,7 +14,7 @@ async function addUser(data, image) {
     let client;
 
     try {
-        const verifiedData = addUserVerification(data, image);
+        const verifiedData = addBookVerification(data, image);
         if (verifiedData !== true) {
             response.Error = verifiedData;
             response.status = 400;
@@ -25,18 +24,6 @@ async function addUser(data, image) {
         client = await pool.connect();
 
         begin(client);
-
-        // verificar se o usuário existe
-        const verifiedDB = await dataBaseVerification(
-            data.email,
-            data.telephone,
-            client
-        );
-        if (verifiedDB.Error !== null) {
-            rollback(client);
-            client.release();
-            return verifiedDB;
-        }
 
         // insere a imagem na tabela
         await newImage(image.filename, image.path, client);
@@ -70,4 +57,4 @@ async function addUser(data, image) {
     return response;
 }
 
-module.exports = { addUser };
+module.exports = { addBook };
