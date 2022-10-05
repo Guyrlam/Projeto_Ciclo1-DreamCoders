@@ -304,3 +304,97 @@ padding-bottom: 4%;
     display: flex;
     justify-content: flex-start;
 }
+
+#profile{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0px;
+    width: 100%;
+}
+#profile-details{
+    display: flex;
+    flex-direction: row;
+    height: 350px;
+    width: 100%;
+    border-bottom: solid #FFF 2px;
+    align-items: center;
+    justify-content: center;
+
+}
+#profile-photo{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    padding-right: 5%;
+}
+#profile-description{
+    padding-left: 5%;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+
+.profile-details-text{
+    padding-bottom: 2%;
+}
+
+#profile-edit{
+    display: flex;
+    padding-left: 0%;
+}
+#profile-button-edit{
+    width: 158px;
+    height: 40px;
+    border-radius: 25px;
+    border: none;
+    color: white;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+#profile-my-collections{
+    display: flex;
+    flex-direction: row;
+    height: 500px;
+    width: 100%;
+    border-bottom: solid #FFF 2px;
+    align-items: center;
+    justify-content: center;
+
+}
+
+#profile-my-collections{
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    align-items: flex-start;
+    padding: 0% 0% 3% 0%;
+    
+}
+#profile-colletion-books{
+    display: flex;
+    padding-bottom: 20px;
+}
+
+.books-profile{
+    height: 323px;
+    width: 226px;
+    padding: 3% 3% 0% 3%;
+}
+#my-collection-text{
+    padding-top: 3%;
+}
+#profile-button-add{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+#button-add{
+    width: 186px;
+    height: 43px;
+    border: none;
+    border-radius: 25px;
+    color: #FFF;
+    font-size: 15px;
+}

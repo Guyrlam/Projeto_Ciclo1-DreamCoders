@@ -2,12 +2,13 @@ import feed from "./pages/books/index.js"
 import home from "./pages/home/index.js"
 import details from "./pages/details/index.js"
 import login from "./pages/login/index.js"
+import profile from "./pages/profile/index.js"
 const main = document.querySelector('#root')
 
 
- window.addEventListener("load", () => {
-     main.appendChild(home())
- })
+//  window.addEventListener("load", () => {
+//      main.appendChild(home())
+//  })
 
 window.addEventListener("hashchange", () => {
     main.innerHTML = ""
@@ -23,6 +24,9 @@ window.addEventListener("hashchange", () => {
             break;
         case "#login":
             main.appendChild(login())
+            break;
+        case "#profile":
+            main.appendChild(profile())
             break;
 
     }
