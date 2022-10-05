@@ -76,7 +76,8 @@ ul {
 main {
     color: #FFF;
     padding: 3%;
-    
+    display: flex;
+    justify-content: center;
 }
 #main-text{
     display: flex;
@@ -197,6 +198,7 @@ main {
 }
 #header-ul{
     width: 100%;
+    text-align: center;
 }
 .book-feed {
     height: 323px;
@@ -209,3 +211,190 @@ main {
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
+#login{
+    display: flex;
+    flex-direction: column;
+    
+    width: 600px;
+    height: 500px;
+    border: solid black 1px;
+}
+#login-title{
+    text-align: center;
+}
+#login-checkbox{
+    display: flex;
+    justify-content: flex-start;
+}
+.checkbox{
+    padding: 3%;
+    border-radius: 25%;
+}
+#login-inputs{
+    display: flex;
+    flex-direction: column;
+}
+.filling-login{
+    width: 200px;
+}
+#details{
+
+    width: 90%;
+    height: 600px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 0px;
+
+}
+#book-photos{
+    width: 40%;
+    height: 100%;
+    border-right: solid 2px #FFF;
+    margin: 0px;
+    display: flex;
+    padding-right: 4%;
+}
+
+#small-photos-book{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
+.small-photo-book{
+    padding: 20px 20px 20px 0px;
+    width: 80px;
+    height: 80px;
+}
+#main-photo-book{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#main-photo-details{
+    width: 354px;
+    height: 500px;
+}
+#book-details{
+    width: 60%;
+    height: 100%;
+
+    padding: 0px 0px 10px 4%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+}
+.paragrafo-book-details{
+padding-bottom: 4%;
+    
+}
+#button-solicitar{
+    width: 158px;
+    height: 43px;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 15px;
+}
+#title-details-book{
+    margin-bottom: 7%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+#profile{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0px;
+    width: 100%;
+}
+#profile-details{
+    display: flex;
+    flex-direction: row;
+    height: 350px;
+    width: 100%;
+    border-bottom: solid #FFF 2px;
+    align-items: center;
+    justify-content: center;
+
+}
+#profile-photo{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    padding-right: 5%;
+}
+#profile-description{
+    padding-left: 5%;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+
+.profile-details-text{
+    padding-bottom: 2%;
+}
+
+#profile-edit{
+    display: flex;
+    padding-left: 0%;
+}
+#profile-button-edit{
+    width: 158px;
+    height: 40px;
+    border-radius: 25px;
+    border: none;
+    color: white;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+#profile-my-collections{
+    display: flex;
+    flex-direction: row;
+    height: 500px;
+    width: 100%;
+    border-bottom: solid #FFF 2px;
+    align-items: center;
+    justify-content: center;
+
+}
+
+#profile-my-collections{
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    align-items: flex-start;
+    padding: 0% 0% 3% 0%;
+    
+}
+#profile-colletion-books{
+    display: flex;
+    padding-bottom: 20px;
+}
+
+.books-profile{
+    height: 323px;
+    width: 226px;
+    padding: 3% 3% 0% 3%;
+}
+#my-collection-text{
+    padding-top: 3%;
+}
+#profile-button-add{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+#button-add{
+    width: 186px;
+    height: 43px;
+    border: none;
+    border-radius: 25px;
+    color: #FFF;
+    font-size: 15px;
+}
