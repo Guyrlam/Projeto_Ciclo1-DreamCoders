@@ -1,11 +1,14 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const { pool, begin, commit, rollback } = require('../repository/repository');
-const { insertUser } = require('../repository/users');
+const { insertUser, tokenInfo } = require('../repository/users');
 const { newImage, selectByName } = require('../repository/images');
 const { selectClassID } = require('../repository/user-classes');
 const {
     addUserVerification,
     dataBaseVerification,
+    logVerification,
+    logDBVerification,
 } = require('../validators/user-validators');
 
 async function addUser(data, image) {
@@ -74,4 +77,54 @@ async function addUser(data, image) {
     return response;
 }
 
-module.exports = { addUser };
+async function logUser(data) {
+    const response = {
+        Error: null,
+    };
+
+    let client;
+
+    try {
+        const verifiedData = logVerification(data);
+        if (verifiedData !== true) {
+            response.Error = verifiedData;
+            response.status = 400;
+            return response;
+        }
+
+        client = await pool.connect();
+
+        begin(client);
+
+        // verificar se o login está correto
+        const verifiedDB = await logDBVerification(
+            data.email,
+            data.password,
+            client
+        );
+        if (verifiedDB.Error !== null) {
+            rollback(client);
+            client.release();
+            return verifiedDB;
+        }
+
+        // captura de informações para o token
+        const userInfo = await tokenInfo(data.email, client);
+
+        // criação do token
+        response.token = jwt.sign(userInfo, process.env.JWT_KEY, {
+            expiresIn: 3600,
+        });
+
+        commit(client);
+    } catch (error) {
+        response.Error = error.message;
+        response.status = 500;
+        rollback(client);
+    }
+
+    client.release();
+    return response;
+}
+
+module.exports = { addUser, logUser };

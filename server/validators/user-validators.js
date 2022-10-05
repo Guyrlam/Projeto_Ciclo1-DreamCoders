@@ -1,5 +1,7 @@
+const bcrypt = require('bcrypt');
 const { checkUser } = require('../repository/users');
 
+// verificações para adicionar usuários
 function addUserVerification(data, image) {
     try {
         if (!data || !image) {
@@ -67,4 +69,66 @@ async function dataBaseVerification(email, telephone, client) {
     return response;
 }
 
-module.exports = { addUserVerification, dataBaseVerification };
+// verificações para logar usuários
+function logVerification(data) {
+    try {
+        if (
+            !data.email ||
+            typeof data.email !== 'string' ||
+            data.email.length < 5 ||
+            data.email.includes('@') === false
+        ) {
+            throw new Error('Email inválido');
+        } else if (
+            !data.password ||
+            typeof data.password !== 'string' ||
+            data.password.length < 6
+        ) {
+            throw new Error('Senha inválida');
+        }
+
+        return true;
+    } catch (error) {
+        return error.message;
+    }
+}
+
+async function logDBVerification(email, password, client) {
+    const response = {
+        Error: null,
+    };
+
+    let selected;
+
+    try {
+        const userData = await checkUser(client);
+        userData.forEach((el) => {
+            if (email === el.email) {
+                selected = el;
+            }
+        });
+
+        if (selected === undefined) {
+            response.Error = 'email ou senha incorretos';
+            response.status = 404;
+        } else {
+            const compare = await bcrypt.compare(password, selected.password);
+            if (!compare) {
+                response.Error = 'email ou senha incorretos';
+                response.status = 404;
+            }
+        }
+    } catch (error) {
+        response.Error = error.message;
+        response.status = 500;
+    }
+
+    return response;
+}
+
+module.exports = {
+    addUserVerification,
+    dataBaseVerification,
+    logVerification,
+    logDBVerification,
+};
