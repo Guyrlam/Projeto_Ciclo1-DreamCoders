@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const { pool, begin, commit, rollback } = require('../repository/repository');
 const { insertUser } = require('../repository/users');
 const { newImage, selectByName } = require('../repository/images');
@@ -47,13 +48,16 @@ async function addUser(data, image) {
         // retorna o uuid do tipo de usuário
         const classID = await selectClassID(data.class, client);
 
+        // criptografa a senha do usuário
+        const hashed = await bcrypt.hash(data.password, 10);
+
         const userArray = [
             data.name,
             imageID,
             classID,
             data.email,
             data.telephone,
-            data.password,
+            hashed,
         ];
 
         // adiciona usuário ao banco de dados
