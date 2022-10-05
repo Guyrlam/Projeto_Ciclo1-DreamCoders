@@ -31,11 +31,11 @@ window.addEventListener("hashchange", () => {
             break;
         case "#signup":
             main.appendChild(signup())
+            const form = document.querySelector('form')
+            const submit = document.querySelector('#signup-submit')
+            submit.addEventListener('click', () => {
+                console.log('teste')
+            })
+            break;
     }
 })
-
-
-
-
-
-
