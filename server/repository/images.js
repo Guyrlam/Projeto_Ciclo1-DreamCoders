@@ -16,7 +16,7 @@ async function newImage(name, path, client) {
     await client.query(insert);
 }
 
-async function selectByName(property, filename, client) {
+async function selectByName(filename, client) {
     select.values = [filename];
     const response = await client.query(select);
     return response.rows[0].id;

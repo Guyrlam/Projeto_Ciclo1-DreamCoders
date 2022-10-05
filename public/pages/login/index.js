@@ -1,7 +1,7 @@
 export default () => {
-    console.log('oi')
-    const container = document.createElement('div')
-    const template =  `
+    console.log('oi');
+    const container = document.createElement('div');
+    const template = `
     <section>
     <div id="login">
     <div id="login-title">
@@ -36,7 +36,7 @@ export default () => {
     </div>
 </div>
     </section>
-    `
-    container.innerHTML = template
-    return container
-}
+    `;
+    container.innerHTML = template;
+    return container;
+};

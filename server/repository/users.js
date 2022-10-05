@@ -3,7 +3,8 @@ const check = {
     email,
     telephone
     FROM user_profile
-    WHERE approved <> false`,
+    WHERE approved isnull 
+    OR approved = true`,
 };
 
 const newUser = {
