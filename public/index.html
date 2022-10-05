@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Túnel do Saber: seu portal para troca de livros</title>
     <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
+    <script src="./index.js" type="module"></script>
 </head>
 
 <body>
     <header>
         <section class="green-text" id="header-top">
-            <a href="http://">
+            <a>
                 <p>HOME</p>
             </a>
             <a href="http://">
@@ -22,7 +22,9 @@
         </section>
         <section id="header-middle">
             <div id="header-title">
-                <h1 class="white-text" id="tunel-do-saber">Túnel do Saber</h1>
+                <a href="#home">
+                    <h1 class="white-text" id="tunel-do-saber">Túnel do Saber</h1>
+                </a>
             </div>
 
             <div id="header-search">
@@ -51,8 +53,8 @@
                 <a href="http://">
                     <li>Mais Vendidos</li>
                 </a>
-                <a href="http://">
-                    <li>Últimos Cadastrados</li>
+                <a href="#books">
+                    <li id="toFeed">Últimos Cadastrados</li>
                 </a>
                 <a href="http://">
                     <li>Maiores Coleções</li>
@@ -64,7 +66,7 @@
 
 
 
-    <main>
+    <main id="root">
         <section>
             <div id="main-text">
                 <h1 id="title-main-text">Contribua para que a cultura do livro físico viva. Compartilhe sua coleção com
