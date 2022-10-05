@@ -443,3 +443,62 @@ main {
     color: #FFF;
     font-size: 15px;
 }
+.filling-login{
+    width: 200px;
+    height: 25px;
+    border-radius: 20px;
+
+}
+
+#format{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+
+
+.auto{
+    width: 50px;
+    height: 50px;
+    margin-top: 10px;
+}
+#signup-inputs{
+    display: flex;
+    flex-direction: column;
+}
+#auto-cadastro{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-left: 50px;
+}
+
+
+#root > div{
+    padding: 0px;
+    margin: 0;
+    background: #FFF;
+    border-radius: 35px;
+    width: 600px;
+    height: 400px;
+    color: #000000;
+}
+#signup{
+    margin: 10px;
+}
+#signuped{
+    justify-content: center;
+}
+#submit{
+    background-color: var(--orange);
+    height: 28px;
+    border-radius: 20px;
+    width: 150px;
+    margin-top: 20px;
+}
+#but-login{
+    background-color: var(--blue);
+
+}
