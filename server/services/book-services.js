@@ -2,9 +2,7 @@ const { pool, begin, commit, rollback } = require('../repository/repository');
 const { insertUser } = require('../repository/users');
 const { newImage, selectByName } = require('../repository/images');
 const { selectClassID } = require('../repository/user-classes');
-const {
-    addBookVerification
-} = require('../validators/book-validators');
+const { addBookVerification } = require('../validators/book-validators');
 
 async function addBook(data, image) {
     const response = {

@@ -28,7 +28,9 @@ function addUserVerification(data, image) {
             throw new Error('Escritor(a) inválido');
         } else if (
             !data.condition ||
-            (data.condition !== 'antigo' && data.condition !== 'novo' && data.condition !== 'seminovo')
+            (data.condition !== 'antigo' &&
+                data.condition !== 'novo' &&
+                data.condition !== 'seminovo')
         ) {
             throw new Error('Tipo de usuário inválido');
         } else if (
