@@ -29,11 +29,7 @@ export default () => {
                     <img src="" alt="" style="width: 100%; height:100%;">
                 </a>
         </div>
-        <div class="book-feed">
-                <a href="#details">
-                    <img src="" alt="" style="width: 100%; height:100%;">
-                </a>
-        </div>
+        
         
     </section>
     `
