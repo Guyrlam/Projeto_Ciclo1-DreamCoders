@@ -1,7 +1,7 @@
 export default () => {
-    console.log('oi')
+    console.log('home template')
     const container = document.createElement('div')
-    const template =  `
+    const template = `
     <section>
             <div id="main-text">
                 <h1 id="title-main-text">Contribua para que a cultura do livro físico viva. Compartilhe sua coleção com

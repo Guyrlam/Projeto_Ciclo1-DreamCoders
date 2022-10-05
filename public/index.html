@@ -13,12 +13,12 @@
 <body>
     <header>
         <section class="green-text" id="header-top">
-            <a>
-                <p>HOME</p>
-            </a>
-            <a href="http://">
-                <p>CONTATO</p>
-            </a>
+            <p>
+                <a id="home" href="./index.html">
+                    HOME
+                </a>
+            </p>
+
         </section>
         <section id="header-middle">
             <div id="header-title">
@@ -31,17 +31,20 @@
                 <div id="header-search-filter">
                     <img src="./assets/icon-filter.png" alt="" class="icon-search">
                 </div>
-                <input type="text" placeholder="O que você está procurando?" id="header-search-bar">
-                <button id="header-search-button">
-                    <img src="./assets/search-icon.svg" alt="inserir termo de pesquisa" class="icon-search">
-                </button>
-
+                <form action="/search" method="get">
+                    <input type="text" placeholder="O que você está procurando?" id="header-search-bar">
+                    <button type="submit" id="header-search-button">
+                        <img src="./assets/search-icon.svg" alt="inserir termo de pesquisa" class="icon-search">
+                    </button>
+                </form>
             </div>
-            <div id="header-login">
-                <a href="#login">
-                    <button id="header-button-login">Fazer Login</button>
-                </a>
 
+            <div id="header-login">
+                <button id="header-button-login">
+                    <a href="#login">
+                        Fazer Login
+                    </a>
+                </button>
             </div>
 
 
@@ -59,13 +62,15 @@
 
 
     <main id="root">
-        
+
     </main>
 
 
     <footer>
         <section class="contact-help-modal">
-
+            <!-- <a href="http://">
+                <p>CONTATO</p>
+            </a> -->
         </section>
     </footer>
 </body>

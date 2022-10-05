@@ -36,20 +36,22 @@ body {
     font-size: 36px;
 }
 
+/* reseting anchors and put transitions */
 a:link {
+    color: #FFF;
+    letter-spacing: 1px;
     transition: 400ms;
-    color: initial;
-    width: 100%;
-    height: 100%;
 }
 
-a:visited{
+a:visited {
     color: initial;
 }
 
 a:hover {
     font-weight: bold;
+    letter-spacing: 0.7px;
     transition: 200ms;
+
 }
 
 button {
@@ -79,7 +81,8 @@ main {
     display: flex;
     justify-content: center;
 }
-#main-text{
+
+#main-text {
     display: flex;
 
     flex-direction: column;
@@ -87,48 +90,55 @@ main {
     padding-top: 3%;
     padding-left: 3%;
 }
-#title-main-text{
+
+#title-main-text {
     font-size: 60px;
     margin-bottom: 5%;
     text-align: left;
 }
-#main-img{
+
+#main-img {
     width: 50%;
     height: 550px;
 }
-#p-main-text{
+
+#p-main-text {
     text-align: left;
-    line-height:25px;
+    line-height: 25px;
 }
-#button-main{
+
+#button-main {
     margin-top: 3%;
     width: 250px;
     height: 60px;
-    
+
     font-size: 27px;
     color: #FFF;
 
     font-family: 'Source Sans Pro', sans-serif;
 
 }
-.button-border-radius{
+
+.button-border-radius {
     border: none;
     border-radius: 41px;
 }
 
-#header-middle{
+#header-middle {
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
     height: 100px;
     align-items: center;
 }
-#header-search{
+
+#header-search {
     display: flex;
 
     width: 100%;
     align-items: center;
 }
-#header-search-bar{
+
+#header-search-bar {
     width: 100%;
     height: 40px;
     outline: none;
@@ -136,17 +146,19 @@ main {
     padding-left: 3%;
     font-size: 15px;
 }
-#header-search-filter{
+
+#header-search-filter {
     display: flex;
     width: 50px;
     height: 40px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    background-color:#F7A325;
+    background-color: #F7A325;
     justify-content: center;
     align-items: center;
 }
-#header-search-button{
+
+#header-search-button {
     border: none;
     display: flex;
     width: 50px;
@@ -156,24 +168,29 @@ main {
     border-bottom-right-radius: 10px;
     justify-content: center;
     align-items: center;
-    background-color:#F7A325
+    background-color: #F7A325
 }
-.icon-search{
+
+.icon-search {
     height: 20px;
     width: 20px;
 }
-#tunel-do-saber{
+
+#tunel-do-saber {
     width: 100%;
     font-size: 27px;
 }
-#header-title{
+
+#header-title {
     width: 30%;
 }
-#header-login{
+
+#header-login {
     display: flex;
     width: 25%;
 }
-#header-button-login{
+
+#header-button-login {
     height: 40px;
     width: 150px;
     border-radius: 23px;
@@ -182,7 +199,8 @@ main {
     color: #FFF;
     font-family: 'Source Sans Pro', sans-serif;
 }
-#header-top{
+
+#header-top {
     height: 35px;
     display: flex;
     justify-content: flex-start;
@@ -190,54 +208,64 @@ main {
     padding-left: 2%;
     font-size: 15px;
 }
-#header-bottom{
+
+#header-bottom {
     height: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-#header-ul{
+
+#header-ul {
     width: 100%;
     text-align: center;
 }
+
 .book-feed {
     height: 323px;
     width: 226px;
     display: flex;
     flex-wrap: wrap;
 }
-#books{
+
+#books {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-#login{
+#login {
     display: flex;
     flex-direction: column;
-    
+
     width: 600px;
     height: 500px;
     border: solid black 1px;
 }
-#login-title{
+
+#login-title {
     text-align: center;
 }
-#login-checkbox{
+
+#login-checkbox {
     display: flex;
     justify-content: flex-start;
 }
-.checkbox{
+
+.checkbox {
     padding: 3%;
     border-radius: 25%;
 }
-#login-inputs{
+
+#login-inputs {
     display: flex;
     flex-direction: column;
 }
-.filling-login{
+
+.filling-login {
     width: 200px;
 }
-#details{
+
+#details {
 
     width: 90%;
     height: 600px;
@@ -246,7 +274,8 @@ main {
     gap: 0px;
 
 }
-#book-photos{
+
+#book-photos {
     width: 40%;
     height: 100%;
     border-right: solid 2px #FFF;
@@ -255,27 +284,31 @@ main {
     padding-right: 4%;
 }
 
-#small-photos-book{
+#small-photos-book {
     display: flex;
     justify-content: center;
     flex-direction: column;
 
 }
-.small-photo-book{
+
+.small-photo-book {
     padding: 20px 20px 20px 0px;
     width: 80px;
     height: 80px;
 }
-#main-photo-book{
+
+#main-photo-book {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-#main-photo-details{
+
+#main-photo-details {
     width: 354px;
     height: 500px;
 }
-#book-details{
+
+#book-details {
     width: 60%;
     height: 100%;
 
@@ -284,13 +317,15 @@ main {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    
+
 }
-.paragrafo-book-details{
-padding-bottom: 4%;
-    
+
+.paragrafo-book-details {
+    padding-bottom: 4%;
+
 }
-#button-solicitar{
+
+#button-solicitar {
     width: 158px;
     height: 43px;
     border: none;
@@ -299,20 +334,22 @@ padding-bottom: 4%;
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 15px;
 }
-#title-details-book{
+
+#title-details-book {
     margin-bottom: 7%;
     display: flex;
     justify-content: flex-start;
 }
 
-#profile{
+#profile {
     display: flex;
     justify-content: center;
     flex-direction: column;
     gap: 0px;
     width: 100%;
 }
-#profile-details{
+
+#profile-details {
     display: flex;
     flex-direction: row;
     height: 350px;
@@ -322,30 +359,33 @@ padding-bottom: 4%;
     justify-content: center;
 
 }
-#profile-photo{
+
+#profile-photo {
     width: 200px;
     height: 200px;
     border-radius: 50%;
     padding-right: 5%;
 }
-#profile-description{
+
+#profile-description {
     padding-left: 5%;
     width: 60%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    
+
 }
 
-.profile-details-text{
+.profile-details-text {
     padding-bottom: 2%;
 }
 
-#profile-edit{
+#profile-edit {
     display: flex;
     padding-left: 0%;
 }
-#profile-button-edit{
+
+#profile-button-edit {
     width: 158px;
     height: 40px;
     border-radius: 25px;
@@ -353,7 +393,8 @@ padding-bottom: 4%;
     color: white;
     font-family: 'Source Sans Pro', sans-serif;
 }
-#profile-my-collections{
+
+#profile-my-collections {
     display: flex;
     flex-direction: row;
     height: 500px;
@@ -364,33 +405,37 @@ padding-bottom: 4%;
 
 }
 
-#profile-my-collections{
+#profile-my-collections {
     display: flex;
     flex-direction: column;
-    justify-content:space-between;
+    justify-content: space-between;
     align-items: flex-start;
     padding: 0% 0% 3% 0%;
-    
+
 }
-#profile-colletion-books{
+
+#profile-colletion-books {
     display: flex;
     padding-bottom: 20px;
 }
 
-.books-profile{
+.books-profile {
     height: 323px;
     width: 226px;
     padding: 3% 3% 0% 3%;
 }
-#my-collection-text{
+
+#my-collection-text {
     padding-top: 3%;
 }
-#profile-button-add{
+
+#profile-button-add {
     display: flex;
     width: 100%;
     justify-content: center;
 }
-#button-add{
+
+#button-add {
     width: 186px;
     height: 43px;
     border: none;

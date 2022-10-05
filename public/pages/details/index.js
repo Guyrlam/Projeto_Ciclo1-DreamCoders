@@ -1,8 +1,8 @@
 export default () => {
-    console.log('oi')
+    console.log('details template')
     const container = document.createElement('div')
 
-    const template =  `
+    const template = `
     <section id="details">
             <div id="book-photos">
                 <div id="small-photos-book">

@@ -1,7 +1,7 @@
 export default () => {
-    console.log('oi')
+    console.log('login template')
     const container = document.createElement('div')
-    const template =  `
+    const template = `
     <section>
     <div id="login">
     <div id="login-title">
