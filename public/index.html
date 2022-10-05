@@ -38,7 +38,10 @@
 
             </div>
             <div id="header-login">
-                <button id="header-button-login">Fazer Login</button>
+                <a href="#login">
+                    <button id="header-button-login">Fazer Login</button>
+                </a>
+
             </div>
 
 
@@ -67,26 +70,38 @@
 
 
     <main id="root">
-        <section>
-            <div id="main-text">
-                <h1 id="title-main-text">Contribua para que a cultura do livro físico viva. Compartilhe sua coleção com
-                    o mundo!</h1>
-                <p id="p-main-text">Sabe aquele livro parado em sua estante há meses ou até anos? Já pensou em trocá-lo
-                    com outras
-                    pessoas e
-                    permitir que ambos os envolvidos desfrutem das incríveis experiências que esses itens podem
-                    proporcionar? Se
-                    ficou interessado, crie já seu perfil e venha participar da nossa comunidade!</p>
-                <button id="button-main" class="button-border-radius">Cadastre-se</button>
+        <div id="login">
+            <div id="login-title">
+                <h1>Faça login em Túnel do Saber</h1>
+
+                <span>Sua primeira vez aqui? Crie uma conta!</span>
+                <a href="#signup">
+                    <button>Cadastre-se</button>
+                </a>
             </div>
-            <img src="./assets/main-image.svg" alt="contribua para a cultura da troca de livros" id="main-img">
-        </section>
+            <div>
+                <form method="POST">
+                    <div id="login-checkbox">
+                        <label for="checkbox-user">Sou Usuário
+                            <input type="checkbox" name="checkbox-user" id="checkbox-user" class="checkbox" type="">
+                            <span class="mark"></span>
+                        </label>
 
-        <section class="signup-modal">
-        </section>
-        <section class="login-modal">
-        </section>
+                        <label for="checkbox-adm">Sou Administrador
+                            <input type="checkbox" name="checkbox-adm" id="checkbox-adm" class="checkbox">
+                            <span class="mark"></span>
+                        </label>
 
+                    </div>
+                    <div id="login-inputs">
+                        <label for="email-login">Endereço de Email</label>
+                        <input type="email" name="email-login" id="email-login" class="filling-login">
+                        <label for="email-login">Senha</label>
+                        <input type="email" name="email-login" id="email-login" class="filling-login">
+                    </div>
+                </form>
+            </div>
+        </div>
     </main>
 
 

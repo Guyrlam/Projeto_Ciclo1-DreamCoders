@@ -76,7 +76,8 @@ ul {
 main {
     color: #FFF;
     padding: 3%;
-    
+    display: flex;
+    justify-content: center;
 }
 #main-text{
     display: flex;
@@ -209,3 +210,29 @@ main {
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
+#login{
+    display: flex;
+    flex-direction: column;
+    
+    width: 600px;
+    height: 500px;
+    border: solid black 1px;
+}
+#login-title{
+    text-align: center;
+}
+#login-checkbox{
+    display: flex;
+    justify-content: flex-start;
+}
+.checkbox{
+    padding: 3%;
+    border-radius: 25%;
+}
+#login-inputs{
+    display: flex;
+    flex-direction: column;
+}
+.filling-login{
+    width: 200px;
+}
