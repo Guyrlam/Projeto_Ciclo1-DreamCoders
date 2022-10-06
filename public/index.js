@@ -1,45 +1,48 @@
-import feed from "./pages/books/index.js"
-import details from "./pages/details/index.js"
-import editbook from "./pages/editbook/index.js"
-import home from "./pages/home/index.js"
-import login from "./pages/login/index.js"
-import profile from "./pages/profile/index.js"
-import signup from "./pages/signup/index.js"
-const main = document.querySelector('#root')
+import feed from './pages/books/index.js';
+import details from './pages/details/index.js';
+import home from './pages/home/index.js';
+import login from './pages/login/index.js';
+import profile from './pages/profile/index.js';
+import signup from './pages/signup/index.js';
+import postUser from './pages/signup/postUser.js';
 
-//  window.addEventListener("load", () => {
-//      main.appendChild(home())
-//  })
+const main = document.querySelector('#root');
 
-window.addEventListener("hashchange", () => {
-    main.innerHTML = ""
+//   window.addEventListener("load", () => {
+//       main.appendChild(home())
+//   })
+
+window.addEventListener('hashchange', () => {
+    main.innerHTML = '';
     switch (window.location.hash) {
-        case "#books":
-            main.appendChild(feed())
+        case '#books':
+            main.appendChild(feed());
             break;
-        case "#home":
-            main.appendChild(home())
+        case '#home':
+            main.appendChild(home());
             break;
-        case "#details":
-            main.appendChild(details())
+        case '#details':
+            main.appendChild(details());
             break;
-        case "#login":
-            main.appendChild(login())
+        case '#login':
+            main.appendChild(login());
             break;
-        case "#profile":
-            main.appendChild(profile())
+        case '#profile':
+            main.appendChild(profile());
             break;
-        case "#signup":
-            main.appendChild(signup())
-            break;
-        case "#editbook":
-            main.appendChild(editbook())
+        case '#signup':
+            main.appendChild(signup());
+            const submit = document.querySelector('#signup-submit');
+            submit.addEventListener('click', async () => {
+                const resp = await postUser();
+                if (resp.message == "Usuário adicionado com sucesso") {
+                    alert("Cadastro realizado com sucesso")
+                }
+
+
+            });
             break;
     }
-})
-
-
-
-
+});
 
 
