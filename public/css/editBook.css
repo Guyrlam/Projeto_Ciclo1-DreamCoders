@@ -1,0 +1,45 @@
+#editBook {
+    display: flex;
+    flex-flow: column nowrap;
+    color: var(--white);
+    align-items: center;
+}
+
+
+#blocks form {
+    max-width: 50vw;
+    height: 3vh;
+}
+
+#blocks fieldset label {
+    padding-left: 30px;
+    padding-right: 20px;
+    cursor: pointer;
+}
+
+#blocks input[type='text'],
+#blocks select {
+    margin-left: 20px;
+}
+
+#blocks button[type='submit'] {
+    font-size: large;
+    color: var(--white);
+    border: none;
+    border-radius: 5vw;
+    padding: 1vw 5vw;
+    margin-top: 30px;
+    text-align: center;
+}
+
+#save {
+    background-color: var(--blue);
+}
+
+#remove {
+    background-color: var(--orange);
+}
+
+/* .button.b2 {
+    position: relative;
+} */
