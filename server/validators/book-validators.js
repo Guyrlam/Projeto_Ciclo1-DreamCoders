@@ -1,4 +1,4 @@
-function addUserVerification(data, image) {
+function addBookVerification(data, image) {
     try {
         if (!data || !image) {
             throw new Error('Não foi possível ler os dados informados');
@@ -53,4 +53,4 @@ function addUserVerification(data, image) {
     }
 }
 
-module.exports = { addUserVerification };
+module.exports = { addBookVerification };

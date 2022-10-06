@@ -10,41 +10,9 @@ CREATE TABLE public.User_classes (
 	deleted_at timestamptz
 );
 
-CREATE TABLE public.Publishers (
-	id uuid NOT NULL PRIMARY KEY default gen_random_uuid(),
-	publisher varchar(80) NOT NULL,
-	created_at timestamptz default now(),
-	updated_at timestamptz,
-	deleted_at timestamptz
-);
-
-CREATE TABLE public.Writers (
-	id uuid NOT NULL PRIMARY KEY default gen_random_uuid(),
-	writer varchar(80) NOT NULL,
-	created_at timestamptz default now(),
-	updated_at timestamptz,
-	deleted_at timestamptz
-);
-
-CREATE TABLE public.Book_conditions (
-	id uuid NOT NULL PRIMARY KEY default gen_random_uuid(),
-	condition varchar(80) NOT NULL,
-	created_at timestamptz default now(),
-	updated_at timestamptz,
-	deleted_at timestamptz
-);
-
-CREATE TABLE public.Categories (
-	id uuid NOT NULL PRIMARY KEY default gen_random_uuid(),
-	category varchar(80) NOT NULL,
-	created_at timestamptz default now(),
-	updated_at timestamptz,
-	deleted_at timestamptz
-);
-
 CREATE TABLE public.Images (
 	id uuid NOT NULL PRIMARY KEY default gen_random_uuid(),
-	file_name varchar(80) NOT NULL,
+	file_name TEXT NOT NULL,
 	file_path TEXT NOT NULL,
 	added_at timestamptz default now(),
 	deleted_at timestamptz
@@ -73,14 +41,10 @@ CREATE TABLE public.Book (
 	details TEXT NOT NULL,
 	user_id uuid NOT NULL,
     FOREIGN KEY (user_id) REFERENCES User_profile(id),
-	publisher_id uuid NOT NULL,
-    FOREIGN KEY (publisher_id) REFERENCES Publishers(id),
-	writer_id uuid NOT NULL,
-    FOREIGN KEY (writer_id) REFERENCES Writers(id),
-	condition_id uuid NOT NULL,
-    FOREIGN KEY (condition_id) REFERENCES Book_conditions(id),
-	category_id uuid NOT NULL,
-    FOREIGN KEY (category_id) REFERENCES Categories(id),
+	publisher varchar(80) NOT NULL,
+	writer varchar(80) NOT NULL,
+	condition varchar(80) NOT NULL,
+	category varchar(80) NOT NULL,
 	synopsis TEXT NOT NULL,
 	approved boolean,
 	created_at timestamptz default now(),
@@ -111,4 +75,3 @@ CREATE TABLE public.Book_images (
 
 --default values
 INSERT INTO User_classes(class) VALUES('cliente'), ('administrador');
-INSERT INTO Book_conditions(condition) VALUES('antigo'), ('novo'), ('seminovo');

@@ -6,7 +6,7 @@ function verifyToken(req, res, next) {
         req.user_info = decode;
         next();
     } catch (error) {
-        res.status(401).send({ mensagem: 'Fala na autenticação do token' });
+        res.status(401).send({ mensagem: 'Falha na autenticação do token' });
     }
 }
 
