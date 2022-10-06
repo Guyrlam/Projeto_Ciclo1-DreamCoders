@@ -43,6 +43,7 @@ window.addEventListener('hashchange', () => {
             break;
         case "#addBook":
             main.appendChild(addBook())
+            
             break;
 
     }
