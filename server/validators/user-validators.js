@@ -1,49 +1,6 @@
 const bcrypt = require('bcrypt');
 const { checkUser } = require('../repository/users');
 
-// verificações para adicionar usuários
-function addUserVerification(data, image) {
-    try {
-        if (!data || !image) {
-            throw new Error('Não foi possível ler os dados informados');
-        } else if (
-            !data.name ||
-            typeof data.name !== 'string' ||
-            data.name.length < 5
-        ) {
-            throw new Error('Nome inválido');
-        } else if (
-            !data.email ||
-            typeof data.email !== 'string' ||
-            data.email.length < 5 ||
-            data.email.includes('@') === false
-        ) {
-            throw new Error('Email inválido');
-        } else if (
-            !data.telephone ||
-            typeof data.telephone !== 'string' ||
-            data.telephone.length < 10
-        ) {
-            throw new Error('Telefone inválido');
-        } else if (
-            !data.class ||
-            (data.class !== 'cliente' && data.class !== 'administrador')
-        ) {
-            throw new Error('Tipo de usuário inválido');
-        } else if (
-            !data.password ||
-            typeof data.password !== 'string' ||
-            data.password.length < 6
-        ) {
-            throw new Error('Senha inválida');
-        }
-
-        return true;
-    } catch (error) {
-        return error.message;
-    }
-}
-
 async function dataBaseVerification(email, telephone, client) {
     const response = {
         Error: null,
@@ -127,7 +84,6 @@ async function logDBVerification(email, password, client) {
 }
 
 module.exports = {
-    addUserVerification,
     dataBaseVerification,
     logVerification,
     logDBVerification,
