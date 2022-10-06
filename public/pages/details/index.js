@@ -5,9 +5,9 @@ export default () => {
     <section id="details">
             <div id="book-photos">
                 <div id="small-photos-book">
-                    <img src="" alt="" class="small-photo-book">
-                    <img src="" alt="" class="small-photo-book">
-                    <img src="" alt="" class="small-photo-book">
+                    <img src="" alt="" class="small-photo">
+                    <img src="" alt="" class="small-photo">
+                    <img src="" alt="" class="small-photo">
                 </div>
                 <div id="main-photo-book">
                     <img src="" alt="" id="main-photo-details">
