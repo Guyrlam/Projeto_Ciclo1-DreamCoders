@@ -1,7 +1,6 @@
 export default () => {
-
-    console.log('profile template')
-    const container = document.createElement('div')
+    console.log('profile template');
+    const container = document.createElement('div');
 
     const template = `
     <section id="profile">

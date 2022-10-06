@@ -39,6 +39,7 @@ const upload = multer({
 });
 
 // routes
+app.use('/', express.static(`./public/`));
 app.use('/uploads', express.static(`./server/uploads/`));
 app.use('/user', upload.single('image'), userRoute);
 app.use('/book', upload.array('image', 4), bookRoute);
