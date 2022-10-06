@@ -27,7 +27,7 @@ export default () => {
                 <label for="repeat-password">Repita a Senha</label>
                 <input type="password" name="confirm-password" id="confirm-password" class="filling-signup">
                 <label for="pic-profile">Foto de perfil</label>
-                <input type="file" name="" id="profile-photo">
+                <input type="file" name="" id="profile-photo-signup">
             </div>
             
             <button id="signup-submit">Cadastrar</button>

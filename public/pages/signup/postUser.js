@@ -7,7 +7,7 @@ export default async function postUser() {
     const classe = 'cliente';
     const password = document.querySelector('#password-signup');
 
-    const image = document.querySelector('#profile-photo');
+    const image = document.querySelector('#profile-photo-signup');
 
     formData.append('name', nome.value);
     formData.append('email', email.value);
@@ -20,6 +20,7 @@ export default async function postUser() {
         method: 'POST',
         body: formData,
     });
-
+    
     return resp.json();
+
 }

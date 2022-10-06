@@ -35,6 +35,11 @@ window.addEventListener('hashchange', () => {
             const submit = document.querySelector('#signup-submit');
             submit.addEventListener('click', async () => {
                 const resp = await postUser();
+                if(resp.message == "Usuário adicionado com sucesso"){
+                    alert("Cadastro realizado com sucesso")
+                }
+                
+                
             });
             break;
     }
