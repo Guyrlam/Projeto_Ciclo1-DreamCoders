@@ -18,7 +18,7 @@ const images = {
 };
 
 async function newBook(array, client) {
-    insert.values = [array];
+    insert.values = array;
     await client.query(insert);
 }
 

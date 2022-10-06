@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 const { pool, begin, commit, rollback } = require('../repository/repository');
 const { newBook, selectBook, bookImages } = require('../repository/books');
 const { newImage, selectByName } = require('../repository/images');
@@ -42,18 +43,13 @@ async function addBook(data, images, info) {
         // encontra o id do livro
         const bookID = await selectBook(data.name, userID, client);
 
-        // insere as imagens na tabela e seleciona seu id
-        const id = [];
-        images.forEach(async (el) => {
-            await newImage(el.filename, el.path);
+        // insere as imagens na tabela
+        for (let i = 0; i < images.length; i += 1) {
+            const el = images[i];
+            await newImage(el.filename, el.path, client);
             const imageID = await selectByName(el.filename, client);
-            id.push(imageID);
-        });
-
-        // insere os dados na tabela de imagens de livros
-        id.forEach(async (image) => {
-            await bookImages(image, bookID, client);
-        });
+            await bookImages(imageID, bookID, client);
+        }
 
         commit(client);
     } catch (error) {
