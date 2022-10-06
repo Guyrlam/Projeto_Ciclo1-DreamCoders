@@ -428,6 +428,7 @@ padding-bottom: 4%;
     margin: 10px;
 }
 #signuped{
+    display: flex;
     justify-content: center;
 }
 #signup-submit{
