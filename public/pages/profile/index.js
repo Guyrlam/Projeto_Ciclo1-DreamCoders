@@ -30,7 +30,10 @@ export default () => {
                     <img src="" alt="" class="books-profile">
                 </div>
                 <div id="profile-button-add">
-                    <button id="button-add">Adicionar</button>
+                    <a href="#addBook">
+                        <button id="button-add">Adicionar</button>
+                    </a>
+                    
                 </div>
             </div>
         </section>
