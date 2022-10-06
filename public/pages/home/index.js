@@ -1,7 +1,6 @@
 export default () => {
-
-    console.log('home template')
-    const container = document.createElement('div')
+    console.log('home template');
+    const container = document.createElement('div');
 
     const template = `
     <section>

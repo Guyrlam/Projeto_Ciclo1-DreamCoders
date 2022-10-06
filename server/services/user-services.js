@@ -127,4 +127,13 @@ async function logUser(data) {
     return response;
 }
 
-module.exports = { addUser, logUser };
+async function userProfile(info) {
+    const status = {
+        Error: null,
+        data: info,
+    };
+
+    return status;
+}
+
+module.exports = { addUser, logUser, userProfile };

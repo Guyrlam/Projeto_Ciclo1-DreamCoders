@@ -1,10 +1,10 @@
 export default () => {
-    console.log('signup template')
-    const container = document.createElement('div')
+    console.log('signup template');
+    const container = document.createElement('div');
     const template = `
 
 
-    `
-    container.innerHTML = template
-    return container
-}
+    `;
+    container.innerHTML = template;
+    return container;
+};

@@ -1,10 +1,9 @@
 const { pool, begin, commit, rollback } = require('../repository/repository');
-const { insertUser } = require('../repository/users');
+const { newBook, selectBook, bookImages } = require('../repository/books');
 const { newImage, selectByName } = require('../repository/images');
-const { selectClassID } = require('../repository/user-classes');
 const { addBookVerification } = require('../validators/book-validators');
 
-async function addBook(data, image) {
+async function addBook(data, images, info) {
     const response = {
         Error: null,
     };
@@ -12,7 +11,7 @@ async function addBook(data, image) {
     let client;
 
     try {
-        const verifiedData = addBookVerification(data, image);
+        const verifiedData = addBookVerification(data, images);
         if (verifiedData !== true) {
             response.Error = verifiedData;
             response.status = 400;
@@ -23,26 +22,38 @@ async function addBook(data, image) {
 
         begin(client);
 
-        // insere a imagem na tabela
-        await newImage(image.filename, image.path, client);
+        // retorna o uuid do usuário
+        const userID = info.user_id;
 
-        // retorna o uuid da imagem
-        const imageID = await selectByName(image.filename, client);
-
-        // retorna o uuid do tipo de usuário
-        const classID = await selectClassID(data.class, client);
-
-        const userArray = [
+        const bookArray = [
             data.name,
-            imageID,
-            classID,
-            data.email,
-            data.telephone,
-            data.password,
+            data.details,
+            userID,
+            data.publisher,
+            data.writer,
+            data.condition,
+            data.category,
+            data.synopsis,
         ];
 
         // adiciona usuário ao banco de dados
-        await insertUser(userArray, client);
+        await newBook(bookArray, client);
+
+        // encontra o id do livro
+        const bookID = await selectBook(data.name, userID, client);
+
+        // insere as imagens na tabela e seleciona seu id
+        const id = [];
+        images.forEach(async (el) => {
+            await newImage(el.filename, el.path);
+            const imageID = await selectByName(el.filename, client);
+            id.push(imageID);
+        });
+
+        // insere os dados na tabela de imagens de livros
+        id.forEach(async (image) => {
+            await bookImages(image, bookID, client);
+        });
 
         commit(client);
     } catch (error) {

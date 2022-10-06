@@ -1,6 +1,6 @@
 export default () => {
-    console.log('details template')
-    const container = document.createElement('div')
+    console.log('details template');
+    const container = document.createElement('div');
     const template = `
     <section id="details">
             <div id="book-photos">
@@ -35,8 +35,7 @@ export default () => {
                 <button id="button-solicitar">Solicitar</button>
             </div>
         </section>
-    `
-    container.innerHTML = template
-    return container
-}
-
+    `;
+    container.innerHTML = template;
+    return container;
+};

@@ -1,4 +1,4 @@
-const { addUser, logUser } = require('../services/user-services');
+const { addUser, logUser, userProfile } = require('../services/user-services');
 
 async function insertUser(req, res) {
     const services = await addUser(req.body, req.file);
@@ -36,4 +36,21 @@ async function login(req, res) {
     }
 }
 
-module.exports = { insertUser, login };
+async function myProfile(req, res) {
+    const services = await userProfile(req.user_info);
+
+    if (services.Error !== null) {
+        const error = {
+            ERROR: services.Error,
+        };
+        res.status(services.status).json(error);
+    } else {
+        const message = {
+            data: services.data,
+        };
+
+        res.status(200).json(message);
+    }
+}
+
+module.exports = { insertUser, login, myProfile };

@@ -1,7 +1,6 @@
 export default () => {
-
-    console.log('login template')
-    const container = document.createElement('div')
+    console.log('login template');
+    const container = document.createElement('div');
 
     const template = `
     <section>
