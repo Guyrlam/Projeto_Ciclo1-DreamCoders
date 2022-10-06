@@ -148,6 +148,8 @@ main {
 #tunel-do-saber {
     width: 100%;
     font-size: 27px;
+    letter-spacing: 0px;
+    padding: 1vw;
 }
 
 #header-title {
