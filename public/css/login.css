@@ -1,0 +1,30 @@
+#login {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    height: 500px;
+    border: solid 1px #000;
+}
+
+#login-title {
+    text-align: center;
+}
+
+#login-checkbox {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.checkbox {
+    padding: 3%;
+    border-radius: 25%;
+}
+
+#login-inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+.filling-login {
+    width: 200px;
+}
