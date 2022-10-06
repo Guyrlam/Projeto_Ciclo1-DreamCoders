@@ -4,6 +4,7 @@ import home from './pages/home/index.js';
 import login from './pages/login/index.js';
 import profile from './pages/profile/index.js';
 import signup from './pages/signup/index.js';
+import postUser from './pages/signup/postUser.js';
 
 const main = document.querySelector('#root');
 
@@ -31,5 +32,17 @@ window.addEventListener('hashchange', () => {
             break;
         case '#signup':
             main.appendChild(signup());
+            const submit = document.querySelector('#signup-submit');
+            submit.addEventListener('click', async () => {
+                const resp = await postUser();
+                if (resp.message == "Usuário adicionado com sucesso") {
+                    alert("Cadastro realizado com sucesso")
+                }
+
+
+            });
+            break;
+        
     }
 });
+

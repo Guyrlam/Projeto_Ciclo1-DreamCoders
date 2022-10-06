@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Spectral+SC:wght@700&display=swap');
+
+@import './css/home.css';
+@import './css/login.css';
+@import './css/profile.css';
+@import './css/books.css';
+@import './css/details.css';
+@import './css/signup.css';
+
+@import './css/specials/checkbox-button.css';
+
+/* ----- defining palette colors ----- */
+:root {
+    --green: #12492F;
+    --dark-blue-green: #0A2F35;
+    --orange: #F56038;
+    --dark-pale: #F7A325;
+    --pale: #FFCA7A;
+    --blue: #2A08FB;
+    --white: #FFFAFA;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-decoration: none;
+    outline: none;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+/* general content */
+body {
+    background-color: var(--dark-blue-green);
+}
+
+.green-text {
+    color: var(--green);
+    background-color: var(--dark-pale);
+}
+
+.white-text {
+    color: var(--white);
+    font-family: 'Spectral SC', serif;
+    font-size: 36px;
+}
+
+/* reseting anchors and put transitions */
+a:link {
+    color: var(--white);
+    letter-spacing: 1px;
+    transition: 400ms;
+}
+
+a:hover {
+    font-weight: bold;
+    letter-spacing: 0.7px;
+    transition: 200ms;
+}
+
+a:visited {
+    color: initial;
+}
+
+button {
+    background-color: var(--orange);
+    border-radius: 10px;
+    width: 50px;
+    word-break: keep-all;
+    text-overflow: clip;
+}
+
+section,
+nav {
+    display: flex;
+    gap: 80px;
+}
+
+ul {
+    display: inherit;
+    gap: inherit;
+    justify-content: space-around;
+    /* background-color: var(--dark-pale); */
+}
+
+/* tag main is for rendering spa subpages */
+main {
+    color: var(--white);
+    padding: 3%;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+#header-middle {
+    display: flex;
+    justify-content: space-between;
+    height: 100px;
+    align-items: center;
+}
+
+#header-search {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+#header-search-bar {
+    width: 100%;
+    height: 40px;
+    outline: none;
+    border: none;
+    padding-left: 3%;
+    font-size: 15px;
+}
+
+#header-search-filter {
+    display: flex;
+    width: 50px;
+    height: 40px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: var(--dark-pale);
+    justify-content: center;
+    align-items: center;
+}
+
+#header-search-button {
+    border: none;
+    display: flex;
+    width: 50px;
+    height: 40px;
+    border-radius: 0px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--dark-pale)
+}
+
+.icon-search {
+    height: 20px;
+    width: 20px;
+}
+
+#tunel-do-saber {
+    width: 100%;
+    font-size: 27px;
+}
+
+#header-title {
+    width: 30%;
+}
+
+#header-login {
+    display: flex;
+    width: 25%;
+}
+
+#header-button-login {
+    height: 40px;
+    width: 150px;
+    border-radius: 23px;
+    border: none;
+    font-size: 15px;
+    color: var(--white);
+}
+
+#header-top {
+    height: 35px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 2%;
+    font-size: 15px;
+}
+
+#header-bottom {
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#header-ul {
+    width: 100%;
+    text-align: center;
+}

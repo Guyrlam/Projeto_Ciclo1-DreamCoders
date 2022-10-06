@@ -403,3 +403,49 @@ padding-bottom: 4%;
     color: #FFF;
     font-size: 15px;
 }
+
+.filling-signup{
+    width: 200px;
+    height: 25px;
+    border-radius: 20px;
+    border: none;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding-left: 10px;
+}
+
+#signup-format{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+#signup-inputs{
+    display: flex;
+    flex-direction: column;
+    
+}
+#signup{
+    margin: 10px;
+}
+#signuped{
+    display: flex;
+    justify-content: center;
+}
+#signup-submit{
+    background-color: var(--orange);
+    height: 35px;
+    border-radius: 20px;
+    font-size: 15px;
+    width: 150px;
+    margin-top: 20px;
+    border: none;
+    color: #FFF;
+}
+#siginup-but-login{
+    border: none;
+    background-color: var(--blue);
+    color:#FFF;
+    height: 25px;
+    border-radius: 20px;
+    font-size: 12px;
+}

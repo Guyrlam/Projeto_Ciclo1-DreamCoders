@@ -1,0 +1,19 @@
+#books {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.book-feed {
+    height: 323px;
+    width: 226px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.a-book-feed{
+    width: 100%;
+    height: 100%;
+}
+.img-book-feed{
+    width: 100%;
+    height: 100%;
+}

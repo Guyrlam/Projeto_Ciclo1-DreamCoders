@@ -1,0 +1,39 @@
+#main-text {
+    display: flex;
+
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 3%;
+    padding-left: 3%;
+}
+
+#title-main-text {
+    font-size: 60px;
+    margin-bottom: 5%;
+    text-align: left;
+}
+
+#main-img {
+    width: 50%;
+    height: 550px;
+}
+
+#p-main-text {
+    text-align: left;
+    line-height: 25px;
+}
+
+#button-main {
+    margin-top: 3%;
+    width: 250px;
+    height: 60px;
+    font-size: 27px;
+    color: #FFF;
+    /*   font-family: 'Source Sans Pro', sans-serif; */
+
+}
+
+.button-border-radius {
+    border: none;
+    border-radius: 41px;
+}
