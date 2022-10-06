@@ -42,6 +42,7 @@ window.addEventListener('hashchange', () => {
 
             });
             break;
+        
     }
 });
 

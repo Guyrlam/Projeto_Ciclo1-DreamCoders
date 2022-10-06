@@ -6,28 +6,13 @@ export default () => {
     <section id="books">
         
         <div class="book-feed">
-                <a href="#details">
-                    <img src="" alt="" style="width: 100%; height:100%;">
+                <a href="#details" class="a-book-feed">
+                    <img src="" alt="" class="img-book-feed" >
                 </a>
         </div>
         <div class="book-feed">
-                <a href="#details">
-                    <img src="" alt="" style="width: 100%; height:100%;">
-                </a>
-        </div>
-        <div class="book-feed">
-                <a href="#details">
-                    <img src="" alt="" style="width: 100%; height:100%;">
-                </a>
-        </div>
-        <div class="book-feed">
-                <a href="#details">
-                    <img src="" alt="" style="width: 100%; height:100%;">
-                </a>
-        </div>
-        <div class="book-feed">
-                <a href="#details">
-                    <img src="" alt="" style="width: 100%; height:100%;">
+                <a href="#details" class="a-book-feed">
+                    <img src="" alt="" class="img-book-feed" >
                 </a>
         </div>
         
