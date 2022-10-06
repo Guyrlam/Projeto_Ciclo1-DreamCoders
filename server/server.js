@@ -1,5 +1,6 @@
 const express = require('express');
 const multer = require('multer');
+const cookieParser = require('cookie-parser');
 const { userRoute } = require('./routes/user-router');
 const { bookRoute } = require('./routes/book-router');
 require('dotenv').config();
@@ -9,6 +10,7 @@ const { NDPORT, NDHOST } = process.env;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // multer configurations
 const diskStorage = multer.diskStorage({
