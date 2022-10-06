@@ -1,0 +1,48 @@
+#addbook-images{
+    display: flex;
+    flex-direction: column;
+    border-right: solid white 2px;
+    padding-right: 4s0px;
+}
+.addbook-image{
+    padding: 3%;
+}
+#addbook-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#addbook-inputs{
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+#addbook-buttons{
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 40px;
+}
+#addbook-save{
+    border: none;
+    width: 100px;
+    margin-right: 20px;
+    height: 30px;
+    border-radius: 25px;
+    color: white;
+}
+#delete-book{
+    background-color: var(--blue);
+    border: none;
+    width: 150px;
+    height: 30px;
+    border-radius: 25px;
+    color: white;
+}
+.addbook-text-inputs{
+    margin-left: 10px;
+    border-radius: 25px;
+    border: none;
+    padding-left: 5px;
+    height: 25px;
+}

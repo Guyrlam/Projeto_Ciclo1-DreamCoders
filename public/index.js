@@ -1,3 +1,4 @@
+import addBook from './pages/books/addBook/index.js';
 import feed from './pages/books/index.js';
 import details from './pages/details/index.js';
 import home from './pages/home/index.js';
@@ -38,11 +39,12 @@ window.addEventListener('hashchange', () => {
                 if (resp.message == "Usuário adicionado com sucesso") {
                     alert("Cadastro realizado com sucesso")
                 }
-
-
             });
             break;
-        
+        case "#addBook":
+            main.appendChild(addBook())
+            break;
+
     }
 });
 
