@@ -190,3 +190,11 @@ main {
     width: 100%;
     text-align: center;
 }
+#hello-user{
+    font-size: 22px;
+    color: #FFFAFA;
+    display: flex;
+}
+#icon-user{
+    margin-right: 15px;
+}
