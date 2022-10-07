@@ -35,7 +35,7 @@ window.addEventListener('hashchange', () => {
             const hLogin = document.querySelector('#header-login')
             acess.addEventListener('click', async () => {
                 const resp = await acesso();
-                await console.log(resp)
+                console.log(resp.message)
                 if(resp.message == "Usuário logado com sucesso"){
                     hLogin.innerHTML = ""
                     hLogin.appendChild(await headerLogin())
