@@ -6,6 +6,9 @@ import login from './pages/login/index.js';
 import profile from './pages/profile/index.js';
 import signup from './pages/signup/index.js';
 import postUser from './pages/signup/postUser.js';
+import acesso from './pages/login/acess.js'
+import postBook from './pages/books/addBook/postBook.js'
+
 
 const main = document.querySelector('#root');
 
@@ -27,6 +30,11 @@ window.addEventListener('hashchange', () => {
             break;
         case '#login':
             main.appendChild(login());
+            const acess = document.querySelector('#button-acessar')
+            acess.addEventListener('click', async () => {
+                const resp = await acesso();
+                console.log(resp)
+            })
             break;
         case '#profile':
             main.appendChild(profile());
@@ -45,7 +53,10 @@ window.addEventListener('hashchange', () => {
             });
             break;
         case "#addBook":
-            main.appendChild(addBook())            
+            main.appendChild(addBook())    
+            break;
+        case "#acess":
+            window.location.hash = '#books'
             break;
 
     }

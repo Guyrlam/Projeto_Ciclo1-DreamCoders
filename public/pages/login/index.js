@@ -10,18 +10,27 @@ export default () => {
 
         <span>Sua primeira vez aqui? Crie uma conta!</span>
         <a href="#signup">
-            <button>Cadastre-se</button>
+            <button id="login-cadastre-se">Cadastre-se</button>
         </a>
     </div>
     <div>
-        <form>
-
-            </div>
+        <form>            
             <div id="login-inputs">
-                <label for="email-login">Endereço de Email</label>
-                <input type="email" name="email-login" id="email-login" class="filling-login">
-                <label for="email-login">Senha</label>
-                <input type="email" name="email-login" id="email-login" class="filling-login">
+                
+                    <label for="email-login">Endereço de Email</label>
+                    <input type="email" name="email-login" id="email-login" class="filling-login">
+                
+                
+                    <label for="email-login">Senha</label>
+                    <input type="email" name="email-login" id="password-login" class="filling-login">
+                
+                    <div id="acessar">
+                    <a href="#acess" id="a-acessar">
+                        <button id="button-acessar" type="button">Acessar</button>
+                    </a>
+                    
+                </div>
+                
             </div>
         </form>
     </div>
