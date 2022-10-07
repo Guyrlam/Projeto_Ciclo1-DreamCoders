@@ -7,12 +7,12 @@ export default () => {
         
         <div class="book-feed">
                 <a href="#details" class="a-book-feed">
-                    <img src="" alt="" class="img-book-feed" >
+                    <img src="../../assets/photobook.jpg" alt="" class="img-book-feed" >
                 </a>
         </div>
         <div class="book-feed">
                 <a href="#details" class="a-book-feed">
-                    <img src="" alt="" class="img-book-feed" >
+                    <img src="https://m.media-amazon.com/images/I/51pDuamx5XL.jpg" alt="" class="img-book-feed" >
                 </a>
         </div>
         

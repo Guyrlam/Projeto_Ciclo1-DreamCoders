@@ -3,11 +3,11 @@
     flex-direction: column;
     width: 600px;
     height: 500px;
-    border: solid 1px #000;
+    
 }
 
 #login-title {
-    text-align: center;
+    padding-left: 20%;
     line-height: 30px;
 }
 
@@ -31,8 +31,9 @@
     display: flex;
     flex-direction: column;
     justify-content:flex-start;
-    align-items: center;
+    align-items: flex-start;
     margin-top: 5%;
+    padding-left: 20%;
 }
 
 .filling-login {

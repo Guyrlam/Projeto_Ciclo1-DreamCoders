@@ -10,35 +10,18 @@ export default () => {
 
         <span>Sua primeira vez aqui? Crie uma conta!</span>
         <a href="#signup">
-            <button id="login-cadastre-se">Cadastre-se</button>
+            <button>Cadastre-se</button>
         </a>
     </div>
     <div>
         <form>
-            <div id="login-checkbox">
-                <label for="user">Sou Usuário 
-                    <input type="radio" name="radio-class-user" id="client-radio" class="radio-user">
-                </label>
-
-
-                <label for="adm">Sou Administrador
-                    <input type="radio" name="radio-class-user" id="adm-radio" class="radio-user">
-                </label>
 
             </div>
             <div id="login-inputs">
-                
-                    <label for="email-login">Endereço de Email</label>
-                    <input type="email" name="email-login" id="email-login" class="filling-login">
-                
-                
-                    <label for="email-login">Senha</label>
-                    <input type="email" name="email-login" id="email-login" class="filling-login">
-                
-                    <div id="acessar">
-                    <button id="button-acessar" type="button">Acessar</button>
-                </div>
-                
+                <label for="email-login">Endereço de Email</label>
+                <input type="email" name="email-login" id="email-login" class="filling-login">
+                <label for="email-login">Senha</label>
+                <input type="email" name="email-login" id="email-login" class="filling-login">
             </div>
         </form>
     </div>
