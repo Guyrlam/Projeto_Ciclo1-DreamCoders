@@ -11,6 +11,16 @@ const select = {
     values: [],
 };
 
+const list = {
+    text: `SELECT 
+    images.file_name fileName
+    FROM book_images
+    INNER JOIN images
+    ON images.id = book_images.image_id
+    WHERE book_id = $1`,
+    values: [],
+};
+
 async function newImage(name, path, client) {
     insert.values = [name, path];
     await client.query(insert);
@@ -22,4 +32,10 @@ async function selectByName(filename, client) {
     return response.rows[0].id;
 }
 
-module.exports = { newImage, selectByName };
+async function bookImagesList(book, client) {
+    list.values = [book];
+    const response = await client.query(list);
+    return response.rows;
+}
+
+module.exports = { newImage, selectByName, bookImagesList };

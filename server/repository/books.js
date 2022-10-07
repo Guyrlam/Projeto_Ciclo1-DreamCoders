@@ -17,6 +17,24 @@ const images = {
     values: [],
 };
 
+const books = {
+    text: `SELECT
+    book.id,
+    book.name,
+    book.details,
+    user_profile.name collector,
+    book.publisher,
+    book.writer,
+    book.condition,
+    book.category,
+    book.synopsis
+    FROM book
+    INNER JOIN user_profile
+    ON user_profile.id = book.user_id
+    WHERE book.approved isnull 
+    OR book.approved = true`,
+};
+
 async function newBook(array, client) {
     insert.values = array;
     await client.query(insert);
@@ -33,4 +51,9 @@ async function bookImages(image, book, client) {
     await client.query(images);
 }
 
-module.exports = { newBook, selectBook, bookImages };
+async function bookList(client) {
+    const response = await client.query(books);
+    return response.rows;
+}
+
+module.exports = { newBook, selectBook, bookImages, bookList };
