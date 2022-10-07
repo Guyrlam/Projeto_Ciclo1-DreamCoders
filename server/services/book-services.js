@@ -1,7 +1,7 @@
 /* eslint-disable no-await-in-loop */
 const { pool, begin, commit, rollback } = require('../repository/repository');
-const { newBook, selectBook, bookImages } = require('../repository/books');
-const { newImage, selectByName } = require('../repository/images');
+const { newBook, selectBook, bookImages, bookList } = require('../repository/books');
+const { newImage, selectByName, bookImagesList } = require('../repository/images');
 
 async function addBook(data, images, info) {
     const response = {
@@ -54,4 +54,45 @@ async function addBook(data, images, info) {
     return response;
 }
 
-module.exports = { addBook };
+async function pullBooks() {
+    const response = {
+        Error: null,
+    };
+
+    let client;
+
+    try {
+        client = await pool.connect();
+
+        begin(client);
+
+        // lista os dados dos livros
+        const books = await bookList(client);
+
+        // adiciona a lista de URL's de imagens aos livros
+        for (let i = 0; i < books.length; i += 1) {
+            const el = books[i];
+            el.images = [];
+            const imageList = await bookImagesList(el.id, client);
+            for (let x = 0; x < imageList.length; x += 1) {
+                const image = imageList[x].filename;
+                el.images.push(
+                    `http://${process.env.NDHOST}:${process.env.NDPORT}/uploads/${image}`
+                );
+            }
+        }
+
+        response.data = books;
+
+        commit(client);
+    } catch (error) {
+        response.Error = error.message;
+        response.status = 500;
+        rollback(client);
+    }
+
+    client.release();
+    return response;
+}
+
+module.exports = { addBook, pullBooks };
