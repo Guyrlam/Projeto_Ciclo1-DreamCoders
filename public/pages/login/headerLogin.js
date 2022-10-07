@@ -5,7 +5,7 @@ export default async function headerLogin(){
                         <img src="./assets/icon-user.png" alt="" id="icon-user" width="27px" height="27px">
                         Olá Usuário
                         
-                    </span>
+    </span>
     `
     container.innerHTML = template
     return container
