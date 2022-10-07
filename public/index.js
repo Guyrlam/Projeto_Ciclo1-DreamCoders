@@ -10,7 +10,6 @@ import acesso from './pages/login/acess.js'
 import headerLogin from './pages/login/headerLogin.js';
 //import postBook from './pages/books/addBook/postBook.js'
 
-
 const main = document.querySelector('#root');
 
    window.addEventListener("load", () => {
@@ -39,7 +38,6 @@ window.addEventListener('hashchange', () => {
                 if(resp.message == "Usuário logado com sucesso"){
                     hLogin.innerHTML = ""
                     hLogin.appendChild(await headerLogin())
-                    window.location.hash = '#books'
                 }
             })
             break;
