@@ -25,7 +25,7 @@ export default () => {
                     <input type="email" name="email-login" id="password-login" class="filling-login">
                 
                     <div id="acessar">
-                    <a href="#acess" id="a-acessar">
+                    <a id="a-acessar">
                         <button id="button-acessar" type="button">Acessar</button>
                     </a>
                     

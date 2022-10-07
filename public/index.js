@@ -8,7 +8,7 @@ import signup from './pages/signup/index.js';
 import postUser from './pages/signup/postUser.js';
 import acesso from './pages/login/acess.js'
 import headerLogin from './pages/login/headerLogin.js';
-//import postBook from './pages/books/addBook/postBook.js'
+import postBook from './pages/books/addBook/postBook.js'
 
 const main = document.querySelector('#root');
 
@@ -39,6 +39,7 @@ window.addEventListener('hashchange', () => {
                     hLogin.innerHTML = ""
                     hLogin.appendChild(await headerLogin())
                 }
+                window.location.hash = "#books"
             })
             break;
         case '#profile':
@@ -51,14 +52,27 @@ window.addEventListener('hashchange', () => {
                 const resp = await postUser();
                 if (resp.message == "Usuário adicionado com sucesso") {
                     alert("Cadastro realizado com sucesso")
+                    window.location.hash = "#login"
                 }
                 else{
-                    alert(resp.ERROR)
+                    console.log(resp.ERROR)
                 }
             });
             break;
         case "#addBook":
-            main.appendChild(addBook())    
+            main.appendChild(addBook())
+            const save = document.querySelector('#button-save-book');
+            save.addEventListener('click', async () => {
+                const resp = await postBook();
+                if (resp.message == "Livro adicionado com sucesso") {
+                    alert("Livro adicionado com sucesso")
+                    window.location.hash = "#profile"
+                }
+                else{
+                    alert(resp.ERROR)
+                }
+                
+            });    
             break;
         case "#acess":
             window.location.hash = '#books'
