@@ -38,6 +38,20 @@ window.addEventListener('hashchange', () => {
                 if(resp.message == "Usuário logado com sucesso"){
                     hLogin.innerHTML = ""
                     hLogin.appendChild(await headerLogin())
+                    const helloUser = document.querySelector('#hello-user')
+                    const dropdown = document.querySelector('#dropdown-menu')
+                    const myprofile = document.querySelector('#myprofile-button')
+                     
+                    helloUser.addEventListener('mouseenter', async () => {
+                        dropdown.style.display = "flex"
+                        myprofile.addEventListener('click', () => {
+                            window.location.hash = "#profile"
+                        })
+                        
+                    })
+                    dropdown.addEventListener('mouseleave', async () => {
+                        dropdown.style.display = 'none'
+                    })
                 }
                 window.location.hash = "#books"
             })
