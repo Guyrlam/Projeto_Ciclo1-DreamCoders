@@ -1,5 +1,4 @@
 export default async function postUser() {
-
     const formData = new FormData();
     const nome = document.querySelector('#name-signup');
     const email = document.querySelector('#email-signup');
@@ -20,7 +19,6 @@ export default async function postUser() {
         method: 'POST',
         body: formData,
     });
-    
-    return resp.json();
 
+    return resp.json();
 }

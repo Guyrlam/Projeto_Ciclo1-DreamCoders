@@ -2,7 +2,6 @@
 const { pool, begin, commit, rollback } = require('../repository/repository');
 const { newBook, selectBook, bookImages } = require('../repository/books');
 const { newImage, selectByName } = require('../repository/images');
-const { addBookVerification } = require('../validators/book-validators');
 
 async function addBook(data, images, info) {
     const response = {
@@ -12,13 +11,6 @@ async function addBook(data, images, info) {
     let client;
 
     try {
-        const verifiedData = addBookVerification(data, images);
-        if (verifiedData !== true) {
-            response.Error = verifiedData;
-            response.status = 400;
-            return response;
-        }
-
         client = await pool.connect();
 
         begin(client);

@@ -1,7 +1,6 @@
 export default () => {
-
-    console.log('editBook template')
-    const container = document.createElement('div')
+    console.log('editBook template');
+    const container = document.createElement('div');
 
     const template = `
         <section id="editBook">
@@ -73,7 +72,7 @@ export default () => {
 
         </div>
         </section>
-        `
+        `;
     container.innerHTML = template;
     return container;
 };
