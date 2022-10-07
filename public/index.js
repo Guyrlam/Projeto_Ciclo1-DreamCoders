@@ -44,21 +44,19 @@ window.addEventListener('hashchange', () => {
             const submit = document.querySelector('#signup-submit');
             submit.addEventListener('click', async () => {
                 const resp = await postUser();
-                if (resp.message == "Usuário adicionado com sucesso") {
-                    alert("Cadastro realizado com sucesso")
-                }
-                else{
-                    alert(resp.ERROR)
+                if (resp.message == 'Usuário adicionado com sucesso') {
+                    alert('Cadastro realizado com sucesso');
+                } else {
+                    alert(resp.ERROR);
                 }
             });
             break;
+
         case "#addBook":
             main.appendChild(addBook())    
             break;
         case "#acess":
             window.location.hash = '#books'
             break;
-
     }
 });
-

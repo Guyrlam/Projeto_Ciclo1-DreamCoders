@@ -1,3 +1,4 @@
+
  export default async function postUser() {
 
     const formData = new FormData();
@@ -32,7 +33,6 @@
         method: 'POST',
         body: formData,
     });
-    
-    return resp.json();
 
+    return resp.json();
 }

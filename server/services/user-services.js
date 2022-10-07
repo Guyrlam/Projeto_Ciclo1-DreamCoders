@@ -5,7 +5,6 @@ const { insertUser, tokenInfo } = require('../repository/users');
 const { newImage, selectByName } = require('../repository/images');
 const { selectClassID } = require('../repository/user-classes');
 const {
-    addUserVerification,
     dataBaseVerification,
     logVerification,
     logDBVerification,
@@ -19,13 +18,6 @@ async function addUser(data, image) {
     let client;
 
     try {
-        const verifiedData = addUserVerification(data, image);
-        if (verifiedData !== true) {
-            response.Error = verifiedData;
-            response.status = 400;
-            return response;
-        }
-
         client = await pool.connect();
 
         begin(client);
@@ -127,13 +119,12 @@ async function logUser(data) {
     return response;
 }
 
-async function userProfile(info) {
+/* async function userProfile(info) {
     const status = {
         Error: null,
-        data: info,
     };
 
     return status;
-}
+} */
 
-module.exports = { addUser, logUser, userProfile };
+module.exports = { addUser, logUser };
