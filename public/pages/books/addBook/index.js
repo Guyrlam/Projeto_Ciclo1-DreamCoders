@@ -39,21 +39,20 @@ export default () => {
                 <option value="misterio">Mistério</option>
             </select>
 
-            <fieldset title="Estado do livro.">
+            <fieldset title="Estado do livro." id="conditions">
 
                 <label for="conditions">Condições do livro: </label>
-                <input type="radio" name="book-conditions" id="conditions" value="new">
+                <input type="radio" name="book-conditions" id="conditions1" value="used">
                 <span> usado</span>
-                <input type="radio" name="book-conditions" id="conditions" value="new">
-                <span> seminovo</span>
-                <input type="radio" name="book-conditions" id="conditions" value="new">
-                <span> antigo</span>
+                <input type="radio" name="book-conditions" id="conditions2" value="new">
+                <span> novo</span>
+                
             </fieldset>
 
             <label for="synopsis">Sinopse:</label>
             <input type="text" name="book-synopsis" id="synopsis">
 
-            <label for="sell">Disponível para venda?</label>
+            <label for="sell">Disponível para troca?</label>
 
             <div class="button b2" id="button-toggle">
                 <input type="checkbox" class="checkbox">
@@ -63,7 +62,10 @@ export default () => {
 
             </div>
 
-            <label for="exchange">Disponível para troca?</label>
+            <div id="div-input-photo-book">
+                <label for="pic-profile">Foto do livro: </label>
+                <input type="file" name="" id="input-book-photo">
+            </div>
 
             <button type="submit">Salvar</button>
             <button type="submit">Excluir livro</button>

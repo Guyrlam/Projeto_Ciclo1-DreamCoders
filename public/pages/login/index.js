@@ -14,18 +14,7 @@ export default () => {
         </a>
     </div>
     <div>
-        <form>
-            <div id="login-checkbox">
-                <label for="user">Sou Usuário 
-                    <input type="radio" name="radio-class-user" id="client-radio" class="radio-user">
-                </label>
-
-
-                <label for="adm">Sou Administrador
-                    <input type="radio" name="radio-class-user" id="adm-radio" class="radio-user">
-                </label>
-
-            </div>
+        <form>            
             <div id="login-inputs">
                 
                     <label for="email-login">Endereço de Email</label>
@@ -33,10 +22,13 @@ export default () => {
                 
                 
                     <label for="email-login">Senha</label>
-                    <input type="email" name="email-login" id="email-login" class="filling-login">
+                    <input type="email" name="email-login" id="password-login" class="filling-login">
                 
                     <div id="acessar">
-                    <button id="button-acessar" type="button">Acessar</button>
+                    <a href="#acess" id="a-acessar">
+                        <button id="button-acessar" type="button">Acessar</button>
+                    </a>
+                    
                 </div>
                 
             </div>
