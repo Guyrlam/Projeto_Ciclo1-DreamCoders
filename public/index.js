@@ -38,6 +38,8 @@ window.addEventListener('hashchange', () => {
                 const resp = await postUser();
                 if (resp.message == 'Usuário adicionado com sucesso') {
                     alert('Cadastro realizado com sucesso');
+                } else {
+                    alert(resp.ERROR);
                 }
             });
             break;

@@ -3,60 +3,76 @@ export default () => {
     const container = document.createElement('div');
 
     const template = `
-    <section id="addbook">
-    <div id="addbook-images">
-        <img src="" alt="" width="100px" height="100px" class="addbook-image">
-        <img src="" alt="" width="100px" height="100px" class="addbook-image">
-        <img src="" alt="" width="100px" height="100px" class="addbook-image">
-        <input type="file" name="" id="file-photo-addbook" class="addbook-image">
+    <section id="editbook">
+    <div>
+        <h2>Alterar cadastro de livro</h2>
     </div>
-    <div id="addbook-details">
-        <div id="addbook-inputs">
-            <div>
-                <label for="book-name">Nome do Livro: </label>
-                <input type="text" name="" id="addbook-name" class="addbook-text-inputs">
+    <div id="blocks">
+        <form action="" method="post" style="display: flex; flex-flow: column nowrap; gap: 30px">
+
+            <label for="book-title">Título do Livro:</label>
+            <input type="text" name="book-title" id="book-title">
+
+            <label for="details">Detalhes:</label>
+            <input type="text" name="book-details" id="book-details">
+
+            <label for="publisher">Editora:</label>
+            <select name="Editora" id="publisher">
+                <option value="" selected disabled>(selecione)</option>
+                <option value="Zahar">Zahar</option>
+                <option value="Saraiva">Saraiva</option>
+                <option value="Scipione">Scipione</option>
+            </select>
+
+            <label for="writer">Escritor:</label>
+            <select name="Escritor" id="writer">
+                <option value="" selected disabled>(selecione)</option>
+                <option value="Arthur Conan Doyle">Arthur Conan Doyle</option>
+                <option value="Augusto Cury">Augusto Cury</option>
+                <option value="Eckhart Tolle">Eckhart Tolle</option>
+            </select>
+
+            <label for="category">Categoria:</label>
+            <select name="Categoria" id="cateogry">
+                <option value="" selected disabled>(selecione)</option>
+                <option value="autoajuda">Autoajuda</option>
+                <option value="misterio">Mistério</option>
+            </select>
+
+            <fieldset title="Estado do livro.">
+
+                <label for="conditions">Condições do livro: </label>
+                <input type="radio" name="book-conditions" id="conditions" value="new">
+                <span> usado</span>
+                <input type="radio" name="book-conditions" id="conditions" value="new">
+                <span> seminovo</span>
+                <input type="radio" name="book-conditions" id="conditions" value="new">
+                <span> antigo</span>
+            </fieldset>
+
+            <label for="synopsis">Sinopse:</label>
+            <input type="text" name="book-synopsis" id="synopsis">
+
+            <label for="sell">Disponível para venda?</label>
+
+            <div class="button b2" id="button-toggle">
+                <input type="checkbox" class="checkbox">
+                <div class="knobs">
+                    <span></span>
+                </div>
+
             </div>
 
-            <div>
-                <label for="">Detalhes: </label>
-                <input type="text" name="" id="addbook-description" class="addbook-text-inputs">
-            </div>
+            <label for="exchange">Disponível para troca?</label>
 
-            <div>
-                <label for="">Editora: </label>
-                <select name="" id="addbook-publisher">Editora</select>
-            </div>
+            <button type="submit">Salvar</button>
+            <button type="submit">Excluir livro</button>
 
-            <div>
-                <label for="">Escritor: </label>
-                <select name="" id="addbook-writer">Escritor</select>
-            </div>
 
-            <div>
-                <label for="">Condições: </label>
-                <select name="" id="addbook-conditions">Condições</select>
-            </div>
+        </form>
 
-            <div>
-                <label for="">Sinopse: </label>
-                <input type="text" name="" id="addbook-synopsis" class="addbook-text-inputs">
-            </div>
-
-            <div>
-                <label for="disponivel">Disponivel: </label>
-                <input type="checkbox" name="disponivel" id="addbook-enable">
-            </div>
-
-        </div>
-        <div id="addbook-buttons">
-            <button id="addbook-save">Salvar</button>
-            <button id="delete-book">Excluir Livro</button>
-        </div>
     </div>
 </section>
-
-
-
     `;
     container.innerHTML = template;
     return container;
