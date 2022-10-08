@@ -8,7 +8,7 @@ export default () => {
         <h2>Alterar cadastro de livro</h2>
     </div>
     <div id="blocks">
-        <form action="" method="post" style="display: flex; flex-flow: column nowrap; gap: 30px">
+        <div style="display: flex; flex-flow: column nowrap; gap: 30px">
 
             <label for="book-title">Título do Livro:</label>
             <input type="text" name="book-title" id="book-title">
@@ -42,10 +42,12 @@ export default () => {
             <fieldset title="Estado do livro." id="conditions">
 
                 <label for="conditions">Condições do livro: </label>
-                <input type="radio" name="book-conditions" id="conditions1" value="used">
-                <span> usado</span>
-                <input type="radio" name="book-conditions" id="conditions2" value="new">
+                <input type="radio" name="book-conditions" class="book-conditions" id="conditions-antigo" value="antigo">
+                <span> antigo</span>
+                <input type="radio" name="book-conditions" class="book-conditions" id="conditions-novo" value="novo">
                 <span> novo</span>
+                <input type="radio" name="book-conditions" class="book-conditions" id="conditions-semi" value="seminovo">
+                <span> seminovo</span>
                 
             </fieldset>
 
@@ -67,11 +69,11 @@ export default () => {
                 <input type="file" name="" id="input-book-photo">
             </div>
 
-            <button type="submit">Salvar</button>
-            <button type="submit">Excluir livro</button>
+            <button id="button-save-book">Salvar</button>
+            <button >Excluir livro</button>
 
 
-        </form>
+        </div>
 
     </div>
 </section>

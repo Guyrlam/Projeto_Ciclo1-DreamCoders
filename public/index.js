@@ -8,7 +8,11 @@ import signup from './pages/signup/index.js';
 import postUser from './pages/signup/postUser.js';
 import acesso from './pages/login/acess.js';
 import headerLogin from './pages/login/headerLogin.js';
+<<<<<<< HEAD
 // import postBook from './pages/books/addBook/postBook.js'
+=======
+import postBook from './pages/books/addBook/postBook.js'
+>>>>>>> main
 
 const main = document.querySelector('#root');
 
@@ -34,12 +38,27 @@ window.addEventListener('hashchange', () => {
             const hLogin = document.querySelector('#header-login');
             acess.addEventListener('click', async () => {
                 const resp = await acesso();
-                await console.log(resp);
-                if (resp.message == 'Usuário logado com sucesso') {
-                    hLogin.innerHTML = '';
-                    hLogin.appendChild(await headerLogin());
+                await console.log(resp)
+                if(resp.message == "Usuário logado com sucesso"){
+                    hLogin.innerHTML = ""
+                    hLogin.appendChild(await headerLogin())
+                    const helloUser = document.querySelector('#hello-user')
+                    const dropdown = document.querySelector('#dropdown-menu')
+                    const myprofile = document.querySelector('#myprofile-button')
+                     
+                    helloUser.addEventListener('mouseenter', async () => {
+                        dropdown.style.display = "flex"
+                        myprofile.addEventListener('click', () => {
+                            window.location.hash = "#profile"
+                        })
+                        
+                    })
+                    dropdown.addEventListener('mouseleave', async () => {
+                        dropdown.style.display = 'none'
+                    })
                 }
-            });
+                window.location.hash = "#books"
+            })
             break;
         case '#profile':
             main.appendChild(profile());
@@ -49,6 +68,7 @@ window.addEventListener('hashchange', () => {
             const submit = document.querySelector('#signup-submit');
             submit.addEventListener('click', async () => {
                 const resp = await postUser();
+<<<<<<< HEAD
                 if (resp.message == 'Usuário adicionado com sucesso') {
                     alert('Cadastro realizado com sucesso');
                 } else {
@@ -58,6 +78,31 @@ window.addEventListener('hashchange', () => {
             break;
         case '#addBook':
             main.appendChild(addBook());
+=======
+                if (resp.message == "Usuário adicionado com sucesso") {
+                    alert("Cadastro realizado com sucesso")
+                    window.location.hash = "#login"
+                }
+                else{
+                    console.log(resp.ERROR)
+                }
+            });
+            break;
+        case "#addBook":
+            main.appendChild(addBook())
+            const save = document.querySelector('#button-save-book');
+            save.addEventListener('click', async () => {
+                const resp = await postBook();
+                if (resp.message == "Livro adicionado com sucesso") {
+                    alert("Livro adicionado com sucesso")
+                    window.location.hash = "#profile"
+                }
+                else{
+                    alert(resp.ERROR)
+                }
+                
+            });    
+>>>>>>> main
             break;
         case '#acess':
             window.location.hash = '#books';

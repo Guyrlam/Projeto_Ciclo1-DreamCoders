@@ -6,7 +6,11 @@ export default async function headerLogin() {
                         Olá Usuário
                         
     </span>
-    `;
-    container.innerHTML = template;
-    return container;
+    <div id="dropdown-menu">
+                    <button class="button-dropdown-menu" id="myprofile-button">Meu Perfil</button>
+                    <button class="button-dropdown-menu" id="requests-button">Solicitações</button>
+                </div>
+    `
+    container.innerHTML = template
+    return container
 }
