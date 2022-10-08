@@ -55,6 +55,11 @@ window.addEventListener('hashchange', async () => {
                 const resp = await acesso();
                 await console.log(resp)
                 if(resp.message == "Usuário logado com sucesso"){
+
+                    //Atribuindo valora a variavel do usuário
+                    myUser = await collectUser()
+                    myUser = myUser.data[0]
+
                     hLogin.innerHTML = ""
                     hLogin.appendChild(await headerLogin())
                     const helloUser = document.querySelector('#hello-user')
@@ -62,8 +67,7 @@ window.addEventListener('hashchange', async () => {
                     const myprofile = document.querySelector('#myprofile-button')
                     const myrequest = document.querySelector('#requests-button')
 
-                    myUser = await collectUser()
-                    myUser = myUser.data[0]
+                    
                     
                     
                     helloUser.addEventListener('mouseenter', async () => {
