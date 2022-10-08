@@ -5,7 +5,11 @@
     gap: 0px;
     width: 100%;
 }
-
+main > div {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
 #profile-details {
     display: flex;
     flex-direction: row;

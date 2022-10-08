@@ -1,7 +1,14 @@
-export default () => {
+export default (data) => {
     console.log('profile template');
     const container = document.createElement('div');
-
+    function addmybooks(dataF){
+        let template = ''
+        for(let i in dataF.books){
+            template += `<img src="${dataF.books[i].image[0]}" alt="" class="books-profile">`
+        }
+        return template
+    }
+    const mybooks = addmybooks(data)
     const template = `
     <section id="profile">
             <div id="profile-details">
@@ -10,11 +17,8 @@ export default () => {
                         id="profile-photo">
                 </div>
                 <div id="profile-description">
-                    <h1 class="profile-details-text">Nome:</h1>
-                    <h3 class="profile-details-text">Coleção</h3>
-                    <h3 class="profile-details-text">Classificação</h3>
-                    <p class="profile-details-text">Lorem ipsum dolor sit amet, consectetur adipisci elit,
-                        sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                    <h1 class="profile-details-text">Nome: ${data.name}</h1>
+                    <p class="profile-details-text">${data.description}
                     </p>
                 </div>
                 <div id="profile-edit">
@@ -24,10 +28,7 @@ export default () => {
             <div id="profile-my-collections">
                 <h1 id="my-collection-text">Minha Coleção</h1>
                 <div id="profile-colletion-books">
-                    <img src="" alt="" class="books-profile">
-                    <img src="" alt="" class="books-profile">
-                    <img src="" alt="" class="books-profile">
-                    <img src="" alt="" class="books-profile">
+                    ${mybooks}
                 </div>
                 <div id="profile-button-add">
                     <a href="#addBook">
