@@ -22,7 +22,7 @@ export default () => {
                 
                 
                     <label for="email-login">Senha</label>
-                    <input type="email" name="email-login" id="password-login" class="filling-login">
+                    <input type="password" name="email-login" id="password-login" class="filling-login">
                 
                     <div id="acessar">
                     <a id="a-acessar">
