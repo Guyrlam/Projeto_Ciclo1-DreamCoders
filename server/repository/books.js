@@ -22,6 +22,7 @@ const books = {
     book.id,
     book.name,
     book.details,
+    book.user_id collector_id,
     user_profile.name collector,
     book.publisher,
     book.writer,
@@ -33,6 +34,27 @@ const books = {
     ON user_profile.id = book.user_id
     WHERE book.approved isnull 
     OR book.approved = true`,
+};
+
+const userBooks = {
+    text: `SELECT
+    book.id,
+    book.name,
+    book.details,
+    book.user_id collector_id,
+    user_profile.name collector,
+    book.publisher,
+    book.writer,
+    book.condition,
+    book.category,
+    book.synopsis
+    FROM book
+    INNER JOIN user_profile
+    ON user_profile.id = book.user_id
+    WHERE book.user_id = $1
+	AND book.approved isnull 
+    OR book.approved = true`,
+    values: [],
 };
 
 async function newBook(array, client) {
@@ -56,4 +78,10 @@ async function bookList(client) {
     return response.rows;
 }
 
-module.exports = { newBook, selectBook, bookImages, bookList };
+async function userBookList(user, client) {
+    userBooks.values = [user];
+    const response = await client.query(userBooks);
+    return response.rows;
+}
+
+module.exports = { newBook, selectBook, bookImages, bookList, userBookList };

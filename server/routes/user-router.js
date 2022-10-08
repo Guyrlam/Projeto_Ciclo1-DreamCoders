@@ -1,6 +1,10 @@
 const { Router } = require('express');
-const { insertUser, login, myProfile } = require('../controllers/user-controllers');
-const { verifyToken } = require('../middlewares/login');
+const {
+    insertUser,
+    login,
+    listProfiles,
+} = require('../controllers/user-controllers');
+const { optionalToken } = require('../middlewares/login');
 const { upload } = require('../middlewares/multer');
 const { addUserVerification } = require('../middlewares/user-validators');
 
@@ -12,6 +16,7 @@ userRoute.post('/', upload.single('image'), addUserVerification, insertUser);
 // faz o login e inicia a sessão
 userRoute.post('/login', login);
 
-userRoute.get('/', verifyToken, myProfile);
+// lista os usuários aprovados
+userRoute.get('/', optionalToken, listProfiles);
 
 module.exports = { userRoute };

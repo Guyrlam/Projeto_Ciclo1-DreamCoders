@@ -1,14 +1,16 @@
+/* eslint-disable no-await-in-loop */
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { pool, begin, commit, rollback } = require('../repository/repository');
-const { insertUser, tokenInfo } = require('../repository/users');
-const { newImage, selectByName } = require('../repository/images');
+const { insertUser, tokenInfo, userList } = require('../repository/users');
+const { newImage, selectByName, bookImagesList } = require('../repository/images');
 const { selectClassID } = require('../repository/user-classes');
 const {
     dataBaseVerification,
     logVerification,
     logDBVerification,
 } = require('../validators/user-validators');
+const { userBookList } = require('../repository/books');
 
 async function addUser(data, image) {
     const response = {
@@ -102,6 +104,7 @@ async function logUser(data) {
 
         // captura de informações para o token
         const userInfo = await tokenInfo(data.email, client);
+        response.user_id = userInfo.user_id;
 
         // criação do token
         response.token = jwt.sign(userInfo, process.env.JWT_KEY, {
@@ -119,12 +122,58 @@ async function logUser(data) {
     return response;
 }
 
-/* async function userProfile(info) {
-    const status = {
+async function pullProfiles(token) {
+    const response = {
         Error: null,
     };
 
-    return status;
-} */
+    let client;
 
-module.exports = { addUser, logUser };
+    try {
+        client = await pool.connect();
+
+        if (token !== null) {
+            response.token = jwt.sign(token, process.env.JWT_KEY, {
+                expiresIn: 3600,
+            });
+        }
+
+        begin(client);
+
+        // lista os dados dos usuários
+        const users = await userList(client);
+
+        // adiciona a lista de livros a cada perfil
+        for (let i = 0; i < users.length; i += 1) {
+            const el = users[i];
+            el.image = `http://${process.env.NDHOST}:${process.env.NDPORT}/uploads/${el.image}`;
+            el.books = [];
+            const bookList = await userBookList(el.id, client);
+            for (let x = 0; x < bookList.length; x += 1) {
+                const book = bookList[x];
+                book.image = [];
+                const imageList = await bookImagesList(book.id, client);
+                for (let y = 0; y < imageList.length; y += 1) {
+                    const image = imageList[y].filename;
+                    book.image.push(
+                        `http://${process.env.NDHOST}:${process.env.NDPORT}/uploads/${image}`
+                    );
+                }
+                el.books.push(book);
+            }
+        }
+
+        response.data = users;
+
+        commit(client);
+    } catch (error) {
+        response.Error = error.message;
+        response.status = 500;
+        rollback(client);
+    }
+
+    client.release();
+    return response;
+}
+
+module.exports = { addUser, logUser, pullProfiles };

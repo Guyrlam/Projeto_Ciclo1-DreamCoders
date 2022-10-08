@@ -6,15 +6,15 @@ import login from './pages/login/index.js';
 import profile from './pages/profile/index.js';
 import signup from './pages/signup/index.js';
 import postUser from './pages/signup/postUser.js';
-import acesso from './pages/login/acess.js'
+import acesso from './pages/login/acess.js';
 import headerLogin from './pages/login/headerLogin.js';
-//import postBook from './pages/books/addBook/postBook.js'
+// import postBook from './pages/books/addBook/postBook.js'
 
 const main = document.querySelector('#root');
 
-   window.addEventListener("load", () => {
-       main.appendChild(home())
-   })
+window.addEventListener('load', () => {
+    main.appendChild(home());
+});
 
 window.addEventListener('hashchange', () => {
     main.innerHTML = '';
@@ -30,16 +30,16 @@ window.addEventListener('hashchange', () => {
             break;
         case '#login':
             main.appendChild(login());
-            const acess = document.querySelector('#button-acessar')
-            const hLogin = document.querySelector('#header-login')
+            const acess = document.querySelector('#button-acessar');
+            const hLogin = document.querySelector('#header-login');
             acess.addEventListener('click', async () => {
                 const resp = await acesso();
-                await console.log(resp)
-                if(resp.message == "Usuário logado com sucesso"){
-                    hLogin.innerHTML = ""
-                    hLogin.appendChild(await headerLogin())
+                await console.log(resp);
+                if (resp.message == 'Usuário logado com sucesso') {
+                    hLogin.innerHTML = '';
+                    hLogin.appendChild(await headerLogin());
                 }
-            })
+            });
             break;
         case '#profile':
             main.appendChild(profile());
@@ -49,21 +49,18 @@ window.addEventListener('hashchange', () => {
             const submit = document.querySelector('#signup-submit');
             submit.addEventListener('click', async () => {
                 const resp = await postUser();
-                if (resp.message == "Usuário adicionado com sucesso") {
-                    alert("Cadastro realizado com sucesso")
-                }
-                else{
-                    alert(resp.ERROR)
+                if (resp.message == 'Usuário adicionado com sucesso') {
+                    alert('Cadastro realizado com sucesso');
+                } else {
+                    alert(resp.ERROR);
                 }
             });
             break;
-        case "#addBook":
-            main.appendChild(addBook())    
+        case '#addBook':
+            main.appendChild(addBook());
             break;
-        case "#acess":
-            window.location.hash = '#books'
+        case '#acess':
+            window.location.hash = '#books';
             break;
-
     }
 });
-

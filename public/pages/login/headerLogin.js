@@ -1,4 +1,4 @@
-export default async function headerLogin(){
+export default async function headerLogin() {
     const container = document.createElement('div');
     const template = `
     <span id="hello-user">
@@ -6,7 +6,7 @@ export default async function headerLogin(){
                         Olá Usuário
                         
     </span>
-    `
-    container.innerHTML = template
-    return container
+    `;
+    container.innerHTML = template;
+    return container;
 }

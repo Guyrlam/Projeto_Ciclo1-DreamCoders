@@ -1,24 +1,20 @@
-
- export default async function postUser() {
-
+export default async function postUser() {
     const formData = new FormData();
     const nome = document.querySelector('#book-title');
     const details = document.querySelector('#book-details');
     const publisher = document.querySelector('#publisher');
     const writer = document.querySelector('#writer');
     const condition = () => {
-        if(document.getElementById(condition1 === true)){
-            return 'novo'
+        if (document.getElementById(condition1 === true)) {
+            return 'novo';
         }
-        else{
-            return 'usado'
-        }
+
+        return 'usado';
     };
-    
+
     const category = document.querySelector('#cateogry');
     const synopsis = document.querySelector('#synopsis');
     const image = document.querySelector('#input-book-photo');
-    
 
     formData.append('name', nome.value);
     formData.append('details', details.value);
