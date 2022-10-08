@@ -1,4 +1,4 @@
-const { addUser, logUser, userProfile } = require('../services/user-services');
+const { addUser, logUser, pullProfiles } = require('../services/user-services');
 
 async function insertUser(req, res) {
     const services = await addUser(req.body, req.file);
@@ -27,6 +27,7 @@ async function login(req, res) {
         res.status(services.status).json(error);
     } else {
         const message = {
+            logged: services.user_id,
             message: 'Usuário logado com sucesso',
         };
 
@@ -36,8 +37,12 @@ async function login(req, res) {
     }
 }
 
-async function myProfile(req, res) {
-    const services = await userProfile(req.user_info);
+async function listProfiles(req, res) {
+    const services = await pullProfiles(req.user_info);
+
+    if (services.token) {
+        res.cookie('token', services.token, { maxAge: 900000, httpOnly: true });
+    }
 
     if (services.Error !== null) {
         const error = {
@@ -48,9 +53,8 @@ async function myProfile(req, res) {
         const message = {
             data: services.data,
         };
-
         res.status(200).json(message);
     }
 }
 
-module.exports = { insertUser, login, myProfile };
+module.exports = { insertUser, login, listProfiles };

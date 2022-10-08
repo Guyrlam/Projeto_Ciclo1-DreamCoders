@@ -1,4 +1,4 @@
-export default async function headerLogin(){
+export default async function headerLogin() {
     const container = document.createElement('div');
     const template = `
     <span id="hello-user">

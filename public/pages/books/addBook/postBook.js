@@ -21,7 +21,6 @@ export default async function postUser() {
     const synopsis = document.querySelector('#synopsis');
     const image = document.querySelector('#input-book-photo');
 
-
     formData.append('name', nome.value);
     formData.append('details', details.value);
     formData.append('publisher', publisher.value);
