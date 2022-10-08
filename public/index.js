@@ -4,6 +4,7 @@ import details from './pages/details/index.js';
 import home from './pages/home/index.js';
 import login from './pages/login/index.js';
 import profile from './pages/profile/index.js';
+import request from './pages/requests/index.js';
 import signup from './pages/signup/index.js';
 import postUser from './pages/signup/postUser.js';
 import acesso from './pages/login/acess.js';
@@ -45,13 +46,16 @@ window.addEventListener('hashchange', () => {
                     const helloUser = document.querySelector('#hello-user')
                     const dropdown = document.querySelector('#dropdown-menu')
                     const myprofile = document.querySelector('#myprofile-button')
-                     
+                    const myrequest = document.querySelector('#requests-button')
+
                     helloUser.addEventListener('mouseenter', async () => {
                         dropdown.style.display = "flex"
                         myprofile.addEventListener('click', () => {
                             window.location.hash = "#profile"
                         })
-                        
+                        myrequest.addEventListener('click', () => {
+                            window.location.hash = "#request"
+                        })
                     })
                     dropdown.addEventListener('mouseleave', async () => {
                         dropdown.style.display = 'none'
@@ -62,6 +66,9 @@ window.addEventListener('hashchange', () => {
             break;
         case '#profile':
             main.appendChild(profile());
+            break;
+            case '#request':
+            main.appendChild(request());
             break;
         case '#signup':
             main.appendChild(signup());
