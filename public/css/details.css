@@ -12,7 +12,7 @@
     border-right: solid 2px var(--white);
     margin: 0px;
     display: flex;
-    padding-right: 4%;
+
 }
 
 #small-photos-book {
@@ -22,6 +22,7 @@
 }
 
 .small-photo {
+    display: flex;
     padding: 20px;
     padding-left: 0px;
     width: 80px;
@@ -34,8 +35,8 @@
     align-items: center;
 }
 
-#main-photo-details {
-    width: 354px;
+#main-photo-details{
+    max-width: 354px;
     height: 500px;
 }
 
