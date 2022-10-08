@@ -31,6 +31,24 @@ const token = {
     values: [],
 };
 
+const users = {
+    text: `SELECT
+    user_profile.id,
+    user_profile.name,
+    user_profile.description,
+    images.file_name image,
+    user_classes.class,
+    user_profile.email,
+    user_profile.telephone
+    FROM user_profile
+    INNER JOIN images
+    ON images.id = user_profile.image_id
+    INNER JOIN user_classes
+    ON user_classes.id = user_profile.class_id
+    WHERE user_profile.approved isnull 
+    OR user_profile.approved = true`,
+};
+
 async function checkUser(client) {
     const response = await client.query(check);
     return response.rows;
@@ -47,4 +65,9 @@ async function tokenInfo(email, client) {
     return response.rows[0];
 }
 
-module.exports = { checkUser, insertUser, tokenInfo };
+async function userList(client) {
+    const response = await client.query(users);
+    return response.rows;
+}
+
+module.exports = { checkUser, insertUser, tokenInfo, userList };

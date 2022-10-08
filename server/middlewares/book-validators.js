@@ -32,7 +32,9 @@ function addBookVerification(req, res, next) {
                 req.body.condition !== 'novo' &&
                 req.body.condition !== 'seminovo')
         ) {
-            throw new Error('Tipo de usuário inválido');
+            throw new Error(
+                'Condição inválida, esclareça se o livro é antigo, novo ou seminovo'
+            );
         } else if (
             !req.body.category ||
             typeof req.body.category !== 'string' ||

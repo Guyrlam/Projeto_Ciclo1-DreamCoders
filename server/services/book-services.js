@@ -1,9 +1,10 @@
 /* eslint-disable no-await-in-loop */
+const jwt = require('jsonwebtoken');
 const { pool, begin, commit, rollback } = require('../repository/repository');
 const { newBook, selectBook, bookImages, bookList } = require('../repository/books');
 const { newImage, selectByName, bookImagesList } = require('../repository/images');
 
-async function addBook(data, images, info) {
+async function addBook(data, images, token) {
     const response = {
         Error: null,
     };
@@ -13,10 +14,14 @@ async function addBook(data, images, info) {
     try {
         client = await pool.connect();
 
+        response.token = jwt.sign(token, process.env.JWT_KEY, {
+            expiresIn: 3600,
+        });
+
         begin(client);
 
         // retorna o uuid do usuário
-        const userID = info.user_id;
+        const userID = token.user_id;
 
         const bookArray = [
             data.name,
@@ -54,7 +59,7 @@ async function addBook(data, images, info) {
     return response;
 }
 
-async function pullBooks() {
+async function pullBooks(token) {
     const response = {
         Error: null,
     };
@@ -63,6 +68,12 @@ async function pullBooks() {
 
     try {
         client = await pool.connect();
+
+        if (token !== null) {
+            response.token = jwt.sign(token, process.env.JWT_KEY, {
+                expiresIn: 3600,
+            });
+        }
 
         begin(client);
 
