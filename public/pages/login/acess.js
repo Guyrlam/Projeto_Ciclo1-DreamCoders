@@ -1,5 +1,4 @@
 export default async () => {
-    console.log('oi')
     let email = document.querySelector('#email-login')
     let password = document.querySelector('#password-login')
     //console.log(email.value,password.value)
