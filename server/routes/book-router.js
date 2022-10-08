@@ -1,5 +1,9 @@
 const { Router } = require('express');
-const { insertBook, listBooks } = require('../controllers/book-controllers');
+const {
+    insertBook,
+    listBooks,
+    alterBooks,
+} = require('../controllers/book-controllers');
 const { verifyToken, optionalToken } = require('../middlewares/login');
 const { upload } = require('../middlewares/multer');
 const { addBookVerification } = require('../middlewares/book-validators');
@@ -15,5 +19,7 @@ bookRoute.post(
 );
 
 bookRoute.get('/', optionalToken, listBooks);
+
+bookRoute.put('/:id', verifyToken, alterBooks);
 
 module.exports = { bookRoute };

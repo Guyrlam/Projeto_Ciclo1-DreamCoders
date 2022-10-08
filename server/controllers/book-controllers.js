@@ -1,4 +1,4 @@
-const { addBook, pullBooks } = require('../services/book-services');
+const { addBook, pullBooks, modifyBooks } = require('../services/book-services');
 
 async function insertBook(req, res) {
     const services = await addBook(req.body, req.files, req.user_info);
@@ -41,4 +41,24 @@ async function listBooks(req, res) {
     }
 }
 
-module.exports = { insertBook, listBooks };
+async function alterBooks(req, res) {
+    const services = await modifyBooks(req.body, req.files, req.user_info);
+    if (services.Error !== null) {
+        const error = {
+            ERROR: services.Error,
+        };
+        res.status(services.status)
+            .cookie('token', services.token, { maxAge: 900000, httpOnly: true })
+            .json(error);
+    } else {
+        const message = {
+            data: services.data,
+        };
+
+        res.status(200)
+            .cookie('token', services.token, { maxAge: 900000, httpOnly: true })
+            .json(message);
+    }
+}
+
+module.exports = { insertBook, listBooks, alterBooks };
