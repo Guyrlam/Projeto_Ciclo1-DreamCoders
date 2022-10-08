@@ -59,7 +59,7 @@ window.addEventListener('hashchange', async () => {
                     //Atribuindo valora a variavel do usuário
                     myUser = await collectUser()
                     myUser = myUser.data[0]
-
+                    console.log(myUser)
                     hLogin.innerHTML = ""
                     hLogin.appendChild(await headerLogin())
                     const helloUser = document.querySelector('#hello-user')
@@ -73,7 +73,8 @@ window.addEventListener('hashchange', async () => {
                     helloUser.addEventListener('mouseenter', async () => {
                         dropdown.style.display = "flex"
                         myprofile.addEventListener('click', () => {
-                            window.location.hash = "#profile"
+                            main.innerHTML = ''
+                            main.appendChild(profile(myUser))
                         })
                         myrequest.addEventListener('click', () => {
                             window.location.hash = "#request"
@@ -87,11 +88,8 @@ window.addEventListener('hashchange', async () => {
                 else{
                     alert(resp.ERROR)
                 }
-                
+
             })
-            break;
-        case '#profile':
-            main.appendChild(profile());
             break;
             case '#request':
             main.appendChild(request());
