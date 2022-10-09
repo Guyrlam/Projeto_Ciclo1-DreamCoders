@@ -145,7 +145,7 @@ async function pullBooks(token) {
             for (let x = 0; x < imageList.length; x += 1) {
                 const image = imageList[x].filename;
                 el.images.push(
-                    `http://${process.env.NDHOST}:${process.env.NDPORT}/uploads/${image}`
+                    `//${process.env.NDHOST}:${process.env.NDPORT}/uploads/${image}`
                 );
             }
         }

@@ -20,6 +20,7 @@
     --pale: #FFCA7A;
     --blue: #2A08FB;
     --white: #FFFAFA;
+    --black: #000000;
 }
 
 * {
@@ -31,7 +32,10 @@
     font-family: 'Source Sans Pro', sans-serif;
 }
 
-/* general content */
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: var(--dark-blue-green);
 }
@@ -70,6 +74,7 @@ button {
     width: 50px;
     word-break: keep-all;
     text-overflow: clip;
+    cursor: pointer;
 }
 
 section,
@@ -181,14 +186,17 @@ main {
     width: 100%;
     text-align: center;
 }
-#hello-user{
+
+#hello-user {
     font-size: 22px;
-    color: #FFFAFA;
+    color: var(--white);
     display: flex;
 }
-#icon-user{
+
+#icon-user {
     margin-right: 15px;
 }
+
 #header-button-login {
     height: 40px;
     width: 150px;
@@ -197,32 +205,33 @@ main {
     font-size: 15px;
     color: var(--white);
 }
+
 #header-login {
     display: flex;
     width: 25%;
     flex-direction: column;
 }
-#dropdown-menu{
+
+#dropdown-menu {
     display: none;
-    position:absolute;
+    position: absolute;
     margin-top: 10px;
     background-color: var(--dark-blue-green);
     width: 180px;
     height: 120px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    box-shadow: 3px 3px 5px black;
+    box-shadow: 3px 3px 5px var(--black);
     flex-direction: column;
-    justify-content:space-around;
+    justify-content: space-around;
     align-items: center;
 }
-.button-dropdown-menu{
+
+.button-dropdown-menu {
     border: none;
     width: 80%;
     height: 30%;
     border-radius: 25px;
     background-color: var(--orange);
-    color: black;
+    color: var(--black);
 }
-
-

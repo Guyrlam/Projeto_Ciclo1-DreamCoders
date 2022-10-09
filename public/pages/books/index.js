@@ -1,16 +1,16 @@
 //import details from '../details/index.js'
-async function temp(){
-    const rawResponse = await fetch('http://localhost:8080/book');
+async function temp() {
+    const rawResponse = await fetch(`//localhost:8080/book`);
     const content = rawResponse.json();
-    return content;  
+    return content;
     //console.log(content);
 }
 
-function list(data){ 
-    let ktem=`
+function list(data) {
+    let ktem = `
     <section id="books">`;
     for (var i = 0; i < data.length; i++) {
-        ktem+=`
+        ktem += `
  
             <div class="book-feed">
                     <a class="a-book-feed">
@@ -21,7 +21,7 @@ function list(data){
         `;
 
     }
-    ktem+=`</section>`;
+    ktem += `</section>`;
     return ktem;
 }
 
@@ -33,7 +33,7 @@ export default async function feed() {
         container.innerHTML = list(data.data);
     })
     //container.innerHTML = template;
-    
+
     return container;
 };
 

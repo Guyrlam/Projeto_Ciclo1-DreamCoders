@@ -1,87 +1,93 @@
 /* CSS rules are kept repetitive so that you can get CSS rules for each button easily :) */
 
-* {
+#editBook {
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
-*:focus {
+/* *:focus {
     outline: none;
-}
-
-/* body {
+} 
+body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     background-color: #f1f9f9;
 } */
 
-.knobs {
+.switch-button {
+    background: var(--green);
+    border-radius: 30px;
+    overflow: hidden;
+    width: 240px;
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: var(--dark-blue-green);
+    position: relative;
+    padding-right: 120px;
+    position: relative;
+}
+
+.switch-button:before {
+    content: "NÃO";
     position: absolute;
     top: 0;
-    right: 0;
     bottom: 0;
+    right: 0;
+    width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.switch-button-checkbox {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
     left: 0;
-}
-
-.button {
-    position: relative;
-    top: 50%;
-    width: 74px;
-    height: 36px;
-    margin: -20px auto 0 auto;
-    overflow: hidden;
-}
-
-.button.b2 {
-    border-radius: 2px;
-}
-
-.checkbox {
-    position: relative;
+    bottom: 0;
     width: 100%;
     height: 100%;
-    padding: 0;
-    margin: 0;
     opacity: 0;
-    cursor: pointer;
-    z-index: 3;
+    z-index: 2;
 }
 
+.switch-button-checkbox:checked+.switch-button-label:before {
+    transform: translateX(120px);
+    transition: transform 300ms linear;
+}
 
+.switch-button-checkbox+.switch-button-label {
+    position: relative;
+    padding: 15px 0;
+    display: block;
+    user-select: none;
+    pointer-events: none;
+}
 
-.knobs:before,
-.knobs:after,
-.knobs span {
+.switch-button-checkbox+.switch-button-label:before {
+    content: "";
+    background: var(--white);
+    height: 100%;
+    width: 100%;
     position: absolute;
-    top: 4px;
-    width: 20px;
-    height: 10px;
-    font-size: 10px;
-    font-weight: bold;
-    text-align: center;
-    line-height: 1;
-    padding: 9px 4px;
-    border-radius: 2px;
-    transition: 0.3s ease all;
+    left: 0;
+    top: 0;
+    border-radius: 30px;
+    transform: translateX(0);
+    transition: transform 300ms;
 }
 
-.knobs:before,
-.knobs:after {
-    color: #4e4e4e;
-    z-index: 1;
+.switch-button-checkbox+.switch-button-label .switch-button-label-span {
+    position: relative;
 }
 
-.knobs:before {
-    content: 'SIM';
-    left: 4px;
-}
-
-.knobs:after {
-    content: 'NÃO';
-    right: 4px;
-}
-
-.knobs span {
+/* .knobs span {
     width: 25px;
     left: 37px;
     background-color: #12492F;
@@ -91,4 +97,4 @@
 .checkbox:checked+.knobs span {
     left: 4px;
     background-color: #F56038;
-}
+} */

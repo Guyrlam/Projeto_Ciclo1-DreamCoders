@@ -57,7 +57,7 @@ async function bookImagesList(book, client) {
 async function deleteBookImages(images, client) {
     if (typeof images === 'string') {
         const fileName = images.replace(
-            `http://${process.env.NDHOST}:${process.env.NDPORT}/uploads/`,
+            `//${process.env.NDHOST}:${process.env.NDPORT}/uploads/`,
             ''
         );
         select.values = [fileName];
@@ -69,7 +69,7 @@ async function deleteBookImages(images, client) {
     } else {
         for (let i = 0; i < images.length; i += 1) {
             const fileName = images[i].replace(
-                `http://${process.env.NDHOST}:${process.env.NDPORT}/uploads/`,
+                `//${process.env.NDHOST}:${process.env.NDPORT}/uploads/`,
                 ''
             );
             select.values = [fileName];
