@@ -51,6 +51,13 @@ main > div {
     border: none;
     color: var(--white);
 }
+#save-edit-profile{
+    width: 158px;
+    height: 40px;
+    border-radius: 25px;
+    border: none;
+    color: var(--white);
+}
 
 #profile-my-collections {
     height: 500px;
@@ -94,4 +101,46 @@ main > div {
     border-radius: 25px;
     color: var(--white);
     font-size: 15px;
+}
+.inputs-edit-myprofile{
+    border-radius: 25px;
+    height: 30px;
+    color: white;
+    border-style:dashed;
+    padding-left: 5px;
+    background-color: var(--dark-blue-green);
+}
+
+#pen-edit{
+    position: absolute;
+    margin-top: -150px;
+    margin-left: 50px;
+}
+#label{
+    padding: 5px 5px;
+    background-color: var(--orange);
+    color: #FFF;
+    text-align: center;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 25px;
+}
+#change-photo{
+    width: 200px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+#sopcentralizar{
+    display: flex;
+    justify-content: center;
+}
+#inputprofile{
+    display: flex;
+    
+    flex-direction: column;
+    align-items: center;
+}
+#new-photo{
+    display: none;
 }

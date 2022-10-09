@@ -13,7 +13,7 @@ export default (data) => {
     <section id="profile">
             <div id="profile-details">
                 <div>
-                    <img src="https://i.pinimg.com/originals/1d/4d/69/1d4d69c694c8ba1034c0e9552f457ecf.jpg" alt=""
+                    <img src="${data.image}" alt=""
                         id="profile-photo">
                 </div>
                 <div id="profile-description">
@@ -39,6 +39,7 @@ export default (data) => {
             </div>
         </section>
     `;
+    
     container.innerHTML = template;
     return container;
 };
