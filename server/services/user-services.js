@@ -147,6 +147,24 @@ async function logUser(data) {
     return response;
 }
 
+function logoutUser(token) {
+    const response = {
+        Error: null,
+    };
+
+    try {
+        // criação do token com tempo de expiração = 0
+        response.token = jwt.sign(token, process.env.JWT_KEY, {
+            expiresIn: 0,
+        });
+    } catch (error) {
+        response.Error = error.message;
+        response.status = 500;
+    }
+
+    return response;
+}
+
 async function pullProfiles(token) {
     const response = {
         Error: null,
@@ -401,4 +419,5 @@ module.exports = {
     modifyUsers,
     pullUserByID,
     removeUser,
+    logoutUser,
 };
