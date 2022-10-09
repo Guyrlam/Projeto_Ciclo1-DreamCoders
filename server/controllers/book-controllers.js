@@ -58,7 +58,7 @@ async function alterBooks(req, res) {
             .json(error);
     } else {
         const message = {
-            data: services.data,
+            data: 'Livro alterado com sucesso!',
         };
 
         res.status(200)

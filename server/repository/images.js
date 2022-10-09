@@ -28,7 +28,7 @@ const deleted = {
 };
 
 const deletedBook = {
-    text: 'DELETE FROM book_images WHERE book_id = $1',
+    text: 'DELETE FROM book_images WHERE image_id = $1',
     values: [],
 };
 
@@ -50,15 +50,30 @@ async function bookImagesList(book, client) {
 }
 
 async function deleteBookImages(images, client) {
-    for (let i = 0; i < images.length; i += 1) {
-        // eslint-disable-next-line prettier/prettier
-        const fileName = (images[i] - `http://${process.env.NDHOST}:${process.env.NDPORT}/uploads/`);
+    if (typeof images === 'string') {
+        const fileName = images.replace(
+            `http://${process.env.NDHOST}:${process.env.NDPORT}/uploads/`,
+            ''
+        );
         select.values = [fileName];
         const fileID = await client.query(select);
-        deleted.values = [fileID];
+        deleted.values = [fileID.rows[0].id];
         await client.query(deleted);
-        deletedBook.values = [fileID];
+        deletedBook.values = [fileID.rows[0].id];
         await client.query(deletedBook);
+    } else {
+        for (let i = 0; i < images.length; i += 1) {
+            const fileName = images[i].replace(
+                `http://${process.env.NDHOST}:${process.env.NDPORT}/uploads/`,
+                ''
+            );
+            select.values = [fileName];
+            const fileID = await client.query(select);
+            deleted.values = [fileID.rows[0].id];
+            await client.query(deleted);
+            deletedBook.values = [fileID.rows[0].id];
+            await client.query(deletedBook);
+        }
     }
 }
 
