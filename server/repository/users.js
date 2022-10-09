@@ -44,7 +44,7 @@ const users = {
     ON images.id = user_profile.image_id
     INNER JOIN user_classes
     ON user_classes.id = user_profile.class_id
-    WHERE user_profile.delted_at isnull`,
+    WHERE user_profile.deleted_at isnull`,
 };
 
 async function checkUser(client) {
