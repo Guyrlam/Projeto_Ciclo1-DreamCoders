@@ -146,7 +146,7 @@ async function pullProfiles(token) {
         // adiciona a lista de livros a cada perfil
         for (let i = 0; i < users.length; i += 1) {
             const el = users[i];
-            el.image = `http://${process.env.NDHOST}:${process.env.NDPORT}/uploads/${el.image}`;
+            el.image = `//${process.env.NDHOST}:${process.env.NDPORT}/uploads/${el.image}`;
             el.books = [];
             const bookList = await userBookList(el.id, client);
             for (let x = 0; x < bookList.length; x += 1) {
@@ -156,7 +156,7 @@ async function pullProfiles(token) {
                 for (let y = 0; y < imageList.length; y += 1) {
                     const image = imageList[y].filename;
                     book.image.push(
-                        `http://${process.env.NDHOST}:${process.env.NDPORT}/uploads/${image}`
+                        `//${process.env.NDHOST}:${process.env.NDPORT}/uploads/${image}`
                     );
                 }
                 el.books.push(book);

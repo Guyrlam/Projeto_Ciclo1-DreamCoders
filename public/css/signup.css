@@ -1,4 +1,4 @@
-.filling-signup{
+.filling-signup {
     width: 200px;
     height: 25px;
     border-radius: 20px;
@@ -8,24 +8,28 @@
     padding-left: 10px;
 }
 
-#signup-format{
+#signup-format {
     display: flex;
     flex-direction: row;
     margin-top: 20px;
 }
-#signup-inputs{
+
+#signup-inputs {
     display: flex;
     flex-direction: column;
-    
+
 }
-#signup{
+
+#signup {
     margin: 10px;
 }
-#signuped{
+
+#signuped {
     display: flex;
     justify-content: center;
 }
-#signup-submit{
+
+#signup-submit {
     background-color: var(--orange);
     height: 35px;
     border-radius: 20px;
@@ -33,12 +37,13 @@
     width: 150px;
     margin-top: 20px;
     border: none;
-    color: #FFF;
+    color: var(--white);
 }
-#siginup-but-login{
+
+#siginup-but-login {
     border: none;
     background-color: var(--blue);
-    color:#FFF;
+    color: var(--white);
     height: 25px;
     border-radius: 20px;
     font-size: 12px;

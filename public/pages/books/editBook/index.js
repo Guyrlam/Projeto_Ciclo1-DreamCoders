@@ -55,11 +55,9 @@ export default () => {
 
                 <div>
                     <span>Disponível para troca?</span>
-                    <div class="button b2" id="button-toggle">
-                        <input type="checkbox" class="checkbox">
-                        <div class="knobs">
-                            <span></span>
-                        </div>
+                    <div class="switch-button">
+                        <input class="switch-button-checkbox" type="checkbox"></input>
+                        <label class="switch-button-label" for=""><span class="switch-button-label-span">SIM</span></label>
                     </div>
                 </div>
 

@@ -1,8 +1,8 @@
 
 export default async function postUser() {
-    console.log('oi')
+    console.log('post user')
     const formData = new FormData();
-    const nome = document.querySelector('#book-title');
+    const name = document.querySelector('#book-title');
     const details = document.querySelector('#book-details');
     const publisher = document.querySelector('#publisher');
     const writer = document.querySelector('#writer');
@@ -13,15 +13,20 @@ export default async function postUser() {
                 return cboxs[i].value
             }
         }
-        
+
     }
 
 
-    const category = document.querySelector('#cateogry');
+    const category = document.querySelector('#category');
     const synopsis = document.querySelector('#synopsis');
     const image = document.querySelector('#input-book-photo');
 
-    formData.append('name', nome.value);
+    /*    formData.append({
+           'name': name.value, 'details': details.value
+       });
+    formData.append(['name', 'details'], [name.value, details.value]);
+    */
+    formData.append('name', name.value)
     formData.append('details', details.value);
     formData.append('publisher', publisher.value);
     formData.append('writer', writer.value);
@@ -30,7 +35,7 @@ export default async function postUser() {
     formData.append('synopsis', synopsis.value);
     formData.append('image', image.files[0]);
 
-    const resp = await fetch('http://localhost:8080/book', {
+    const resp = await fetch((`//localhost:8080/book`), {
         method: 'POST',
         body: formData,
     });

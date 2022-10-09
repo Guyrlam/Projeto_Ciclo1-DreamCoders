@@ -13,7 +13,7 @@ export default () => {
                     permitir que ambos os envolvidos desfrutem das incríveis experiências que esses itens podem
                     proporcionar? Se
                     ficou interessado, crie já seu perfil e venha participar da nossa comunidade!</p>
-                <button id="button-main" class="button-border-radius">Cadastre-se</button>
+                <button id="button-main" class="button-border-radius"><a href="#signup">Cadastre-se</a></button>
             </div>
             <img src="./assets/main-image.svg" alt="contribua para a cultura da troca de livros" id="main-img">
         </section>
