@@ -4,6 +4,7 @@ const {
     listBooks,
     alterBooks,
     getBook,
+    deleteBook,
 } = require('../controllers/book-controllers');
 const { verifyToken, optionalToken } = require('../middlewares/login');
 const { upload } = require('../middlewares/multer');
@@ -34,5 +35,8 @@ bookRoute.put(
     bookVerification,
     alterBooks
 );
+
+// faz um soft delete no registro de um livro
+bookRoute.delete('/:id', verifyToken, deleteBook);
 
 module.exports = { bookRoute };

@@ -8,12 +8,14 @@ const {
     bookList,
     updateBook,
     getBookByID,
+    removeByID,
 } = require('../repository/books');
 const {
     newImage,
     selectByName,
     bookImagesList,
     deleteBookImages,
+    deleteImagesByBookID,
 } = require('../repository/images');
 const { collectorVerification } = require('../validators/book-validators');
 
@@ -227,4 +229,45 @@ async function modifyBooks(bookId, data, images, token) {
     return response;
 }
 
-module.exports = { addBook, pullBooks, modifyBooks, pullBookByID };
+async function removeBook(bookId, data, token) {
+    const response = {
+        Error: null,
+    };
+
+    let client;
+
+    try {
+        client = await pool.connect();
+
+        response.token = jwt.sign(token, process.env.JWT_KEY, {
+            expiresIn: 3600,
+        });
+
+        begin(client);
+
+        // verificar se o id do usuário é o mesmo do colecionador
+        const verifiedUser = await collectorVerification(bookId, token, client);
+        if (verifiedUser.Error !== null) {
+            rollback(client);
+            client.release();
+            return verifiedUser;
+        }
+
+        // faz um soft delete nos dados do livro
+        await removeByID(bookId, client);
+
+        // deleta imagens
+        await deleteImagesByBookID(bookId, client);
+
+        commit(client);
+    } catch (error) {
+        response.Error = error.message;
+        response.status = 500;
+        rollback(client);
+    }
+
+    client.release();
+    return response;
+}
+
+module.exports = { addBook, pullBooks, modifyBooks, pullBookByID, removeBook };
