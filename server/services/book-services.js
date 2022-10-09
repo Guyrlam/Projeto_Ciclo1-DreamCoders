@@ -7,6 +7,7 @@ const {
     bookImages,
     bookList,
     updateBook,
+    getBookByID,
 } = require('../repository/books');
 const {
     newImage,
@@ -59,6 +60,50 @@ async function addBook(data, images, token) {
             const imageID = await selectByName(el.filename, client);
             await bookImages(imageID, bookID, client);
         }
+
+        commit(client);
+    } catch (error) {
+        response.Error = error.message;
+        response.status = 500;
+        rollback(client);
+    }
+
+    client.release();
+    return response;
+}
+
+async function pullBookByID(bookID, token) {
+    const response = {
+        Error: null,
+    };
+
+    let client;
+
+    try {
+        client = await pool.connect();
+
+        if (token !== null) {
+            response.token = jwt.sign(token, process.env.JWT_KEY, {
+                expiresIn: 3600,
+            });
+        }
+
+        begin(client);
+
+        // seleciona os dados do livro
+        const book = await getBookByID(bookID, client);
+
+        // adiciona a lista de URL's de imagens ao livro
+        book.images = [];
+        const imageList = await bookImagesList(book.id, client);
+        for (let x = 0; x < imageList.length; x += 1) {
+            const image = imageList[x].filename;
+            book.images.push(
+                `http://${process.env.NDHOST}:${process.env.NDPORT}/uploads/${image}`
+            );
+        }
+
+        response.data = book;
 
         commit(client);
     } catch (error) {
@@ -182,4 +227,4 @@ async function modifyBooks(bookId, data, images, token) {
     return response;
 }
 
-module.exports = { addBook, pullBooks, modifyBooks };
+module.exports = { addBook, pullBooks, modifyBooks, pullBookByID };
