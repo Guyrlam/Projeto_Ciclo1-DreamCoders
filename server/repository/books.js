@@ -80,6 +80,11 @@ const update = {
     values: [],
 };
 
+const deleted = {
+    text: 'UPDATE book SET deleted_at = now() WHERE id = $1',
+    values: [],
+};
+
 async function newBook(array, client) {
     insert.values = array;
     await client.query(insert);
@@ -118,6 +123,11 @@ async function updateBook(array, client) {
     await client.query(update);
 }
 
+async function removeByID(bookID, client) {
+    deleted.values = [bookID];
+    await client.query(deleted);
+}
+
 module.exports = {
     newBook,
     selectBook,
@@ -126,4 +136,5 @@ module.exports = {
     userBookList,
     getBookByID,
     updateBook,
+    removeByID,
 };

@@ -5,6 +5,8 @@ const {
     listProfiles,
     alterUsers,
     getUser,
+    deleteUser,
+    logout,
 } = require('../controllers/user-controllers');
 const { optionalToken, verifyToken } = require('../middlewares/login');
 const { upload } = require('../middlewares/multer');
@@ -27,6 +29,9 @@ userRoute.post(
 // faz o login e inicia a sessão
 userRoute.post('/login', login);
 
+// faz o logout e encerra a sessão
+userRoute.post('/logout', verifyToken, logout);
+
 // lista os usuários aprovados
 userRoute.get('/', optionalToken, listProfiles);
 
@@ -41,5 +46,8 @@ userRoute.put(
     userVerification,
     alterUsers
 );
+
+// deleta o perfil do usuário
+userRoute.delete('/:id', verifyToken, deleteUser);
 
 module.exports = { userRoute };

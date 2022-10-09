@@ -37,6 +37,14 @@ const deletedBook = {
     values: [],
 };
 
+const imagesID = {
+    text: `SELECT 
+    image_id id
+    FROM book_images
+    WHERE book_id = $1`,
+    values: [],
+};
+
 async function newImage(name, path, client) {
     insert.values = [name, path];
     await client.query(insert);
@@ -98,6 +106,24 @@ async function changeImage(userID, imageID, client) {
     await client.query(change);
 }
 
+async function deleteImagesByBookID(bookID, client) {
+    imagesID.values = [bookID];
+    const fileID = await client.query(imagesID);
+    for (let i = 0; i < fileID.rows.length; i += 1) {
+        deleted.values = [fileID.rows[i].id];
+        await client.query(deleted);
+        deletedBook.values = [fileID.rows[i].id];
+        await client.query(deletedBook);
+    }
+}
+
+async function deleteImagesByName(fileName, client) {
+    select.values = [fileName];
+    const fileID = await client.query(select);
+    deleted.values = [fileID.rows[0].id];
+    await client.query(deleted);
+}
+
 module.exports = {
     newImage,
     selectByName,
@@ -105,4 +131,6 @@ module.exports = {
     deleteBookImages,
     deleteUserImage,
     changeImage,
+    deleteImagesByBookID,
+    deleteImagesByName,
 };

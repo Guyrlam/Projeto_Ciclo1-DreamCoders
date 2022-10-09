@@ -3,6 +3,7 @@ const {
     pullBooks,
     modifyBooks,
     pullBookByID,
+    removeBook,
 } = require('../services/book-services');
 
 async function insertBook(req, res) {
@@ -93,4 +94,25 @@ async function alterBooks(req, res) {
     }
 }
 
-module.exports = { insertBook, listBooks, alterBooks, getBook };
+async function deleteBook(req, res) {
+    const services = await removeBook(req.params.id, req.user_info);
+
+    if (services.Error !== null) {
+        const error = {
+            ERROR: services.Error,
+        };
+        res.status(services.status)
+            .cookie('token', services.token, { maxAge: 900000, httpOnly: true })
+            .json(error);
+    } else {
+        const message = {
+            data: 'Livro deletado com sucesso!',
+        };
+
+        res.status(200)
+            .cookie('token', services.token, { maxAge: 900000, httpOnly: true })
+            .json(message);
+    }
+}
+
+module.exports = { insertBook, listBooks, alterBooks, getBook, deleteBook };
