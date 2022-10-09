@@ -1,16 +1,15 @@
-export default () => {
+export default (data) => {
     console.log('details template');
+    console.log(data)
     const container = document.createElement('div');
     const template = `
     <section id="details">
             <div id="book-photos">
                 <div id="small-photos-book">
-                    <img src="" alt="" class="small-photo">
-                    <img src="" alt="" class="small-photo">
-                    <img src="" alt="" class="small-photo">
+                    
                 </div>
                 <div id="main-photo-book">
-                    <img src="" alt="" id="main-photo-details">
+                    <img src="${data.images[0]}" alt="" id="main-photo-details">
                 </div>
             </div>
             <div id="book-details">
@@ -19,18 +18,13 @@ export default () => {
                     <span class="white-text" >Título do livro</span>
                 </div>
                 <div>
-                    <p class="paragrafo-book-details">Colecionador:</p>
-                    <p class="paragrafo-book-details">Detalhes:</p>
-                    <p class="paragrafo-book-details">Editora: </p>
-                    <p class="paragrafo-book-details">Escritor: </p>
-                    <p class="paragrafo-book-details">Categoria: </p>
-                    <p class="paragrafo-book-details">Condições do livro: </p>
-                    <p class="paragrafo-book-details">Sinopse: Lorem ipsum dolor sit amet, consectetur adipisci elit,
-                        sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
-                        consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                        pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt
-                        mollit anim id est laborum.</p>
+                    <p class="paragrafo-book-details">Colecionador: ${data.collector}</p>
+                    <p class="paragrafo-book-details">Detalhes: ${data.details}</p>
+                    <p class="paragrafo-book-details">Editora: ${data.publisher}</p>
+                    <p class="paragrafo-book-details">Escritor: ${data.writer}</p>
+                    <p class="paragrafo-book-details">Categoria: ${data.category}</p>
+                    <p class="paragrafo-book-details">Condições do livro: ${data.condition}</p>
+                    <p class="paragrafo-book-details">Sinopse: ${data.synopsis}</p>
                 </div>
                 <button id="button-solicitar">Solicitar</button>
             </div>

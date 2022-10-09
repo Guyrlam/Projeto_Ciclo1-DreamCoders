@@ -1,24 +1,42 @@
-export default () => {
-    console.log('books template');
+//import details from '../details/index.js'
+async function temp(){
+    const rawResponse = await fetch('http://localhost:8080/book');
+    const content = rawResponse.json();
+    return content;  
+    //console.log(content);
+}
+
+function list(data){ 
+    let ktem=`
+    <section id="books">`;
+    for (var i = 0; i < data.length; i++) {
+        ktem+=`
+ 
+            <div class="book-feed">
+                    <a class="a-book-feed">
+                        <img src="${data[i].images[0]}" alt="" class="img-book-feed" id="${data[i].id}">
+                    </a>
+                    <p>${data[i].name}</p>
+            </div>
+        `;
+
+    }
+    ktem+=`</section>`;
+    return ktem;
+}
+
+export default async function feed() {
     const container = document.createElement('div');
 
-    const template = `
-    <section id="books">
-        
-        <div class="book-feed">
-                <a href="#details" class="a-book-feed">
-                    <img src="../../assets/photobook.jpg" alt="" class="img-book-feed" >
-                </a>
-        </div>
-        <div class="book-feed">
-                <a href="#details" class="a-book-feed">
-                    <img src="https://m.media-amazon.com/images/I/51pDuamx5XL.jpg" alt="" class="img-book-feed" >
-                </a>
-        </div>
-        
-        
-    </section>
-    `;
-    container.innerHTML = template;
+
+    temp().then((data) => {
+        container.innerHTML = list(data.data);
+    })
+    //container.innerHTML = template;
+    
     return container;
 };
+
+
+
+

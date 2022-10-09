@@ -1,26 +1,45 @@
 import addBook from './pages/books/addBook/index.js';
-import feed from './pages/books/index.js';
+import feed  from './pages/books/index.js';
 import details from './pages/details/index.js';
 import home from './pages/home/index.js';
 import login from './pages/login/index.js';
 import profile from './pages/profile/index.js';
+import request from './pages/requests/index.js';
 import signup from './pages/signup/index.js';
 import postUser from './pages/signup/postUser.js';
 import acesso from './pages/login/acess.js';
 import headerLogin from './pages/login/headerLogin.js';
+import collectUser from './user/user.js'
 import postBook from './pages/books/addBook/postBook.js'
 
 const main = document.querySelector('#root');
+let myUser = {}
 
 window.addEventListener('load', () => {
     main.appendChild(home());
 });
 
-window.addEventListener('hashchange', () => {
+window.addEventListener('hashchange', async () => {
     main.innerHTML = '';
     switch (window.location.hash) {
         case '#books':
-            main.appendChild(feed());
+            main.appendChild(await feed());
+            async function temp(){
+                const rawResponse = await fetch('http://localhost:8080/book');
+                const content = rawResponse.json();
+                return content;                  
+            }
+            const bookData = await temp()
+            const books = document.querySelectorAll('.img-book-feed')
+            
+            for(let i in books){
+                books[i].addEventListener('click', async () => {
+                    main.innerHTML = ''
+                    
+                    main.appendChild(details(bookData.data[i]));
+                    
+                })
+            }
             break;
         case '#home':
             main.appendChild(home());
@@ -36,28 +55,44 @@ window.addEventListener('hashchange', () => {
                 const resp = await acesso();
                 await console.log(resp)
                 if(resp.message == "Usuário logado com sucesso"){
+
+                    //Atribuindo valora a variavel do usuário
+                    myUser = await collectUser()
+                    myUser = myUser.data[0]
+                    console.log(myUser)
                     hLogin.innerHTML = ""
                     hLogin.appendChild(await headerLogin())
                     const helloUser = document.querySelector('#hello-user')
                     const dropdown = document.querySelector('#dropdown-menu')
                     const myprofile = document.querySelector('#myprofile-button')
-                     
+                    const myrequest = document.querySelector('#requests-button')
+
+                    
+                    
+                    
                     helloUser.addEventListener('mouseenter', async () => {
                         dropdown.style.display = "flex"
                         myprofile.addEventListener('click', () => {
-                            window.location.hash = "#profile"
+                            main.innerHTML = ''
+                            main.appendChild(profile(myUser))
                         })
-                        
+                        myrequest.addEventListener('click', () => {
+                            window.location.hash = "#request"
+                        })
                     })
                     dropdown.addEventListener('mouseleave', async () => {
                         dropdown.style.display = 'none'
                     })
+                    window.location.hash = "#books"
                 }
-                window.location.hash = "#books"
+                else{
+                    alert(resp.ERROR)
+                }
+
             })
             break;
-        case '#profile':
-            main.appendChild(profile());
+            case '#request':
+            main.appendChild(request());
             break;
         case '#signup':
             main.appendChild(signup());
