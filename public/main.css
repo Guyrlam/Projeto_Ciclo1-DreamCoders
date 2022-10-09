@@ -215,8 +215,8 @@ main {
 #dropdown-menu {
     display: none;
     position: absolute;
-    margin-top: 10px;
     background-color: var(--dark-blue-green);
+    margin-top: 10px;
     width: 180px;
     height: 120px;
     border-bottom-left-radius: 20px;

@@ -14,10 +14,17 @@ export default (data) => {
             </div>
         </div>
         <div id="profile-description">
-            <h1 class="profile-details-text">Nome: <input type="text" value="${data.name}" id="edit-username" class="inputs-edit-myprofile"></h1>
-            <p class="profile-details-text">
+            <h3 class="profile-details-text">Nome: 
+            <input type="text" value="${data.name}" id="edit-username" class="inputs-edit-myprofile"></h3>
+            <h3> Descrição:
             <input type="text" value="${data.description}" id="edit-userdescription" class="inputs-edit-myprofile">
-            </p>
+            </h3>
+            <h3> Email:
+            <input type="text" value="${data.email}" id="edit-useremail" class="inputs-edit-myprofile">
+            </h3>
+            <h3>Telefone: 
+            <input type="text" value="${data.telephone}" id="edit-usertel" class="inputs-edit-myprofile">
+            </h3>
         </div>
         <div id="profile-edit">
             <button id="save-edit-profile">Salvar Alterações</button>

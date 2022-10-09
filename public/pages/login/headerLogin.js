@@ -6,7 +6,7 @@ export default async function headerLogin() {
         Olá, Usuário!          
     </span>
     
-    <div id="dropdown-menu">
+    <div id="dropdown-menu" style="background-color: --dark-blue-green;">
         <button class="button-dropdown-menu" id="myprofile-button">Meu Perfil</button>
         <button class="button-dropdown-menu" id="requests-button">Solicitações</button>
     </div>
