@@ -1,6 +1,6 @@
-function addBookVerification(req, res, next) {
+function bookVerification(req, res, next) {
     try {
-        if (!req.body || !req.files) {
+        if (!req.body) {
             throw new Error('Não foi possível ler os dados informados');
         } else if (
             !req.body.name ||
@@ -58,4 +58,4 @@ function addBookVerification(req, res, next) {
     }
 }
 
-module.exports = { addBookVerification };
+module.exports = { bookVerification };

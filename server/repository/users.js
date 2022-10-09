@@ -4,8 +4,7 @@ const check = {
     telephone,
     password
     FROM user_profile
-    WHERE approved isnull 
-    OR approved = true`,
+    WHERE deleted_at isnull`,
 };
 
 const newUser = {
@@ -45,8 +44,7 @@ const users = {
     ON images.id = user_profile.image_id
     INNER JOIN user_classes
     ON user_classes.id = user_profile.class_id
-    WHERE user_profile.approved isnull 
-    OR user_profile.approved = true`,
+    WHERE user_profile.delted_at isnull`,
 };
 
 async function checkUser(client) {

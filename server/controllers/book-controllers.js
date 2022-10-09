@@ -42,7 +42,13 @@ async function listBooks(req, res) {
 }
 
 async function alterBooks(req, res) {
-    const services = await modifyBooks(req.body, req.files, req.user_info);
+    const services = await modifyBooks(
+        req.params.id,
+        req.body,
+        req.files,
+        req.user_info
+    );
+
     if (services.Error !== null) {
         const error = {
             ERROR: services.Error,

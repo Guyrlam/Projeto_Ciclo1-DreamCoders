@@ -1,8 +1,20 @@
 /* eslint-disable no-await-in-loop */
 const jwt = require('jsonwebtoken');
 const { pool, begin, commit, rollback } = require('../repository/repository');
-const { newBook, selectBook, bookImages, bookList } = require('../repository/books');
-const { newImage, selectByName, bookImagesList } = require('../repository/images');
+const {
+    newBook,
+    selectBook,
+    bookImages,
+    bookList,
+    updateBook,
+} = require('../repository/books');
+const {
+    newImage,
+    selectByName,
+    bookImagesList,
+    deleteBookImages,
+} = require('../repository/images');
+const { collectorVerification } = require('../validators/book-validators');
 
 async function addBook(data, images, token) {
     const response = {
@@ -34,7 +46,7 @@ async function addBook(data, images, token) {
             data.synopsis,
         ];
 
-        // adiciona usuário ao banco de dados
+        // adiciona livro ao banco de dados
         await newBook(bookArray, client);
 
         // encontra o id do livro
@@ -106,4 +118,68 @@ async function pullBooks(token) {
     return response;
 }
 
-module.exports = { addBook, pullBooks };
+async function modifyBooks(bookId, data, images, token) {
+    const response = {
+        Error: null,
+    };
+
+    let client;
+
+    try {
+        client = await pool.connect();
+
+        response.token = jwt.sign(token, process.env.JWT_KEY, {
+            expiresIn: 3600,
+        });
+
+        begin(client);
+
+        // verificar se o id do usuário é o mesmo do colecionador
+        const verifiedUser = await collectorVerification(bookId, token, client);
+        if (verifiedUser.Error !== null) {
+            rollback(client);
+            client.release();
+            return verifiedUser;
+        }
+
+        const bookArray = [
+            data.name,
+            data.details,
+            data.publisher,
+            data.writer,
+            data.condition,
+            data.category,
+            data.synopsis,
+            bookId,
+        ];
+
+        // altera os dados do livro
+        await updateBook(bookArray, client);
+
+        // deleta imagens
+        if (data.deleted_images) {
+            await deleteBookImages(data.deleted_images, client);
+        }
+
+        // insere as novas imagens na tabela
+        if (images) {
+            for (let i = 0; i < images.length; i += 1) {
+                const el = images[i];
+                await newImage(el.filename, el.path, client);
+                const imageId = await selectByName(el.filename, client);
+                await bookImages(imageId, bookId, client);
+            }
+        }
+
+        commit(client);
+    } catch (error) {
+        response.Error = error.message;
+        response.status = 500;
+        rollback(client);
+    }
+
+    client.release();
+    return response;
+}
+
+module.exports = { addBook, pullBooks, modifyBooks };
