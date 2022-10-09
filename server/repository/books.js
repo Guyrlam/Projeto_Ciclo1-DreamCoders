@@ -32,8 +32,27 @@ const books = {
     FROM book
     INNER JOIN user_profile
     ON user_profile.id = book.user_id
-    WHERE book.approved isnull 
-    OR book.approved = true`,
+    WHERE book.deleted_at isnull`,
+};
+
+const selectedBook = {
+    text: `SELECT
+    book.id,
+    book.name,
+    book.details,
+    book.user_id collector_id,
+    user_profile.name collector,
+    book.publisher,
+    book.writer,
+    book.condition,
+    book.category,
+    book.synopsis
+    FROM book
+    INNER JOIN user_profile
+    ON user_profile.id = book.user_id
+    WHERE book.id = $1
+	AND book.deleted_at isnull`,
+    values: [],
 };
 
 const userBooks = {
@@ -52,8 +71,12 @@ const userBooks = {
     INNER JOIN user_profile
     ON user_profile.id = book.user_id
     WHERE book.user_id = $1
-	AND book.approved isnull 
-    OR book.approved = true`,
+	AND book.delted_at isnull`,
+    values: [],
+};
+
+const update = {
+    text: 'UPDATE book SET name = $1, details = $2, publisher = $3, writer = $4, condition = $5, category = $6, synopsis = $7 , updated_at = now() WHERE id = $8',
     values: [],
 };
 
@@ -84,4 +107,23 @@ async function userBookList(user, client) {
     return response.rows;
 }
 
-module.exports = { newBook, selectBook, bookImages, bookList, userBookList };
+async function getBookByID(bookID, client) {
+    selectedBook.values = [bookID];
+    const response = await client.query(selectedBook);
+    return response.rows[0];
+}
+
+async function updateBook(array, client) {
+    update.values = array;
+    await client.query(update);
+}
+
+module.exports = {
+    newBook,
+    selectBook,
+    bookImages,
+    bookList,
+    userBookList,
+    getBookByID,
+    updateBook,
+};

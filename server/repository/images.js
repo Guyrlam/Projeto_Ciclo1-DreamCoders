@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 const insert = {
     text: 'INSERT INTO Images(file_name, file_path) VALUES($1, $2)',
     values: [],
@@ -21,6 +22,16 @@ const list = {
     values: [],
 };
 
+const deleted = {
+    text: 'UPDATE images SET deleted_at = now() WHERE id = $1',
+    values: [],
+};
+
+const deletedBook = {
+    text: 'DELETE FROM book_images WHERE image_id = $1',
+    values: [],
+};
+
 async function newImage(name, path, client) {
     insert.values = [name, path];
     await client.query(insert);
@@ -38,4 +49,32 @@ async function bookImagesList(book, client) {
     return response.rows;
 }
 
-module.exports = { newImage, selectByName, bookImagesList };
+async function deleteBookImages(images, client) {
+    if (typeof images === 'string') {
+        const fileName = images.replace(
+            `http://${process.env.NDHOST}:${process.env.NDPORT}/uploads/`,
+            ''
+        );
+        select.values = [fileName];
+        const fileID = await client.query(select);
+        deleted.values = [fileID.rows[0].id];
+        await client.query(deleted);
+        deletedBook.values = [fileID.rows[0].id];
+        await client.query(deletedBook);
+    } else {
+        for (let i = 0; i < images.length; i += 1) {
+            const fileName = images[i].replace(
+                `http://${process.env.NDHOST}:${process.env.NDPORT}/uploads/`,
+                ''
+            );
+            select.values = [fileName];
+            const fileID = await client.query(select);
+            deleted.values = [fileID.rows[0].id];
+            await client.query(deleted);
+            deletedBook.values = [fileID.rows[0].id];
+            await client.query(deletedBook);
+        }
+    }
+}
+
+module.exports = { newImage, selectByName, bookImagesList, deleteBookImages };
