@@ -76,7 +76,7 @@ const userBooks = {
 };
 
 const update = {
-    text: 'UPDATE book SET name = $1, details = $2, publisher = $3, writer = $4, condition = $5, category = $6, synopsis = $7 , updated_at = now() WHERE id = $8',
+    text: 'UPDATE book SET name = $1, details = $2, publisher = $3, writer = $4, condition = $5, category = $6, synopsis = $7, updated_at = now() WHERE id = $8',
     values: [],
 };
 
