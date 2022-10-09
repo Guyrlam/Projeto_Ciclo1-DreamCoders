@@ -9,13 +9,19 @@ const { optionalToken, verifyToken } = require('../middlewares/login');
 const { upload } = require('../middlewares/multer');
 const {
     userVerification,
-    alterUserVerification,
+    passwordVerification,
 } = require('../middlewares/user-validators');
 
 const userRoute = Router();
 
 // insere um novo perfil
-userRoute.post('/', upload.single('image'), userVerification, insertUser);
+userRoute.post(
+    '/',
+    upload.single('image'),
+    userVerification,
+    passwordVerification,
+    insertUser
+);
 
 // faz o login e inicia a sessão
 userRoute.post('/login', login);
@@ -28,7 +34,7 @@ userRoute.put(
     '/:id',
     verifyToken,
     upload.single('image'),
-    alterUserVerification,
+    userVerification,
     alterUsers
 );
 
