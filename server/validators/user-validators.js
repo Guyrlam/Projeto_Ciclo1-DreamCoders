@@ -83,8 +83,31 @@ async function logDBVerification(email, password, client) {
     return response;
 }
 
+async function userVerification(userId, newClass, token) {
+    const response = {
+        Error: null,
+    };
+
+    try {
+        if (token.class !== 'administrador' && token.user_id !== userId) {
+            response.Error = 'Operação não autorizada';
+            response.status = 401;
+        }
+        if (token.class !== 'administrador' && newClass !== 'cliente') {
+            response.Error = 'Operação não autorizada';
+            response.status = 401;
+        }
+    } catch (error) {
+        response.Error = error.message;
+        response.status = 500;
+    }
+
+    return response;
+}
+
 module.exports = {
     dataBaseVerification,
     logVerification,
     logDBVerification,
+    userVerification,
 };

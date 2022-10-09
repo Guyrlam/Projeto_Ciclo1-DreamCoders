@@ -2,13 +2,26 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { pool, begin, commit, rollback } = require('../repository/repository');
-const { insertUser, tokenInfo, userList } = require('../repository/users');
-const { newImage, selectByName, bookImagesList } = require('../repository/images');
+const {
+    insertUser,
+    tokenInfo,
+    userList,
+    changePassword,
+    updateUser,
+} = require('../repository/users');
+const {
+    newImage,
+    selectByName,
+    bookImagesList,
+    deleteUserImage,
+    changeImage,
+} = require('../repository/images');
 const { selectClassID } = require('../repository/user-classes');
 const {
     dataBaseVerification,
     logVerification,
     logDBVerification,
+    userVerification,
 } = require('../validators/user-validators');
 const { userBookList } = require('../repository/books');
 
@@ -20,6 +33,13 @@ async function addUser(data, image) {
     let client;
 
     try {
+        // impossibilita o cadastro imediato de administradores
+        if (data.class !== 'cliente') {
+            response.Error = 'Operação não autorizada';
+            response.status = 401;
+            return response;
+        }
+
         client = await pool.connect();
 
         begin(client);
@@ -105,6 +125,7 @@ async function logUser(data) {
         // captura de informações para o token
         const userInfo = await tokenInfo(data.email, client);
         response.user_id = userInfo.user_id;
+        response.user_class = userInfo.class;
 
         // criação do token
         response.token = jwt.sign(userInfo, process.env.JWT_KEY, {
@@ -176,4 +197,83 @@ async function pullProfiles(token) {
     return response;
 }
 
-module.exports = { addUser, logUser, pullProfiles };
+async function modifyUsers(userId, data, image, token) {
+    const response = {
+        Error: null,
+    };
+
+    let client;
+
+    try {
+        client = await pool.connect();
+
+        begin(client);
+
+        // verificar se o id do usuário é o mesmo do alterado
+        const verifiedUser = await userVerification(userId, data.class, token);
+        if (verifiedUser.Error !== null) {
+            rollback(client);
+            client.release();
+            return verifiedUser;
+        }
+
+        // deleta a imagem
+        if (data.deleted_image) {
+            await deleteUserImage(data.deleted_image, client);
+        }
+
+        // insere a imagem na tabela
+        if (image) {
+            await newImage(image.filename, image.path, client);
+
+            // retorna o uuid da imagem
+            const imageID = await selectByName(image.filename, client);
+
+            // altera o valor na tabela de usuários
+            await changeImage(userId, imageID, client);
+        }
+
+        // retorna o uuid do tipo de usuário
+        const classID = await selectClassID(data.class, client);
+
+        // altera a senha do usuário
+        if (data.password) {
+            // criptografa a senha do usuário
+            const hashed = await bcrypt.hash(data.password, 10);
+
+            // altera a senha na tabela
+            await changePassword(userId, hashed, client);
+        }
+
+        const userArray = [
+            data.name,
+            classID,
+            data.email,
+            data.telephone,
+            userId,
+            data.description,
+        ];
+
+        // altera os dados do usuário
+        await updateUser(userArray, client);
+
+        // captura de informações para o token
+        const userInfo = await tokenInfo(data.email, client);
+
+        // criação do token
+        response.token = jwt.sign(userInfo, process.env.JWT_KEY, {
+            expiresIn: 3600,
+        });
+
+        commit(client);
+    } catch (error) {
+        response.Error = error.message;
+        response.status = 500;
+        rollback(client);
+    }
+
+    client.release();
+    return response;
+}
+
+module.exports = { addUser, logUser, pullProfiles, modifyUsers };

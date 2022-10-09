@@ -27,6 +27,11 @@ const deleted = {
     values: [],
 };
 
+const change = {
+    text: 'UPDATE user_profile SET image_id = $1, updated_at = now() WHERE id = $2',
+    values: [],
+};
+
 const deletedBook = {
     text: 'DELETE FROM book_images WHERE image_id = $1',
     values: [],
@@ -77,4 +82,27 @@ async function deleteBookImages(images, client) {
     }
 }
 
-module.exports = { newImage, selectByName, bookImagesList, deleteBookImages };
+async function deleteUserImage(image, client) {
+    const fileName = image.replace(
+        `http://${process.env.NDHOST}:${process.env.NDPORT}/uploads/`,
+        ''
+    );
+    select.values = [fileName];
+    const fileID = await client.query(select);
+    deleted.values = [fileID.rows[0].id];
+    await client.query(deleted);
+}
+
+async function changeImage(userID, imageID, client) {
+    change.values = [imageID, userID];
+    await client.query(change);
+}
+
+module.exports = {
+    newImage,
+    selectByName,
+    bookImagesList,
+    deleteBookImages,
+    deleteUserImage,
+    changeImage,
+};
