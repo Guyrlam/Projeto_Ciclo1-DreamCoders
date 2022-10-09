@@ -241,7 +241,7 @@ async function pullUserByID(userID, token) {
         const user = await getUserByID(userID, client);
 
         // adiciona a lista de livros ao perfil
-        user.image = `http://${process.env.NDHOST}:${process.env.NDPORT}/uploads/${user.image}`;
+        user.image = `//${process.env.NDHOST}:${process.env.NDPORT}/uploads/${user.image}`;
         user.books = [];
         const bookList = await userBookList(user.id, client);
         for (let x = 0; x < bookList.length; x += 1) {
@@ -251,7 +251,7 @@ async function pullUserByID(userID, token) {
             for (let y = 0; y < imageList.length; y += 1) {
                 const image = imageList[y].filename;
                 book.image.push(
-                    `http://${process.env.NDHOST}:${process.env.NDPORT}/uploads/${image}`
+                    `//${process.env.NDHOST}:${process.env.NDPORT}/uploads/${image}`
                 );
             }
             user.books.push(book);

@@ -92,7 +92,7 @@ async function deleteBookImages(images, client) {
 
 async function deleteUserImage(image, client) {
     const fileName = image.replace(
-        `http://${process.env.NDHOST}:${process.env.NDPORT}/uploads/`,
+        `//${process.env.NDHOST}:${process.env.NDPORT}/uploads/`,
         ''
     );
     select.values = [fileName];
