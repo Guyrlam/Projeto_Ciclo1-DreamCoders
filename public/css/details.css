@@ -68,3 +68,33 @@
     display: flex;
     justify-content: flex-start;
 }
+#resquest-book{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#trocadelivro{
+    display: flex;
+    flex-direction: row;
+    width: 500px;
+    height: 300px;
+    justify-content:space-between;
+    align-items: center;
+}
+#button-trocar{
+    width: 108px;
+    height: 33px;
+    border: none;
+    border-radius: 25px;
+    color: var(--white);
+    font-size: 15px;
+}
+.xwv{
+    display: flex;
+    flex-direction: column;
+}
+select{ 
+    background-color: var(--dark-blue-green);
+    color: white;
+    margin-top: 5px;
+}
