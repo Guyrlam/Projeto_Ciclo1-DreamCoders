@@ -3,6 +3,7 @@ const {
     logUser,
     pullProfiles,
     modifyUsers,
+    pullUserByID,
 } = require('../services/user-services');
 
 async function insertUser(req, res) {
@@ -63,6 +64,27 @@ async function listProfiles(req, res) {
     }
 }
 
+async function getUser(req, res) {
+    const services = await pullUserByID(req.params.id, req.user_info);
+
+    if (services.token) {
+        res.cookie('token', services.token, { maxAge: 900000, httpOnly: true });
+    }
+
+    if (services.Error !== null) {
+        const error = {
+            ERROR: services.Error,
+        };
+        res.status(services.status).json(error);
+    } else {
+        const message = {
+            data: services.data,
+        };
+
+        res.status(200).json(message);
+    }
+}
+
 async function alterUsers(req, res) {
     const services = await modifyUsers(
         req.params.id,
@@ -89,4 +111,4 @@ async function alterUsers(req, res) {
     }
 }
 
-module.exports = { insertUser, login, listProfiles, alterUsers };
+module.exports = { insertUser, login, listProfiles, alterUsers, getUser };

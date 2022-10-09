@@ -23,6 +23,9 @@ bookRoute.post(
 // lista os livros ativos no sistema
 bookRoute.get('/', optionalToken, listBooks);
 
+// puxa os dados de um livro pelo id
+bookRoute.get('/:id', optionalToken, getBook);
+
 // altera o registro de um livro
 bookRoute.put(
     '/:id',
@@ -31,8 +34,5 @@ bookRoute.put(
     bookVerification,
     alterBooks
 );
-
-// puxa os dados de um livro pelo id
-bookRoute.get('/:id', optionalToken, getBook);
 
 module.exports = { bookRoute };
