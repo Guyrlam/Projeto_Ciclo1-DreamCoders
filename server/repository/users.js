@@ -47,6 +47,16 @@ const users = {
     WHERE user_profile.deleted_at isnull`,
 };
 
+const newPwd = {
+    text: 'UPDATE user_profile SET password = $1, updated_at = now() WHERE id = $2',
+    values: [],
+};
+
+const update = {
+    text: 'UPDATE user_profile SET name = $1, description = $6, class_id = $2, email = $3, telephone = $4, updated_at = now() WHERE id = $5',
+    values: [],
+};
+
 async function checkUser(client) {
     const response = await client.query(check);
     return response.rows;
@@ -68,4 +78,21 @@ async function userList(client) {
     return response.rows;
 }
 
-module.exports = { checkUser, insertUser, tokenInfo, userList };
+async function changePassword(userID, password, client) {
+    newPwd.values = [password, userID];
+    await client.query(newPwd);
+}
+
+async function updateUser(array, client) {
+    update.values = array;
+    await client.query(update);
+}
+
+module.exports = {
+    checkUser,
+    insertUser,
+    tokenInfo,
+    userList,
+    changePassword,
+    updateUser,
+};

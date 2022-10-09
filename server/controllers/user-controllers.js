@@ -1,4 +1,9 @@
-const { addUser, logUser, pullProfiles } = require('../services/user-services');
+const {
+    addUser,
+    logUser,
+    pullProfiles,
+    modifyUsers,
+} = require('../services/user-services');
 
 async function insertUser(req, res) {
     const services = await addUser(req.body, req.file);
@@ -28,6 +33,7 @@ async function login(req, res) {
     } else {
         const message = {
             logged: services.user_id,
+            user_class: services.user_class,
             message: 'Usuário logado com sucesso',
         };
 
@@ -57,4 +63,30 @@ async function listProfiles(req, res) {
     }
 }
 
-module.exports = { insertUser, login, listProfiles };
+async function alterUsers(req, res) {
+    const services = await modifyUsers(
+        req.params.id,
+        req.body,
+        req.file,
+        req.user_info
+    );
+
+    if (services.Error !== null) {
+        const error = {
+            ERROR: services.Error,
+        };
+        res.status(services.status)
+            .cookie('token', services.token, { maxAge: 900000, httpOnly: true })
+            .json(error);
+    } else {
+        const message = {
+            data: 'Perfil alterado com sucesso!',
+        };
+
+        res.status(200)
+            .cookie('token', services.token, { maxAge: 900000, httpOnly: true })
+            .json(message);
+    }
+}
+
+module.exports = { insertUser, login, listProfiles, alterUsers };
