@@ -93,8 +93,9 @@ async function alterBooks(req, res) {
             .json(message);
     }
 }
+
 async function deleteBook(req, res) {
-    const services = await removeBook(req.params.id, req.body, req.user_info);
+    const services = await removeBook(req.params.id, req.user_info);
 
     if (services.Error !== null) {
         const error = {

@@ -4,6 +4,7 @@ const {
     pullProfiles,
     modifyUsers,
     pullUserByID,
+    removeUser,
 } = require('../services/user-services');
 
 async function insertUser(req, res) {
@@ -111,4 +112,32 @@ async function alterUsers(req, res) {
     }
 }
 
-module.exports = { insertUser, login, listProfiles, alterUsers, getUser };
+async function deleteUser(req, res) {
+    const services = await removeUser(req.params.id, req.user_info);
+
+    if (services.Error !== null) {
+        const error = {
+            ERROR: services.Error,
+        };
+        res.status(services.status)
+            .cookie('token', services.token, { maxAge: 900000, httpOnly: true })
+            .json(error);
+    } else {
+        const message = {
+            data: 'Usuário deletado com sucesso!',
+        };
+
+        res.status(200)
+            .cookie('token', services.token, { maxAge: 900000, httpOnly: true })
+            .json(message);
+    }
+}
+
+module.exports = {
+    insertUser,
+    login,
+    listProfiles,
+    alterUsers,
+    getUser,
+    deleteUser,
+};

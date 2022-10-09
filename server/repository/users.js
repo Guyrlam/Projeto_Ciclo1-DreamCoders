@@ -76,6 +76,11 @@ const update = {
     values: [],
 };
 
+const remove = {
+    text: 'UPDATE user_profile SET deleted_at = now() WHERE id = $1',
+    values: [],
+};
+
 async function checkUser(client) {
     const response = await client.query(check);
     return response.rows;
@@ -113,6 +118,11 @@ async function updateUser(array, client) {
     await client.query(update);
 }
 
+async function removeUserByID(userID, client) {
+    remove.values = [userID];
+    await client.query(remove);
+}
+
 module.exports = {
     checkUser,
     insertUser,
@@ -121,4 +131,5 @@ module.exports = {
     changePassword,
     updateUser,
     getUserByID,
+    removeUserByID,
 };

@@ -5,6 +5,7 @@ const {
     listProfiles,
     alterUsers,
     getUser,
+    deleteUser,
 } = require('../controllers/user-controllers');
 const { optionalToken, verifyToken } = require('../middlewares/login');
 const { upload } = require('../middlewares/multer');
@@ -41,5 +42,8 @@ userRoute.put(
     userVerification,
     alterUsers
 );
+
+// deleta o perfil do usuário
+userRoute.delete('/:id', verifyToken, deleteUser);
 
 module.exports = { userRoute };

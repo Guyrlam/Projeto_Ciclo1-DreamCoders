@@ -117,6 +117,13 @@ async function deleteImagesByBookID(bookID, client) {
     }
 }
 
+async function deleteImagesByName(fileName, client) {
+    select.values = [fileName];
+    const fileID = await client.query(select);
+    deleted.values = [fileID.rows[0].id];
+    await client.query(deleted);
+}
+
 module.exports = {
     newImage,
     selectByName,
@@ -125,4 +132,5 @@ module.exports = {
     deleteUserImage,
     changeImage,
     deleteImagesByBookID,
+    deleteImagesByName,
 };

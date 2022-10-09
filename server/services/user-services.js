@@ -9,6 +9,7 @@ const {
     changePassword,
     updateUser,
     getUserByID,
+    removeUserByID,
 } = require('../repository/users');
 const {
     newImage,
@@ -16,6 +17,8 @@ const {
     bookImagesList,
     deleteUserImage,
     changeImage,
+    deleteImagesByBookID,
+    deleteImagesByName,
 } = require('../repository/images');
 const { selectClassID } = require('../repository/user-classes');
 const {
@@ -24,7 +27,7 @@ const {
     logDBVerification,
     userVerification,
 } = require('../validators/user-validators');
-const { userBookList } = require('../repository/books');
+const { userBookList, removeByID } = require('../repository/books');
 
 async function addUser(data, image) {
     const response = {
@@ -328,4 +331,74 @@ async function modifyUsers(userId, data, image, token) {
     return response;
 }
 
-module.exports = { addUser, logUser, pullProfiles, modifyUsers, pullUserByID };
+async function removeUser(userId, token) {
+    const response = {
+        Error: null,
+    };
+
+    let client;
+
+    try {
+        client = await pool.connect();
+
+        begin(client);
+
+        // puxa os dados do usuário
+        const user = await getUserByID(userId, client);
+
+        // verificar se o id do usuário é o mesmo do token
+        const verifiedUser = await userVerification(userId, user.class, token);
+        if (verifiedUser.Error !== null) {
+            rollback(client);
+            client.release();
+            return verifiedUser;
+        }
+
+        // faz um soft delete nos dados do usuário
+        await removeUserByID(userId, client);
+
+        // faz um soft delete na imagem do usuário
+        await deleteImagesByName(user.image, client);
+
+        // seleciona os livros do usuário deletado
+        const bookList = await userBookList(userId, client);
+
+        for (let i = 0; i < bookList.length; i += 1) {
+            const bookId = bookList[i].id;
+
+            // faz um soft delete nos dados do livro
+            await removeByID(bookId, client);
+
+            // deleta imagens
+            await deleteImagesByBookID(bookId, client);
+        }
+
+        if (token.class === 'administrador') {
+            response.token = jwt.sign(token, process.env.JWT_KEY, {
+                expiresIn: 3600,
+            });
+        } else {
+            response.token = jwt.sign(token, process.env.JWT_KEY, {
+                expiresIn: 0,
+            });
+        }
+
+        commit(client);
+    } catch (error) {
+        response.Error = error.message;
+        response.status = 500;
+        rollback(client);
+    }
+
+    client.release();
+    return response;
+}
+
+module.exports = {
+    addUser,
+    logUser,
+    pullProfiles,
+    modifyUsers,
+    pullUserByID,
+    removeUser,
+};

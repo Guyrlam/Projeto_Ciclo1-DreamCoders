@@ -229,7 +229,7 @@ async function modifyBooks(bookId, data, images, token) {
     return response;
 }
 
-async function removeBook(bookId, data, token) {
+async function removeBook(bookId, token) {
     const response = {
         Error: null,
     };
