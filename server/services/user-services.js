@@ -8,6 +8,7 @@ const {
     userList,
     changePassword,
     updateUser,
+    getUserByID,
 } = require('../repository/users');
 const {
     newImage,
@@ -197,6 +198,57 @@ async function pullProfiles(token) {
     return response;
 }
 
+async function pullUserByID(userID, token) {
+    const response = {
+        Error: null,
+    };
+
+    let client;
+
+    try {
+        client = await pool.connect();
+
+        if (token !== null) {
+            response.token = jwt.sign(token, process.env.JWT_KEY, {
+                expiresIn: 3600,
+            });
+        }
+
+        begin(client);
+
+        // puxa os dados do usuário
+        const user = await getUserByID(userID, client);
+
+        // adiciona a lista de livros ao perfil
+        user.image = `http://${process.env.NDHOST}:${process.env.NDPORT}/uploads/${user.image}`;
+        user.books = [];
+        const bookList = await userBookList(user.id, client);
+        for (let x = 0; x < bookList.length; x += 1) {
+            const book = bookList[x];
+            book.image = [];
+            const imageList = await bookImagesList(book.id, client);
+            for (let y = 0; y < imageList.length; y += 1) {
+                const image = imageList[y].filename;
+                book.image.push(
+                    `http://${process.env.NDHOST}:${process.env.NDPORT}/uploads/${image}`
+                );
+            }
+            user.books.push(book);
+        }
+
+        response.data = user;
+
+        commit(client);
+    } catch (error) {
+        response.Error = error.message;
+        response.status = 500;
+        rollback(client);
+    }
+
+    client.release();
+    return response;
+}
+
 async function modifyUsers(userId, data, image, token) {
     const response = {
         Error: null,
@@ -276,4 +328,4 @@ async function modifyUsers(userId, data, image, token) {
     return response;
 }
 
-module.exports = { addUser, logUser, pullProfiles, modifyUsers };
+module.exports = { addUser, logUser, pullProfiles, modifyUsers, pullUserByID };
