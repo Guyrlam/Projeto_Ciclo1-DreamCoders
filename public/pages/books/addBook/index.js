@@ -33,7 +33,7 @@ export default () => {
             </select>
 
             <label for="category">Categoria:</label>
-            <select name="Categoria" id="cateogry">
+            <select name="Categoria" id="category">
                 <option value="" selected disabled>(selecione)</option>
                 <option value="autoajuda">Autoajuda</option>
                 <option value="misterio">Mistério</option>

@@ -1,3 +1,4 @@
+import { myUser } from '../../index.js'
 //import details from '../details/index.js'
 async function temp() {
     const rawResponse = await fetch(`//localhost:8080/book`);

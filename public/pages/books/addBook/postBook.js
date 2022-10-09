@@ -37,7 +37,7 @@ export default async function postUser() {
 
     const resp = await fetch((`//localhost:8080/book`), {
         method: 'POST',
-        body: formData,
+        body: formData
     });
 
     return resp.json();
