@@ -9,19 +9,16 @@ import login from './pages/login/index.js';
 import profile from './pages/profile/index.js';
 import request from './pages/requests/index.js';
 import signup from './pages/signup/index.js';
-import postUser from './pages
+import postUser from './pages/signup/postUser.js'
 
-
-import acesso from './pages/login/acess.js';
-import headerLogin from './pages/login/headerLogin.js';
 import collectUser from './user/user.js'
-import postBook from './pages/books/addBook/postBook.js'
 import editprofile from './pages/profile/editProfile/index.js'
 import saveedit from './pages/profile/editProfile/editProfile.js'
 
 
 const main = document.querySelector('#root');
 let myUser = {}
+let idUser = ''
 
 /* main.innerHTML ?? null 
     window.addEventListener('load', () => {
@@ -65,13 +62,16 @@ window.addEventListener('hashchange', async () => {
             const hLogin = document.querySelector('#header-login');
             acess.addEventListener('click', async () => {
                 const resp = await acesso();
-                await console.log(resp)
+                await console.log(resp.logged)
+                idUser = resp.logged
+                
                 if (resp.message == "Usuário logado com sucesso") {
 
                     //Atribuindo valora a variavel do usuário
-                    myUser = await collectUser()
-                    myUser = myUser.data[0]
-                    
+                    myUser = await collectUser(idUser)
+                    myUser = myUser.data
+                    console.log(myUser)
+
                     hLogin.innerHTML = ""
                     hLogin.appendChild(await headerLogin())
                     const helloUser = document.querySelector('#hello-user')
@@ -81,8 +81,9 @@ window.addEventListener('hashchange', async () => {
 
                     helloUser.addEventListener('mouseenter', async () => {
                         dropdown.style.display = "flex"
-                        dropdown.style.backgroundColor = "var(--green)"
-                        myprofile.addEventListener('click', () => {
+                        myprofile.addEventListener('click', async function renderProfile(){
+                            myUser = await collectUser(idUser)
+                            myUser = myUser.data
                             main.innerHTML = ''
                             main.appendChild(profile(myUser))
                             const editProfile = document.querySelector('#profile-button-edit')
@@ -90,9 +91,16 @@ window.addEventListener('hashchange', async () => {
                                 main.innerHTML = ''
                                 main.appendChild(editprofile(myUser))
                                 const saveEdit = document.querySelector('#save-edit-profile')
-                                saveEdit.addEventListener('click', () => {saveedit()})
+                                saveEdit.addEventListener('click', async () => {
+                                    const resp = await saveedit(myUser)
+                                    if (resp.status == 200) {
+                                        alert('Perfil editado com sucesso!')
+                                        renderProfile()
+                                        
+                                    }
+                                })
                             })
-                            
+
                         })
                         myrequest.addEventListener('click', () => {
                             window.location.hash = "#request"
