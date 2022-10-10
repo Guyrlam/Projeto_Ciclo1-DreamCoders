@@ -84,7 +84,7 @@ button {
 section,
 nav {
     display: flex;
-    gap: 80px;
+    gap: 5vw;
 }
 
 ul {
@@ -162,6 +162,7 @@ main {
     padding: 1vw;
     line-height: 2rem;
     text-align: center;
+    white-space: nowrap;
 }
 
 #header-title {
@@ -195,12 +196,14 @@ main {
     font-size: 22px;
     color: var(--white);
     display: flex;
+    user-select: none;
 }
 
 #icon-user {
     margin-right: 15px;
     width: 27px;
     height: 27px;
+    user-select: none;
 }
 
 #header-button-login {
@@ -231,6 +234,7 @@ main {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    user-select: none;
 }
 
 .button-dropdown-menu {

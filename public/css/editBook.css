@@ -1,5 +1,5 @@
 #editBook {
-    display: flex;
+    display: flex !important;
     flex-flow: column nowrap;
     color: var(--white);
     align-items: center;
