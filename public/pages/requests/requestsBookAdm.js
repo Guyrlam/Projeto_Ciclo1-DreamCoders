@@ -1,7 +1,7 @@
 export default async () => {
     console.log('requests template');
     const container = document.createElement('div');
-    const reqUsers = await fetch('http://localhost:8080/admin/users')
+    const reqBooks = await fetch('http://localhost:8080/admin/books')
     .then(
         (res) => {
             return res.json()
@@ -9,15 +9,15 @@ export default async () => {
     )
     
     let reqTemplateUsers = ''
-    for(let i in reqUsers.data){
+    for(let i in reqBooks.data){
         reqTemplateUsers+=
         `
 <div class="requests">
-        <span class="name-type">Solititações de: ${reqUsers.data[i].name}</span>
+        <span class="name-type">Solititações de: ${reqBooks.data[i].name}</span>
         <p></p>
         <div>
-            <button class="acceptUser-button" id="acceptUser:${reqUsers.data[i].id}">Aceitar</button>
-            <button class="rejectUser-button" id="rejectUser:${reqUsers.data[i].id}">Rejeitar</button>
+            <button class="acceptBook-button" id="acceptBook:${reqBooks.data[i].id}">Aceitar</button>
+            <button class="rejectBook-button" id="rejectBook:${reqBooks.data[i].id}">Rejeitar</button>
         </div>
 </div>
         `
@@ -30,9 +30,8 @@ export default async () => {
     <div id="div-page-requests">
     <div id="page-requests">
         
-        
-        <h1 id="title-requests">Solicitações de usuários <a href="#book-requests">
-        <button id="book-requests" class="button-switch-requests">VER SOLICITAÇÕES DE LIVROS</button>
+        <h1 id="title-requests">Solicitações de livros<a href="#request">
+        <button id="book-requests" class="button-switch-requests">VER SOLICITAÇÕES DE USUÁRIOS</button>
         </a></h1>
         ${reqTemplateUsers}
     </div>
