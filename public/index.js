@@ -221,7 +221,7 @@ window.addEventListener('hashchange', async () => {
                     window.location.hash = "#login"
                 }
                 else {
-                    console.log(resp.ERROR)
+                    alert(resp.ERROR)
                 }
             });
             break;

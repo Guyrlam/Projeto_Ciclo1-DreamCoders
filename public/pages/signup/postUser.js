@@ -5,6 +5,8 @@ export default async function postUser() {
     const telephone = document.querySelector('#telephone-signup');
     const classe = 'cliente';
     const password = document.querySelector('#password-signup');
+    const repassword = document.querySelector('#confirm-password');
+
 
     const image = document.querySelector('#profile-photo-signup');
 
@@ -19,6 +21,12 @@ export default async function postUser() {
         method: 'POST',
         body: formData,
     });
+    if(password.value != repassword.value){
+        const resp = {
+            ERROR: 'As duas senhas precisam ser iguais!'
+        }
+        return resp
+    }
 
     return resp.json();
 }

@@ -69,7 +69,7 @@ async function logDBVerification(email, password, client) {
             response.Error = 'email ou senha incorretos';
             response.status = 404;
         } else {
-            const compare = await bcrypt.compare(password, selected.password);
+            const compare = await bcrypt.compare(password, selected.password)
             if (!compare) {
                 response.Error = 'email ou senha incorretos';
                 response.status = 404;
