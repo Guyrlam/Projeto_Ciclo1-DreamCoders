@@ -101,7 +101,7 @@ async function pullBookByID(bookID, token) {
         for (let x = 0; x < imageList.length; x += 1) {
             const image = imageList[x].filename;
             book.images.push(
-                `//${process.env.NDHOST}:${process.env.NDPORT}/uploads/${image}`
+                `//${process.env.NDHOST}:${process.env.NDPORT}/storage/${image}`
             );
         }
 
@@ -147,7 +147,7 @@ async function pullBooks(token) {
             for (let x = 0; x < imageList.length; x += 1) {
                 const image = imageList[x].filename;
                 el.images.push(
-                    `//${process.env.NDHOST}:${process.env.NDPORT}/uploads/${image}`
+                    `//${process.env.NDHOST}:${process.env.NDPORT}/storage/${image}`
                 );
             }
         }

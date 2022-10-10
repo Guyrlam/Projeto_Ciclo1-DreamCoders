@@ -1,6 +1,7 @@
 /* eslint-disable no-await-in-loop */
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const fs = require('fs-extra');
 const { pool, begin, commit, rollback } = require('../repository/repository');
 const {
     insertUser,
@@ -100,6 +101,13 @@ async function addUser(data, image) {
                 admin = true;
             } else {
                 await upgradeUser(admID, data.telephone, client);
+
+                // diretórios das pastas que armazenam imagens
+                const src = `${__dirname}/../images/uploads/${image.filename}`;
+                const dest = `${__dirname}/../images/storage/${image.filename}`;
+
+                // transfere a imagem do perfil para a pasta storage
+                await fs.move(src, dest);
             }
         }
 
@@ -208,7 +216,7 @@ async function pullProfiles(token) {
         // adiciona a lista de livros a cada perfil
         for (let i = 0; i < users.length; i += 1) {
             const el = users[i];
-            el.image = `//${process.env.NDHOST}:${process.env.NDPORT}/uploads/${el.image}`;
+            el.image = `//${process.env.NDHOST}:${process.env.NDPORT}/storage/${el.image}`;
             el.books = [];
             const bookList = await userBookList(el.id, client);
             for (let x = 0; x < bookList.length; x += 1) {
@@ -218,7 +226,7 @@ async function pullProfiles(token) {
                 for (let y = 0; y < imageList.length; y += 1) {
                     const image = imageList[y].filename;
                     book.image.push(
-                        `//${process.env.NDHOST}:${process.env.NDPORT}/uploads/${image}`
+                        `//${process.env.NDHOST}:${process.env.NDPORT}/storage/${image}`
                     );
                 }
                 el.books.push(book);
@@ -260,7 +268,7 @@ async function pullUserByID(userID, token) {
         const user = await getUserByID(userID, client);
 
         // adiciona a lista de livros ao perfil
-        user.image = `//${process.env.NDHOST}:${process.env.NDPORT}/uploads/${user.image}`;
+        user.image = `//${process.env.NDHOST}:${process.env.NDPORT}/storage/${user.image}`;
         user.books = [];
         const bookList = await userBookList(user.id, client);
         for (let x = 0; x < bookList.length; x += 1) {
@@ -270,7 +278,7 @@ async function pullUserByID(userID, token) {
             for (let y = 0; y < imageList.length; y += 1) {
                 const image = imageList[y].filename;
                 book.image.push(
-                    `//${process.env.NDHOST}:${process.env.NDPORT}/uploads/${image}`
+                    `//${process.env.NDHOST}:${process.env.NDPORT}/storage/${image}`
                 );
             }
             user.books.push(book);

@@ -3,6 +3,7 @@ const cookieParser = require('cookie-parser');
 const { userRoute } = require('./routes/user-router');
 const { bookRoute } = require('./routes/book-router');
 const { adminRoute } = require('./routes/admin-router');
+const { verifyAdmToken } = require('./middlewares/login');
 require('dotenv').config();
 
 const app = express();
@@ -13,7 +14,8 @@ app.use(cookieParser());
 
 // routes
 app.use('/', express.static(`./public/`));
-app.use('/uploads', express.static(`./server/images/uploads/`));
+app.use('/storage', express.static(`./server/images/storage/`));
+app.use('/uploads', verifyAdmToken, express.static(`./server/images/uploads/`));
 app.use('/user', userRoute);
 app.use('/book', bookRoute);
 app.use('/admin', adminRoute);

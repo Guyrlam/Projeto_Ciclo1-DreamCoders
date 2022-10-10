@@ -1,4 +1,5 @@
 /* eslint-disable no-await-in-loop */
+const fs = require('fs-extra');
 const jwt = require('jsonwebtoken');
 const {
     usersAdminList,
@@ -133,15 +134,22 @@ async function userReview(rate, userID, token) {
 
         begin(client);
 
+        // seleciona os dados do registro em rejeição
+        const user = await pullRejected(userID, client);
+
         if (rate === 'approved') {
             // aprova o registro do usuário
             await approveUser(userID, client);
+
+            // diretórios das pastas que armazenam imagens
+            const src = `${__dirname}/../images/uploads/${user.image}`;
+            const dest = `${__dirname}/../images/storage/${user.image}`;
+
+            // transfere a imagem do perfil para a pasta storage
+            await fs.move(src, dest);
         } else if (rate === 'rejected') {
             // rejeita o registro do usuário
             await rejectUser(userID, client);
-
-            // seleciona os dados do registro em rejeição
-            const user = await pullRejected(userID, client);
 
             // faz um soft delete na imagem do usuário
             await deleteImagesByName(user.image, client);
@@ -192,6 +200,18 @@ async function bookReview(rate, bookID, token) {
         if (rate === 'approved') {
             // aprova o registro do livro
             await approveBook(bookID, client);
+
+            const imageList = await bookImagesList(bookID, client);
+            for (let x = 0; x < imageList.length; x += 1) {
+                const image = imageList[x].filename;
+
+                // diretórios das pastas que armazenam imagens
+                const src = `${__dirname}/../images/uploads/${image}`;
+                const dest = `${__dirname}/../images/storage/${image}`;
+
+                // transfere a imagem do perfil para a pasta storage
+                await fs.move(src, dest);
+            }
         } else if (rate === 'rejected') {
             // rejeita o registro do usuário
             await rejectBook(bookID, client);
