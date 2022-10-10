@@ -3,18 +3,17 @@ export default () => {
     const container = document.createElement('div');
 
     const template = `
-    <section id="editbook">
+    <section id="editBook">
     <div>
-        <h2>Alterar cadastro de livro</h2>
+        <h2>Cadastrar novo livro</h2>
     </div>
     <div id="blocks">
-        <div style="display: flex; flex-flow: column nowrap; gap: 30px">
-
+        
             <label for="book-title">Título do Livro:</label>
             <input type="text" name="book-title" id="book-title">
 
-            <label for="details">Detalhes:</label>
-            <input type="text" name="book-details" id="book-details">
+            <label for="book-detail">Detalhes:</label>
+            <input type="text" name="book-details" id="book-detail">
 
             <label for="publisher">Editora:</label>
             <select name="Editora" id="publisher">
@@ -54,26 +53,12 @@ export default () => {
             <label for="synopsis">Sinopse:</label>
             <input type="text" name="book-synopsis" id="synopsis">
 
-            <label for="sell">Disponível para troca?</label>
-
-            <div class="button b2" id="button-toggle">
-                <input type="checkbox" class="checkbox">
-                <div class="knobs">
-                    <span></span>
-                </div>
-
-            </div>
-
             <div id="div-input-photo-book">
-                <label for="pic-profile">Foto do livro: </label>
-                <input type="file" name="" id="input-book-photo">
+                <label for="pic-profile">Foto da capa do livro: </label>
+                <input type="file" accept=".jpg,.png" name="" id="input-book-photo">
             </div>
 
-            <button id="button-save-book">Salvar</button>
-            <button >Excluir livro</button>
-
-
-        </div>
+            <button id="save-new-book-button">Salvar</button>
 
     </div>
 </section>

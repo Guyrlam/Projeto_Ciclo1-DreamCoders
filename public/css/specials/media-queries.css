@@ -1,19 +1,25 @@
-@media screen and (max-width: 500px) {
-    #button-main {
-        position: absolute;
-        right: -80%;
-        bottom: 25%;
-        float: right;
-    }
-
-    #main-text {
-        position: relative;
-        left: 8%;
-        overflow: visible;
-        min-width: 100vw;
+@media screen and (max-width: 800px) {
+    #tunel-do-saber {
+        white-space: unset !important;
     }
 
     #main-img {
         display: none;
+    }
+
+    @media (max-width: 500px) {
+        #button-main {
+            position: absolute;
+            right: -80%;
+            bottom: 25%;
+            float: right;
+        }
+
+        #main-text {
+            position: relative;
+            left: 8%;
+            overflow: visible;
+            min-width: 100vw;
+        }
     }
 }

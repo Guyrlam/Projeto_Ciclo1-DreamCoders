@@ -51,16 +51,7 @@ export default () => {
                     <label for="old">antigo </label>
                     <input type="radio" name="book-conditions" id="old" value="old">
                 </fieldset>
-
-
-                <div>
-                    <span>Disponível para troca?</span>
-                    <div class="switch-button">
-                        <input class="switch-button-checkbox" type="checkbox"></input>
-                        <label class="switch-button-label" for=""><span class="switch-button-label-span">SIM</span></label>
-                    </div>
-                </div>
-
+           
                 <span>
                     <button id="save" type="submit">Salvar</button>
                     <button id="remove" type="submit">Excluir</button>

@@ -2,7 +2,7 @@ export default async function headerLogin() {
     const container = document.createElement('div');
     const template = `
     <span id="hello-user">
-        <img src="./assets/icon-user.png" alt="" id="icon-user">
+        <img src="./assets/icon-user.png" alt="avatar do perfil" id="icon-user">
         Olá, Usuário!          
     </span>
     

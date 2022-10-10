@@ -1,19 +1,19 @@
 import addBook from './pages/books/addBook/index.js';
 import postBook from './pages/books/addBook/postBook.js';
 import feed from './pages/books/index.js';
+import resquestBook from './pages/books/resquestBook/resquestBook.js';
 import details from './pages/details/index.js';
 import home from './pages/home/index.js';
 import acesso from './pages/login/acess.js';
 import headerLogin from './pages/login/headerLogin.js';
 import login from './pages/login/index.js';
+import saveedit from './pages/profile/editProfile/editProfile.js';
+import editprofile from './pages/profile/editProfile/index.js';
 import profile from './pages/profile/index.js';
 import request from './pages/requests/index.js';
 import signup from './pages/signup/index.js';
-import postUser from './pages/signup/postUser.js'
-import resquestBook from './pages/books/resquestBook/resquestBook.js';
-import collectUser from './user/user.js'
-import editprofile from './pages/profile/editProfile/index.js'
-import saveedit from './pages/profile/editProfile/editProfile.js'
+import postUser from './pages/signup/postUser.js';
+import collectUser from './user/user.js';
 
 
 const main = document.querySelector('#root');
@@ -30,11 +30,8 @@ async function refreshHeader() {
     hLogin.innerHTML = ""
     hLogin.appendChild(await headerLogin())
 }
-/* main.innerHTML ?? null 
-    window.addEventListener('load', () => {
-        main.appendChild(home())
-    } */
-document.querySelector('#toFeed').addEventListener('click',async () => {
+
+document.querySelector('#toFeed').addEventListener('click', async () => {
     main.innerHTML = ''
     main.appendChild(await feed());
     async function temp() {
@@ -140,7 +137,7 @@ window.addEventListener('hashchange', async () => {
                         }
 
                     })
-                    
+
 
                 })
             }
@@ -149,7 +146,6 @@ window.addEventListener('hashchange', async () => {
         case '#home':
             main.appendChild(home());
             break;
-
         case '#login':
             main.appendChild(login());
             const acess = document.querySelector('#button-acessar');
@@ -194,7 +190,7 @@ window.addEventListener('hashchange', async () => {
                                     }
                                 })
                             })
-                            
+
 
                         })
                         myrequest.addEventListener('click', () => {
@@ -254,6 +250,8 @@ window.addEventListener('hashchange', async () => {
     }
 });
 
-export { myUser }
+export { myUser };
 
-
+/*window.addEventListener('load', () => {
+    main.appendChild(home())
+} */
