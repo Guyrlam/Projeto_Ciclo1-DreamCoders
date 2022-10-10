@@ -25,8 +25,7 @@ app.use('/swap', swapRoute);
 // server
 app.listen(process.env.NDPORT, () => {
     // eslint-disable-next-line no-console
-    console.log(
-        `Server started at http://${process.env.NDHOST}:${process.env.NDPORT}`
+    console.log('\x1b[4;7;34m', `Server started at http://${process.env.NDHOST}:${process.env.NDPORT}`, '\x1b[0m'
     );
 });
 
