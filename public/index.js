@@ -34,7 +34,58 @@ async function refreshHeader() {
     window.addEventListener('load', () => {
         main.appendChild(home())
     } */
+document.querySelector('#toFeed').addEventListener('click',async () => {
+    main.innerHTML = ''
+    main.appendChild(await feed());
+    async function temp() {
+        const rawResponse = await fetch(`//localhost:8080/book`);
+        const content = rawResponse.json();
+        return content;
+    }
+    const bookData = await temp()
+    const books = document.querySelectorAll('.img-book-feed')
+    for (let i in books) {
+        books[i].addEventListener('click', async () => {
 
+            main.innerHTML = ''
+            main.appendChild(details(bookData.data[i]));
+            const solicitar = document.querySelector('#button-solicitar')
+            solicitar.addEventListener('click', () => {
+                if (idUser == '') {
+                    alert('Cadastre-se primeiro')
+                }
+                else {
+                    main.innerHTML = ''
+                    main.appendChild(resquestBook(bookData.data[i]))
+                    const trocar = document.querySelector('#button-trocar')
+                    trocar.addEventListener('click', () => {
+                        console.log('troca')
+
+
+                    })
+
+                    const mybooks = myUser.books
+                    var select = document.getElementById('mybooks-troca');
+                    console.log(select)
+
+
+                    console.log(mybooks[0])
+                    select.addEventListener('change', () => {
+                        var bookSelected = select.value;
+                        for (let i in mybooks) {
+                            if (mybooks[i].name == bookSelected) {
+                                document.querySelector('#img-troca').src = mybooks[i].image[0]
+                            }
+                        }
+                    })
+                }
+
+            })
+
+
+        })
+    }
+})
 if (main.childElementCount === 0) { main.appendChild(home()) };
 
 window.addEventListener('hashchange', async () => {
@@ -43,10 +94,6 @@ window.addEventListener('hashchange', async () => {
     switch (window.location.hash) {
         case '#books':
             main.appendChild(await feed());
-            document.querySelector('#toFeed').addEventListener('click',async () => {
-                main.innerHTML = ''
-                main.appendChild(await feed())
-            })
             async function temp() {
                 const rawResponse = await fetch(`//localhost:8080/book`);
                 const content = rawResponse.json();
@@ -55,9 +102,10 @@ window.addEventListener('hashchange', async () => {
             const bookData = await temp()
             const books = document.querySelectorAll('.img-book-feed')
 
+
             for (let i in books) {
                 books[i].addEventListener('click', async () => {
-                    
+
                     main.innerHTML = ''
                     main.appendChild(details(bookData.data[i]));
                     const solicitar = document.querySelector('#button-solicitar')
@@ -131,7 +179,7 @@ window.addEventListener('hashchange', async () => {
                             myUser = await collectUser(idUser)
                             myUser = myUser.data
                             main.innerHTML = ''
-                            main.appendChild(profile(myUser))
+                            main.appendChild(await profile(myUser))
                             const editProfile = document.querySelector('#profile-button-edit')
                             editProfile.addEventListener('click', () => {
                                 main.innerHTML = ''
@@ -146,7 +194,7 @@ window.addEventListener('hashchange', async () => {
                                     }
                                 })
                             })
-                            window.location.hash = "#profile"
+                            
 
                         })
                         myrequest.addEventListener('click', () => {
@@ -200,11 +248,8 @@ window.addEventListener('hashchange', async () => {
         case '#acess':
             window.location.hash = '#books';
             break;
-        case '#details':
-
-            break;
-        default:
-            main.appendChild(home());
+        case '#profile':
+            renderProfile()
             break;
     }
 });
