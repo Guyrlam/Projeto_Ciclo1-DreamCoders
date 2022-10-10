@@ -4,8 +4,8 @@ const check = {
     telephone,
     password
     FROM user_profile
-    WHERE deleted_at isnull
-    AND approved = true`,
+    WHERE approved = true
+    AND deleted_at isnull`,
 };
 
 const newUser = {
@@ -27,7 +27,9 @@ const token = {
     on user_profile.class_id = user_classes.id
     inner join images
     on user_profile.image_id =  images.id
-    where user_profile.email = $1`,
+    where user_profile.email = $1
+    AND user_profile.approved = true
+    AND user_profile.deleted_at isnull`,
     values: [],
 };
 

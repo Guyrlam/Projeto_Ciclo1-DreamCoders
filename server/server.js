@@ -3,6 +3,7 @@ const cookieParser = require('cookie-parser');
 const { userRoute } = require('./routes/user-router');
 const { bookRoute } = require('./routes/book-router');
 const { adminRoute } = require('./routes/admin-router');
+const { swapRoute } = require('./routes/swap-router');
 const { verifyAdmToken } = require('./middlewares/login');
 require('dotenv').config();
 
@@ -19,6 +20,7 @@ app.use('/uploads', verifyAdmToken, express.static(`./server/images/uploads/`));
 app.use('/user', userRoute);
 app.use('/book', bookRoute);
 app.use('/admin', adminRoute);
+app.use('/swap', swapRoute);
 
 // server
 app.listen(process.env.NDPORT, () => {

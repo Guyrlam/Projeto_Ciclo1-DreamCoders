@@ -54,8 +54,8 @@ CREATE TABLE public.Book (
 
 CREATE TABLE public.Exchanges (
 	id uuid NOT NULL PRIMARY KEY default gen_random_uuid(),
-	new_owner_id uuid NOT NULL,
-    FOREIGN KEY (new_owner_id) REFERENCES User_profile(id),
+	change_for uuid NOT NULL,
+    FOREIGN KEY (change_for) REFERENCES Book(id),
 	book_id uuid NOT NULL,
     FOREIGN KEY (book_id) REFERENCES Book(id),
 	requested_at timestamptz,
