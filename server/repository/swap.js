@@ -17,6 +17,19 @@ const select = {
     values: [],
 };
 
+const list = {
+    text: `SELECT 
+    id,
+    book_id,
+    change_for,
+    requested_at,
+    accepted_at,
+    rejected_at,
+    concluded_at
+    FROM exchanges
+    WHERE deleted_at isnull`,
+};
+
 const approve = {
     text: 'UPDATE exchanges SET accepted_at = now() WHERE id = $1',
     values: [],
@@ -48,6 +61,11 @@ async function exchangeDetails(exchangeID, client) {
     return response.rows[0];
 }
 
+async function exchangeList(client) {
+    const response = await client.query(list);
+    return response.rows;
+}
+
 async function approveSwap(exchangeID, client) {
     approve.values = [exchangeID];
     await client.query(approve);
@@ -75,4 +93,5 @@ module.exports = {
     rejectSwap,
     concludeSwap,
     deleteSwap,
+    exchangeList,
 };
