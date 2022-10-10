@@ -6,9 +6,15 @@ const {
     approveUser,
     rejectUser,
     pullRejected,
+    approveBook,
+    rejectBook,
 } = require('../repository/admin');
 const { pool, begin, commit, rollback } = require('../repository/repository');
-const { bookImagesList, deleteImagesByName } = require('../repository/images');
+const {
+    bookImagesList,
+    deleteImagesByName,
+    deleteImagesByBookID,
+} = require('../repository/images');
 
 async function listPendingUsers(token) {
     const response = {
@@ -140,6 +146,7 @@ async function userReview(rate, userID, token) {
             // faz um soft delete na imagem do usuário
             await deleteImagesByName(user.image, client);
         } else {
+            rollback(client);
             response.Error = 'Operação não identificada';
             response.status = 400;
             return response;
@@ -156,4 +163,57 @@ async function userReview(rate, userID, token) {
     return response;
 }
 
-module.exports = { listPendingUsers, listPendingBooks, userReview };
+async function bookReview(rate, bookID, token) {
+    const response = {
+        Error: null,
+    };
+
+    let client;
+
+    try {
+        // verifica se o usuário é um administrador
+        if (token.class !== 'administrador') {
+            rollback(client);
+            response.Error = 'Operação não autorizada';
+            response.status = 401;
+            return response;
+        }
+
+        if (token !== null) {
+            response.token = jwt.sign(token, process.env.JWT_KEY, {
+                expiresIn: 3600,
+            });
+        }
+
+        client = await pool.connect();
+
+        begin(client);
+
+        if (rate === 'approved') {
+            // aprova o registro do livro
+            await approveBook(bookID, client);
+        } else if (rate === 'rejected') {
+            // rejeita o registro do usuário
+            await rejectBook(bookID, client);
+
+            // deleta imagens
+            await deleteImagesByBookID(bookID, client);
+        } else {
+            rollback(client);
+            response.Error = 'Operação não identificada';
+            response.status = 400;
+            return response;
+        }
+
+        commit(client);
+    } catch (error) {
+        response.Error = error.message;
+        response.status = 500;
+        rollback(client);
+    }
+
+    client.release();
+    return response;
+}
+
+module.exports = { listPendingUsers, listPendingBooks, userReview, bookReview };

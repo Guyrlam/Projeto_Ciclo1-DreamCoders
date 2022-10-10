@@ -46,7 +46,7 @@ const users = {
     INNER JOIN user_classes
     ON user_classes.id = user_profile.class_id
     WHERE user_profile.deleted_at isnull
-    AND approved = true`,
+    AND user_profile.approved = true`,
 };
 
 const selected = {
@@ -65,7 +65,7 @@ const selected = {
     ON user_classes.id = user_profile.class_id
     WHERE user_profile.deleted_at isnull
     AND user_profile.id = $1
-    AND approved = true`,
+    AND user_profile.approved = true`,
     values: [],
 };
 

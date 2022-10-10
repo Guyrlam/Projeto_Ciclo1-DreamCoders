@@ -3,6 +3,7 @@ const {
     userPending,
     bookPending,
     rateUser,
+    rateBook,
 } = require('../controllers/admin-controllers');
 const { verifyToken } = require('../middlewares/login');
 
@@ -16,5 +17,8 @@ adminRoute.get('/books', verifyToken, bookPending);
 
 // avalia o registro de um usuário
 adminRoute.put('/users/:rate/:id', verifyToken, rateUser);
+
+// avalia o registro de um livro
+adminRoute.put('/books/:rate/:id', verifyToken, rateBook);
 
 module.exports = { adminRoute };

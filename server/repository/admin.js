@@ -52,8 +52,18 @@ const userUpdate = {
     values: [],
 };
 
+const bookUpdate = {
+    text: 'UPDATE book SET approved = true, updated_at = now() WHERE id = $1',
+    values: [],
+};
+
 const deleteUser = {
     text: 'UPDATE user_profile SET approved = false, deleted_at = now() WHERE id = $1',
+    values: [],
+};
+
+const deleteBook = {
+    text: 'UPDATE book SET approved = false, deleted_at = now() WHERE id = $1',
     values: [],
 };
 
@@ -83,10 +93,22 @@ async function pullRejected(userID, client) {
     return response.rows[0];
 }
 
+async function approveBook(BookID, client) {
+    bookUpdate.values = [BookID];
+    await client.query(bookUpdate);
+}
+
+async function rejectBook(BookID, client) {
+    deleteBook.values = [BookID];
+    await client.query(deleteBook);
+}
+
 module.exports = {
     usersAdminList,
     booksAdminList,
     approveUser,
     rejectUser,
     pullRejected,
+    approveBook,
+    rejectBook,
 };
