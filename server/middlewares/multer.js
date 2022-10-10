@@ -1,9 +1,11 @@
 const multer = require('multer');
 
 // multer configurations
+const uploadFolder = './server/images/uploads/'
+
 const diskStorage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, `./server/images/uploads/`);
+        cb(null, uploadFolder);
     },
     filename: (req, file, cb) => {
         cb(null, new Date().toISOString().replace(/:/g, '-') + '_' + file.originalname);
