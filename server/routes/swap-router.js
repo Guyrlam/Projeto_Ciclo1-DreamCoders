@@ -4,6 +4,7 @@ const {
     respSwap,
     finishSwap,
     deleteSwap,
+    listSwap,
 } = require('../controllers/swap-controllers');
 const { verifyToken } = require('../middlewares/login');
 
@@ -20,5 +21,8 @@ swapRoute.put('/conclude/:id', verifyToken, finishSwap);
 
 // deleta uma requisição
 swapRoute.delete('/:id', verifyToken, deleteSwap);
+
+// lista as requisições do usuário
+swapRoute.get('/', verifyToken, listSwap);
 
 module.exports = { swapRoute };

@@ -3,6 +3,7 @@ const {
     respRequest,
     concludeRequest,
     deleteRequest,
+    listRequest,
 } = require('../services/swap-services');
 
 async function requestSwap(req, res) {
@@ -89,4 +90,24 @@ async function deleteSwap(req, res) {
     }
 }
 
-module.exports = { requestSwap, respSwap, finishSwap, deleteSwap };
+async function listSwap(req, res) {
+    const services = await listRequest(req.user_info);
+    if (services.Error !== null) {
+        const error = {
+            ERROR: services.Error,
+        };
+        res.status(services.status)
+            .cookie('token', services.token, { maxAge: 900000, httpOnly: true })
+            .json(error);
+    } else {
+        const message = {
+            data: services.data,
+        };
+
+        res.status(200)
+            .cookie('token', services.token, { maxAge: 900000, httpOnly: true })
+            .json(message);
+    }
+}
+
+module.exports = { requestSwap, respSwap, finishSwap, deleteSwap, listSwap };

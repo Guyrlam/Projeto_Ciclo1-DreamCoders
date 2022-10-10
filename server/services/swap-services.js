@@ -8,9 +8,10 @@ const {
     rejectSwap,
     concludeSwap,
     deleteSwap,
+    exchangeList,
 } = require('../repository/swap');
 const { collectorVerification } = require('../validators/book-validators');
-const { changeCollector } = require('../repository/books');
+const { changeCollector, userBookList } = require('../repository/books');
 
 async function createRequest(data, token) {
     const response = {
@@ -202,4 +203,77 @@ async function deleteRequest(exchangeID, token) {
     return response;
 }
 
-module.exports = { createRequest, respRequest, concludeRequest, deleteRequest };
+async function listRequest(token) {
+    const response = {
+        Error: null,
+    };
+
+    let client;
+
+    try {
+        client = await pool.connect();
+
+        response.token = jwt.sign(token, process.env.JWT_KEY, {
+            expiresIn: 3600,
+        });
+
+        begin(client);
+
+        // lista os livros do usuário
+        const books = await userBookList(token.user_id, client);
+
+        // lista de requisições
+        const requests = [];
+
+        for (let i = 0; i < books.length; i += 1) {
+            const book = books[i];
+            const requestList = await exchangeList(client);
+            for (let x = 0; x < requestList.length; x += 1) {
+                const request = requestList[x];
+                if (
+                    book.name === request.book_id ||
+                    (book.name === request.change_for &&
+                        (request.accepted_at !== null ||
+                            request.rejected_at !== null))
+                ) {
+                    if (
+                        request.accepted_at === null &&
+                        request.rejected_at === null
+                    ) {
+                        request.status = 'aguardando sua resposta';
+                    } else if (request.rejected_at !== null) {
+                        request.status = 'proposta rejeitada';
+                    } else if (
+                        request.accepted_at !== null &&
+                        request.concluded_at === null
+                    ) {
+                        request.status = 'aguardando confirmação de troca';
+                    } else {
+                        request.status = 'troca concluída!';
+                    }
+
+                    requests.push(request);
+                }
+            }
+        }
+
+        response.data = requests;
+
+        commit(client);
+    } catch (error) {
+        response.Error = error.message;
+        response.status = 500;
+        rollback(client);
+    }
+
+    client.release();
+    return response;
+}
+
+module.exports = {
+    createRequest,
+    respRequest,
+    concludeRequest,
+    deleteRequest,
+    listRequest,
+};
