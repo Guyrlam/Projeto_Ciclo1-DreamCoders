@@ -37,4 +37,16 @@ function optionalToken(req, res, next) {
     next();
 }
 
-module.exports = { verifyToken, optionalToken };
+function verifyAdmToken(req, res, next) {
+    try {
+        const decode = jwt.verify(req.cookies.token, process.env.JWT_KEY);
+        if (decode.class !== 'administrador') {
+            throw new Error('Visualização não autorizada!');
+        }
+        next();
+    } catch (error) {
+        res.status(401).send({ mensagem: error.message });
+    }
+}
+
+module.exports = { verifyToken, optionalToken, verifyAdmToken };
