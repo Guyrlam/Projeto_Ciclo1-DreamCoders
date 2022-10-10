@@ -17,20 +17,16 @@ export default () => {
         <form>            
             <div id="login-inputs">
                 
-                    <label for="email-login">Endereço de Email</label>
-                    <input type="email" name="email-login" id="email-login" class="filling-login">
-                
-                
-                    <label for="email-login">Senha</label>
-                    <input type="password" name="email-login" id="password-login" class="filling-login">
-                
+                    <label for="email-login">Endereço de E-mail</label>
+                    <input type="email" name="email-login" id="email-login" class="filling-login" required>
+                    <label for="password-login">Senha</label>
+                    <input type="password" name="password-login" id="password-login" class="filling-login" required>
                     <div id="acessar">
                     <a id="a-acessar">
                         <button id="button-acessar" type="button">Acessar</button>
                     </a>
                     
                 </div>
-                
             </div>
         </form>
     </div>

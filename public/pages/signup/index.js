@@ -37,7 +37,7 @@ export default () => {
     
 </div>
 </div>
-    </section>
+</section>
 
     `;
     container.innerHTML = template;

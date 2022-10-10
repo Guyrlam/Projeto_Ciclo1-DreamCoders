@@ -1,0 +1,19 @@
+@media screen and (max-width: 500px) {
+    #button-main {
+        position: absolute;
+        right: -80%;
+        bottom: 25%;
+        float: right;
+    }
+
+    #main-text {
+        position: relative;
+        left: 8%;
+        overflow: visible;
+        min-width: 100vw;
+    }
+
+    #main-img {
+        display: none;
+    }
+}
