@@ -15,7 +15,7 @@ export default (data) => {
             <div id="book-details">
 
                 <div id="title-details-book">
-                    <span class="white-text" >Título do livro</span>
+                    <span class="white-text" >${data.name}</span>
                 </div>
                 <div>
                     <p class="paragrafo-book-details">Colecionador: ${data.collector}</p>
