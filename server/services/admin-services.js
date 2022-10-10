@@ -1,9 +1,47 @@
 /* eslint-disable no-await-in-loop */
 const jwt = require('jsonwebtoken');
+const { usersAdminList, booksAdminList } = require('../repository/admin');
 const { pool, begin, commit, rollback } = require('../repository/repository');
-const { usersAdminList } = require('../repository/admin');
+const { bookImagesList } = require('../repository/images');
 
 async function listPendingUsers(token) {
+    const response = {
+        Error: null,
+    };
+
+    try {
+        // verifica se o usuário é um administrador
+        if (token.class !== 'administrador') {
+            response.Error = 'Operação não autorizada';
+            response.status = 401;
+            return response;
+        }
+
+        if (token !== null) {
+            response.token = jwt.sign(token, process.env.JWT_KEY, {
+                expiresIn: 3600,
+            });
+        }
+
+        // lista os dados dos usuários com aprovação pendente
+        const users = await usersAdminList();
+
+        // altera a URL das imagens
+        for (let i = 0; i < users.length; i += 1) {
+            const el = users[i];
+            el.image = `//${process.env.NDHOST}:${process.env.NDPORT}/uploads/${el.image}`;
+        }
+
+        response.data = users;
+    } catch (error) {
+        response.Error = error.message;
+        response.status = 500;
+    }
+
+    return response;
+}
+
+async function listPendingBooks(token) {
     const response = {
         Error: null,
     };
@@ -18,26 +56,33 @@ async function listPendingUsers(token) {
             return response;
         }
 
-        client = await pool.connect();
-
         if (token !== null) {
             response.token = jwt.sign(token, process.env.JWT_KEY, {
                 expiresIn: 3600,
             });
         }
 
+        client = await pool.connect();
+
         begin(client);
 
         // lista os dados dos usuários com aprovação pendente
-        const users = await usersAdminList(client);
+        const books = await booksAdminList(client);
 
-        // altera a URL das imagens
-        for (let i = 0; i < users.length; i += 1) {
-            const el = users[i];
-            el.image = `//${process.env.NDHOST}:${process.env.NDPORT}/uploads/${el.image}`;
+        // adiciona a lista de URL's de imagens aos livros
+        for (let i = 0; i < books.length; i += 1) {
+            const el = books[i];
+            el.images = [];
+            const imageList = await bookImagesList(el.id, client);
+            for (let x = 0; x < imageList.length; x += 1) {
+                const image = imageList[x].filename;
+                el.images.push(
+                    `//${process.env.NDHOST}:${process.env.NDPORT}/uploads/${image}`
+                );
+            }
         }
 
-        response.data = users;
+        response.data = books;
 
         commit(client);
     } catch (error) {
@@ -50,4 +95,4 @@ async function listPendingUsers(token) {
     return response;
 }
 
-module.exports = { listPendingUsers };
+module.exports = { listPendingUsers, listPendingBooks };

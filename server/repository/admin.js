@@ -1,3 +1,5 @@
+const { pool } = require('./repository');
+
 const users = {
     text: `SELECT
     user_profile.id,
@@ -13,12 +15,36 @@ const users = {
     INNER JOIN user_classes
     ON user_classes.id = user_profile.class_id
     WHERE user_profile.deleted_at isnull
-    AND approved isnull`,
+    AND user_profile.approved isnull`,
 };
 
-async function usersAdminList(client) {
-    const response = await client.query(users);
+const books = {
+    text: `SELECT
+    book.id,
+    book.name,
+    book.details,
+    book.user_id collector_id,
+    user_profile.name collector,
+    book.publisher,
+    book.writer,
+    book.condition,
+    book.category,
+    book.synopsis
+    FROM book
+    INNER JOIN user_profile
+    ON user_profile.id = book.user_id
+    WHERE book.deleted_at isnull
+    AND book.approved isnull`,
+};
+
+async function usersAdminList() {
+    const response = await pool.query(users);
     return response.rows;
 }
 
-module.exports = { usersAdminList };
+async function booksAdminList(client) {
+    const response = await client.query(books);
+    return response.rows;
+}
+
+module.exports = { usersAdminList, booksAdminList };
