@@ -3,7 +3,7 @@ export default async function postUser() {
     console.log('post user')
     const formData = new FormData();
     const name = document.querySelector('#book-title');
-    const details = document.querySelector('#book-details');
+    const details = document.querySelector('#book-detail');
     const publisher = document.querySelector('#publisher');
     const writer = document.querySelector('#writer');
     let condition = () => {

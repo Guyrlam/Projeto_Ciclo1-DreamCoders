@@ -10,7 +10,8 @@ import login from './pages/login/index.js';
 import saveedit from './pages/profile/editProfile/editProfile.js';
 import editprofile from './pages/profile/editProfile/index.js';
 import profile from './pages/profile/index.js';
-import request from './pages/requests/index.js';
+import requestClient from './pages/requests/cliente/index.js';
+import requestAdm from './pages/requests/adm/index.js';
 import signup from './pages/signup/index.js';
 import postUser from './pages/signup/postUser.js';
 import collectUser from './user/user.js';
@@ -25,6 +26,7 @@ async function refreshData() {
     myUser = await collectUser(idUser)
     myUser = myUser.data
     mybooks = myUser.books
+    return myUser
 }
 async function refreshHeader() {
     hLogin.innerHTML = ""
@@ -209,7 +211,13 @@ window.addEventListener('hashchange', async () => {
             })
             break;
         case '#request':
-            main.appendChild(request());
+            if(myUser.class=='cliente'){
+                main.appendChild(requestClient());
+            }
+            if(myUser.class=='administrador'){
+                main.appendChild(requestAdm())
+            }
+            
             break;
         case '#signup':
             main.appendChild(signup());
@@ -227,7 +235,7 @@ window.addEventListener('hashchange', async () => {
             break;
         case "#addBook":
             main.appendChild(addBook())
-            const save = document.querySelector('#button-save-book');
+            const save = document.querySelector('#save-new-book-button');
             save.addEventListener('click', async () => {
                 const resp = await postBook();
                 if (resp.message == "Livro adicionado com sucesso") {
