@@ -27,6 +27,16 @@ const reject = {
     values: [],
 };
 
+const concluded = {
+    text: 'UPDATE exchanges SET concluded_at = now() WHERE id = $1',
+    values: [],
+};
+
+const deleted = {
+    text: 'UPDATE exchanges SET deleted_at = now() WHERE id = $1',
+    values: [],
+};
+
 async function newRequest(array, client) {
     insert.values = array;
     await client.query(insert);
@@ -48,4 +58,21 @@ async function rejectSwap(exchangeID, client) {
     await client.query(reject);
 }
 
-module.exports = { newRequest, exchangeDetails, approveSwap, rejectSwap };
+async function deleteSwap(exchangeID, client) {
+    deleted.values = [exchangeID];
+    await client.query(deleted);
+}
+
+async function concludeSwap(exchangeID, client) {
+    concluded.values = [exchangeID];
+    await client.query(concluded);
+}
+
+module.exports = {
+    newRequest,
+    exchangeDetails,
+    approveSwap,
+    rejectSwap,
+    concludeSwap,
+    deleteSwap,
+};

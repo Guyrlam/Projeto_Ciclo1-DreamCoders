@@ -83,6 +83,11 @@ const update = {
     values: [],
 };
 
+const collector = {
+    text: 'UPDATE book SET user_id = $1, updated_at = now() WHERE id = $2',
+    values: [],
+};
+
 const deleted = {
     text: 'UPDATE book SET deleted_at = now() WHERE id = $1',
     values: [],
@@ -126,6 +131,22 @@ async function updateBook(array, client) {
     await client.query(update);
 }
 
+async function changeCollector(bookID, changeID, client) {
+    // Colecionador1
+    selectedBook.values = [bookID];
+    const book = await client.query(selectedBook);
+    const bookCollectorID = book.rows[0].collector_id;
+    // Colecionador 2
+    selectedBook.values = [changeID];
+    const change = await client.query(selectedBook);
+    const changeCollectorID = change.rows[0].collector_id;
+    // Alterações
+    collector.values = [bookCollectorID, changeID];
+    await client.query(collector);
+    collector.values = [changeCollectorID, bookID];
+    await client.query(collector);
+}
+
 async function removeByID(bookID, client) {
     deleted.values = [bookID];
     await client.query(deleted);
@@ -140,4 +161,5 @@ module.exports = {
     getBookByID,
     updateBook,
     removeByID,
+    changeCollector,
 };
