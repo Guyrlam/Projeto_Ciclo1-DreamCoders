@@ -6,7 +6,7 @@ export default (data) => {
     <section id="profile">
     <div id="profile-details">
         <div>
-            <img src="${data.image}" alt=""
+            <img src="${data.image ?? '../../assets/no-pic-avatar.png'}" alt="imagem do perfil"
                 id="profile-photo" name="editimagem">
             <div id="change-photo">
                 <label for="new-photo" id="label">Adicione aqui uma foto para o perfil</label>
