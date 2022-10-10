@@ -31,6 +31,8 @@
 #title-requests{
     font-size: 40px;
     text-align: start;
+    display: flex;
+    align-items: center;
     
 }
 .name-type{
@@ -67,4 +69,12 @@
     font-size: 15px;
     color: var(--white);
     border: none;
+}
+.button-switch-requests{
+    width: 150px;
+    height: 40px;
+    border-radius: 25px;
+    border: none;
+    margin-left: 30px;
+    margin-bottom: 15px;
 }

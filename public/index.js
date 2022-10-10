@@ -15,7 +15,10 @@ import requestAdm from './pages/requests/adm/index.js';
 import signup from './pages/signup/index.js';
 import postUser from './pages/signup/postUser.js';
 import collectUser from './user/user.js';
-
+import acceptuser from './pages/requests/acccpet-reject/acceptUser.js';
+import rejectuser from './pages/requests/acccpet-reject/rejectUser.js';
+import requestsBookAdm from './pages/requests/requestsBookAdm.js';
+import acceptbook from './pages/requests/acccpet-reject/acceptBook.js';
 
 const main = document.querySelector('#root');
 let myUser = {}
@@ -215,7 +218,22 @@ window.addEventListener('hashchange', async () => {
                 main.appendChild(requestClient());
             }
             if(myUser.class=='administrador'){
-                main.appendChild(requestAdm())
+                main.appendChild(await requestAdm())
+                const acceptUser = document.querySelectorAll('.acceptUser-button')
+                const rejectUser = document.querySelectorAll('.rejectUser-button')
+                for(let i in acceptUser){
+                        acceptUser[i].addEventListener('click', async () => {
+                            const idUser = acceptUser[i].id.split(':')[1]
+                            const resp = await acceptuser(idUser)
+                            await console.log(resp)
+                        })
+                        rejectUser[i].addEventListener('click', async () => {
+                            const idUser =  rejectUser[i].id.split(':')[1]
+                            const resp = await rejectuser(idUser)
+                            await console.log(resp)
+                        })
+                }
+                
             }
             
             break;
@@ -249,11 +267,29 @@ window.addEventListener('hashchange', async () => {
 
             });
             break;
+        
         case '#acess':
             window.location.hash = '#books';
             break;
         case '#profile':
             renderProfile()
+            break;
+        case '#book-requests':
+            main.appendChild(await requestsBookAdm())
+            const acceptBook = document.querySelectorAll('.acceptBook-button')
+            const rejectBook = document.querySelectorAll('.rejectBook-button')
+                for(let i in acceptBook){
+                        acceptBook[i].addEventListener('click', async () => {
+                            const idBook = acceptBook[i].id.split(':')[1]
+                            const resp = await acceptbook(idBook)
+                            await console.log(resp)
+                        })
+                        rejectBook[i].addEventListener('click', async () => {
+                            const idBook =  rejectBook[i].id.split(':')[1]
+                            const resp = await rejectbook(idBook)
+                            await console.log(resp)
+                        })
+                }
             break;
     }
 });
