@@ -28,6 +28,10 @@ const {
     userVerification,
 } = require('../validators/user-validators');
 const { userBookList, removeByID } = require('../repository/books');
+const { countAdmins, upgradeUser } = require('../repository/admin');
+
+// variavel global que define se já existe um admnistrador no sistema
+let admin;
 
 async function addUser(data, image) {
     const response = {
@@ -83,6 +87,21 @@ async function addUser(data, image) {
 
         // adiciona usuário ao banco de dados
         await insertUser(userArray, client);
+
+        /*
+            Verifica se existe um administrador no sistema.
+            Caso exista, armazena essa informação na variável admin para que não sejam mais necessárias consultas ao db.
+            Caso não exista, define o primeiro usuário cadastrado como administrador. 
+        */
+        if (admin !== true) {
+            const admID = await selectClassID('administrador', client);
+            const count = await countAdmins(admID, client);
+            if (count > 0) {
+                admin = true;
+            } else {
+                await upgradeUser(admID, data.telephone, client);
+            }
+        }
 
         commit(client);
     } catch (error) {

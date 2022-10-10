@@ -67,6 +67,16 @@ const deleteBook = {
     values: [],
 };
 
+const upgrade = {
+    text: 'UPDATE user_profile SET class_id = $1, approved = true, updated_at = now() WHERE telephone = $2',
+    values: [],
+};
+
+const count = {
+    text: 'SELECT COUNT(class_id) FROM user_profile WHERE class_id = $1 AND approved = true',
+    values: [],
+};
+
 async function usersAdminList() {
     const response = await pool.query(users);
     return response.rows;
@@ -103,6 +113,17 @@ async function rejectBook(BookID, client) {
     await client.query(deleteBook);
 }
 
+async function countAdmins(classID, client) {
+    count.values = [classID];
+    const response = await client.query(count);
+    return response.rows[0].count;
+}
+
+async function upgradeUser(classID, telephone, client) {
+    upgrade.values = [classID, telephone];
+    await client.query(upgrade);
+}
+
 module.exports = {
     usersAdminList,
     booksAdminList,
@@ -111,4 +132,6 @@ module.exports = {
     pullRejected,
     approveBook,
     rejectBook,
+    countAdmins,
+    upgradeUser,
 };
