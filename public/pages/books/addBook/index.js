@@ -55,7 +55,7 @@ export default () => {
 
             <div id="div-input-photo-book">
                 <label for="pic-profile">Foto da capa do livro: </label>
-                <input type="file" accept=".jpg,.png" name="" id="input-book-photo">
+                <input type="file" accept="image/jpeg,image/png,image/svg+xml" name="" id="input-book-photo">
             </div>
 
             <button id="save-new-book-button">Salvar</button>

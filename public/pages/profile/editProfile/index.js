@@ -10,7 +10,7 @@ export default (data) => {
                 id="profile-photo" name="editimagem">
             <div id="change-photo">
                 <label for="new-photo" id="label">Adicione aqui uma foto para o perfil</label>
-                <input type="file" accept=".jpg,.png" name="new-photo" id="new-photo">
+                <input type="file" accept="image/jpeg,image/png,image/svg+xml" name="new-photo" id="new-photo">
             </div>
         </div>
         <div id="profile-description">
