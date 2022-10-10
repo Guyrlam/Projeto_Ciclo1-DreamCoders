@@ -6,12 +6,12 @@ const diskStorage = multer.diskStorage({
         cb(null, `./server/images/uploads/`);
     },
     filename: (req, file, cb) => {
-        cb(null, new Date().toISOString().replace(/:/g, '-') + file.originalname);
+        cb(null, new Date().toISOString().replace(/:/g, '-') + '_' + file.originalname);
     },
 });
 
 const imageFilter = (req, file, cb) => {
-    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+    if (file.mimetype === ('image/jpeg' || 'image/png' || 'image/svg+xml')) {
         cb(null, true);
     } else {
         cb(null, false);
