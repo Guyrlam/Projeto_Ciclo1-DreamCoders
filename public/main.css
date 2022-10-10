@@ -8,7 +8,9 @@
 @import './css/signup.css';
 @import './css/addBook.css';
 @import './css/requests.css';
+@import './css/editBook.css';
 
+@import './css/specials/media-queries.css';
 @import './css/specials/checkbox-button.css';
 
 /* ----- defining palette colors ----- */
@@ -37,18 +39,19 @@ html {
 }
 
 body {
+    /* background:  linear-gradient(var(--green), var(--dark-blue-green)); */
     background-color: var(--dark-blue-green);
 }
 
 .green-text {
     color: var(--green);
     background-color: var(--dark-pale);
+    box-shadow: 2px 2px 50px 2px;
 }
 
 .white-text {
     color: var(--white);
     font-family: 'Spectral SC', serif;
-    font-size: 36px;
 }
 
 /* reseting anchors and put transitions */
@@ -59,7 +62,7 @@ a:link {
 }
 
 a:hover {
-    font-weight: bold;
+    font-weight: 600;
     letter-spacing: 0.7px;
     transition: 200ms;
 }
@@ -70,6 +73,7 @@ a:visited {
 
 button {
     background-color: var(--orange);
+    box-shadow: 0px 0px 10px var(--orange);
     border-radius: 10px;
     width: 50px;
     word-break: keep-all;
@@ -135,12 +139,13 @@ main {
 
 #header-search-button {
     border: none;
-    display: flex;
+    /* box-shadow: initial; */
     width: 50px;
     height: 40px;
     border-radius: 0px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
+    display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--dark-pale)
@@ -152,10 +157,11 @@ main {
 }
 
 #tunel-do-saber {
-    width: 100%;
-    font-size: 27px;
-    letter-spacing: 0px;
+    font-size: 30px;
+    letter-spacing: 1.5px;
     padding: 1vw;
+    line-height: 2rem;
+    text-align: center;
 }
 
 #header-title {
@@ -163,10 +169,8 @@ main {
 }
 
 
-
-
-
 #header-top {
+    /* width: auto; */
     height: 35px;
     display: flex;
     justify-content: flex-start;
@@ -195,6 +199,8 @@ main {
 
 #icon-user {
     margin-right: 15px;
+    width: 27px;
+    height: 27px;
 }
 
 #header-button-login {
@@ -221,7 +227,7 @@ main {
     height: 120px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    box-shadow: 3px 3px 5px var(--black);
+    box-shadow: 5px 5px 40px 10px var(--black), 10px 10px 20px 15px var(--green);
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
@@ -232,6 +238,10 @@ main {
     width: 80%;
     height: 30%;
     border-radius: 25px;
+    box-shadow: inset 2px 2px 10px;
     background-color: var(--orange);
-    color: var(--black);
+    color: var(--dark-blue-green);
+    font-weight: bold;
+    text-shadow: var(--black);
+    letter-spacing: 1.5px;
 }
