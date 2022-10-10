@@ -1,4 +1,8 @@
-const { listPendingUsers, listPendingBooks } = require('../services/admin-services');
+const {
+    listPendingUsers,
+    listPendingBooks,
+    userReview,
+} = require('../services/admin-services');
 
 async function userPending(req, res) {
     const services = await listPendingUsers(req.user_info);
@@ -40,4 +44,24 @@ async function bookPending(req, res) {
     }
 }
 
-module.exports = { userPending, bookPending };
+async function rateUser(req, res) {
+    const services = await userReview(req.params.rate, req.params.id, req.user_info);
+
+    if (services.Error !== null) {
+        const error = {
+            ERROR: services.Error,
+        };
+        res.status(services.status)
+            .cookie('token', services.token, { maxAge: 900000, httpOnly: true })
+            .json(error);
+    } else {
+        const message = {
+            message: 'Status atualizado com sucesso!',
+        };
+        res.status(200)
+            .cookie('token', services.token, { maxAge: 900000, httpOnly: true })
+            .json(message);
+    }
+}
+
+module.exports = { userPending, bookPending, rateUser };

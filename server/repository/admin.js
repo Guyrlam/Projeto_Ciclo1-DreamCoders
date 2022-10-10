@@ -37,6 +37,26 @@ const books = {
     AND book.approved isnull`,
 };
 
+const rejected = {
+    text: `SELECT
+    images.file_name image
+    FROM user_profile
+    INNER JOIN images
+    ON images.id = user_profile.image_id
+    WHERE user_profile.id = $1`,
+    values: [],
+};
+
+const userUpdate = {
+    text: 'UPDATE user_profile SET approved = true, updated_at = now() WHERE id = $1',
+    values: [],
+};
+
+const deleteUser = {
+    text: 'UPDATE user_profile SET approved = false, deleted_at = now() WHERE id = $1',
+    values: [],
+};
+
 async function usersAdminList() {
     const response = await pool.query(users);
     return response.rows;
@@ -47,4 +67,26 @@ async function booksAdminList(client) {
     return response.rows;
 }
 
-module.exports = { usersAdminList, booksAdminList };
+async function approveUser(userID, client) {
+    userUpdate.values = [userID];
+    await client.query(userUpdate);
+}
+
+async function rejectUser(userID, client) {
+    deleteUser.values = [userID];
+    await client.query(deleteUser);
+}
+
+async function pullRejected(userID, client) {
+    rejected.values = [userID];
+    const response = await client.query(rejected);
+    return response.rows[0];
+}
+
+module.exports = {
+    usersAdminList,
+    booksAdminList,
+    approveUser,
+    rejectUser,
+    pullRejected,
+};
