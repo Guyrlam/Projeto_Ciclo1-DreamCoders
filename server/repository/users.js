@@ -4,7 +4,8 @@ const check = {
     telephone,
     password
     FROM user_profile
-    WHERE deleted_at isnull`,
+    WHERE deleted_at isnull
+    AND approved = true`,
 };
 
 const newUser = {
@@ -44,7 +45,8 @@ const users = {
     ON images.id = user_profile.image_id
     INNER JOIN user_classes
     ON user_classes.id = user_profile.class_id
-    WHERE user_profile.deleted_at isnull`,
+    WHERE user_profile.deleted_at isnull
+    AND approved = true`,
 };
 
 const selected = {
@@ -62,7 +64,8 @@ const selected = {
     INNER JOIN user_classes
     ON user_classes.id = user_profile.class_id
     WHERE user_profile.deleted_at isnull
-    AND user_profile.id = $1`,
+    AND user_profile.id = $1
+    AND approved = true`,
     values: [],
 };
 

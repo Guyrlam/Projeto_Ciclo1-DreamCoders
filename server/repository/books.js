@@ -32,7 +32,8 @@ const books = {
     FROM book
     INNER JOIN user_profile
     ON user_profile.id = book.user_id
-    WHERE book.deleted_at isnull`,
+    WHERE book.deleted_at isnull
+    AND approved = true`,
 };
 
 const selectedBook = {
@@ -51,7 +52,8 @@ const selectedBook = {
     INNER JOIN user_profile
     ON user_profile.id = book.user_id
     WHERE book.id = $1
-	AND book.deleted_at isnull`,
+	AND book.deleted_at isnull
+    AND approved = true`,
     values: [],
 };
 
@@ -71,7 +73,8 @@ const userBooks = {
     INNER JOIN user_profile
     ON user_profile.id = book.user_id
     WHERE book.user_id = $1
-	AND book.deleted_at isnull`,
+	AND book.deleted_at isnull
+    AND approved = true`,
     values: [],
 };
 

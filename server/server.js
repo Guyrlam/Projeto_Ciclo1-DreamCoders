@@ -2,6 +2,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const { userRoute } = require('./routes/user-router');
 const { bookRoute } = require('./routes/book-router');
+const { adminRoute } = require('./routes/admin-router');
 require('dotenv').config();
 
 const app = express();
@@ -12,9 +13,10 @@ app.use(cookieParser());
 
 // routes
 app.use('/', express.static(`./public/`));
-app.use('/uploads', express.static(`./server/uploads/`));
+app.use('/uploads', express.static(`./server/images/uploads/`));
 app.use('/user', userRoute);
 app.use('/book', bookRoute);
+app.use('/admin', adminRoute);
 
 // server
 app.listen(process.env.NDPORT, () => {

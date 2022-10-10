@@ -75,3 +75,7 @@ CREATE TABLE public.Book_images (
 
 --default values
 INSERT INTO User_classes(class) VALUES('cliente'), ('administrador');
+
+--após criar um usuário inicial, utilize esse comando para torná-lo o primeiro administrador
+UPDATE user_profile SET class_id = 'id da classe administrador', approved = true, updated_at = now() WHERE id = 'id do usuário'
+-- feito isso, transfira a imagem do administrador para a pasta approved e faça login pela interface para receber o token de administrador :)
