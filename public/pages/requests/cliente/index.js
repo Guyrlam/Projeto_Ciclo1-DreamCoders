@@ -1,7 +1,40 @@
 
-export default () => {
+export default async () => {
     console.log('requests template');
     const container = document.createElement('div');
+
+    const reqSwap = await fetch(`//localhost:8080/swap`)
+        .then(
+            (res) => {
+                return res.json()
+            }
+        )
+        .then(
+            (res) => {
+                return res.data
+            }
+        )
+    await console.log(reqSwap);
+
+    let reqTemplate = ''
+
+    for(let i in reqSwap){
+        reqTemplate+= `
+        <div class="requests">
+        <span class="name-type">
+            ${reqSwap[i].book_id.collector} : Troca de Livros!
+        </span>
+        <p>
+            Olá, ${reqSwap[i].change_for.collector}! ${reqSwap[i].book_id.collector} deseja trocar o seu livro ${reqSwap[i].change_for.name} por ${reqSwap[i].book_id.name}
+        </p>
+        <div>
+            <button id="requests-accept">Aceitar</button>
+            <button id="requests-reject">Rejeitar</button>
+        </div>
+
+    </div>
+    `
+    }
 
     const template =
         `
@@ -10,19 +43,7 @@ export default () => {
             <div id="page-requests">
             
                 <h1 id="title-requests">Solicitações</h1>
-                <div class="requests">
-                    <span class="name-type">
-                        Jorge Jesus : Troca de Livros!
-                    </span>
-                    <p>
-                        Olá, Mariana! Jorge Jesus deseja trocar o seu livro O Poder do HÁBITO por Sherlock Holmes: Um Estudo em Vermelho
-                    </p>
-                    <div>
-                        <button id="requests-accept">Aceitar</button>
-                        <button id="requests-reject">Rejeitar</button>
-                    </div>
-
-                </div>
+                ${reqTemplate}
             </div>
         </div>        
     </section>
