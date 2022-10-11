@@ -92,9 +92,7 @@ document.querySelector('#toFeed').addEventListener('click', async () => {
         })
     }
 })
-if (main.childElementCount === 0) {
-    main.appendChild(home()); document.main.style.insertRule('#root { background-color: red; }')
-};
+if (main.childElementCount === 0) { main.appendChild(home()) };
 
 window.addEventListener('hashchange', async () => {
     main.innerHTML = ''
