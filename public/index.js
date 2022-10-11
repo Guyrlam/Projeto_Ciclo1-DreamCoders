@@ -22,6 +22,9 @@ import requestClient from './pages/requests/cliente/index.js';
 import signup from './pages/signup/index.js';
 import postUser from './pages/signup/postUser.js';
 import collectUser from './user/user.js';
+import editBook from './pages/books/editBook/index.js';
+import swap from './pages/books/swap/swap.js';
+
 
 
 // Sweet Alert for sugar alerts
@@ -68,27 +71,27 @@ document.querySelector('#toFeed').addEventListener('click', async () => {
                 else {
                     main.innerHTML = ''
                     main.appendChild(resquestBook(bookData.data[i]))
-                    const trocar = document.querySelector('#button-trocar')
-                    trocar.addEventListener('click', () => {
-                        console.log('troca')
-
-
-                    })
-
+                    
                     const mybooks = myUser.books
                     var select = document.getElementById('mybooks-troca');
-                    console.log(select)
 
 
-                    console.log(mybooks[0])
-                    select.addEventListener('change', () => {
+                    let bookToExchange = {}
+                    select.addEventListener('change', async () => {
                         var bookSelected = select.value;
                         for (let i in mybooks) {
                             if (mybooks[i].name == bookSelected) {
                                 document.querySelector('#img-troca').src = mybooks[i].image[0]
+                                bookToExchange = mybooks[i]
                             }
                         }
                     })
+                    const trocar = document.querySelector('#button-trocar')
+                    trocar.addEventListener('click', async () => {
+                        const resp = swap(bookData.data[i], bookToExchange)
+                        await console.log(resp)
+                    })
+
                 }
 
             })
@@ -127,27 +130,27 @@ window.addEventListener('hashchange', async () => {
                         else {
                             main.innerHTML = ''
                             main.appendChild(resquestBook(bookData.data[i]))
-                            const trocar = document.querySelector('#button-trocar')
-                            trocar.addEventListener('click', () => {
-                                console.log('troca')
-
-
-                            })
-
+                            
                             const mybooks = myUser.books
                             var select = document.getElementById('mybooks-troca');
-                            console.log(select)
 
 
-                            console.log(mybooks[0])
-                            select.addEventListener('change', () => {
+                            let bookToExchange = {}
+                            select.addEventListener('change', async () => {
                                 var bookSelected = select.value;
                                 for (let i in mybooks) {
                                     if (mybooks[i].name == bookSelected) {
                                         document.querySelector('#img-troca').src = mybooks[i].image[0]
+                                        bookToExchange = mybooks[i]
                                     }
                                 }
                             })
+                            const trocar = document.querySelector('#button-trocar')
+                            trocar.addEventListener('click', async () => {
+                                const resp = await swap(bookData.data[i], bookToExchange)
+                                await console.log(resp)
+                            })
+
                         }
 
                     })
@@ -224,7 +227,7 @@ window.addEventListener('hashchange', async () => {
             break;
         case '#request':
             if (myUser.class == 'cliente') {
-                main.appendChild(requestClient());
+                main.appendChild(await requestClient());
             }
             if (myUser.class == 'administrador') {
                 main.appendChild(await requestAdm())
