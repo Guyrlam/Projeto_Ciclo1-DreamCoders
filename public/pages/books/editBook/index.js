@@ -1,7 +1,7 @@
-export default () => {
-    console.log('editBook template');
+export default async (data) => {
+    await console.log('editBook template');
     const container = document.createElement('div');
-
+    await console.log('editando',data)
     const template = `
         <section id="editBook">
         <div>
@@ -11,10 +11,10 @@ export default () => {
             <form action="" method="post" style="display: flex; flex-flow: column nowrap; gap: 10px">
 
                 <label for="book-title">Título do Livro:</label>
-                <input type="text" name="book-title" id="book-title">
+                <input type="text" name="book-title" id="book-title" value="${data.name}">
 
                 <label for="book-detail">Detalhes:</label>
-                <input type="text" name="book-details" id="book-detail">
+                <input type="text" name="book-details" id="book-detail" value="${data.details}">
 
                 <label for="publisher">Editora:</label>
                 <select name="Editora" id="publisher">
@@ -40,7 +40,7 @@ export default () => {
                 </select>
 
                 <label for="synopsis">Sinopse:</label>
-                <input type="text" name="book-synopsis" id="synopsis">
+                <input type="text" name="book-synopsis" id="synopsis" value="${data.synopsis}">
 
                 <fieldset title="Estado do livro.">
                     <span>Condições do livro: </span>
@@ -53,8 +53,8 @@ export default () => {
                 </fieldset>
            
                 <span>
-                    <button id="save" type="submit">Salvar</button>
-                    <button id="remove" type="submit">Excluir</button>
+                    <button id="save">Salvar</button>
+                    <button id="remove">Excluir</button>
                 </span>
 
             </form>

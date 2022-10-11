@@ -1,6 +1,19 @@
+import isMyBook from "../books/isMyBook.js";
+import { myUser } from "../../index.js";
 export default (data) => {
     console.log('details template');
-    console.log(data)
+    let editOrRequest = ''
+    const botao = isMyBook(myUser, data)
+    if(botao == true){
+        editOrRequest = `
+        
+        <button id="button-editBook" class="edit-book"><a href="#editBook">Editar Livro</a></button>
+        
+        `
+    }
+    else{
+        editOrRequest = `<button id="button-solicitar">Solicitar</button>`
+    }
     const container = document.createElement('div');
     const template = `
     <section id="details">
@@ -26,10 +39,11 @@ export default (data) => {
                     <p class="paragrafo-book-details">Condições do livro: ${data.condition}</p>
                     <p class="paragrafo-book-details">Sinopse: ${data.synopsis}</p>
                 </div>
-                <button id="button-solicitar">Solicitar</button>
+                ${editOrRequest}
             </div>
         </section>
     `;
+
     container.innerHTML = template;
     return container;
 };
