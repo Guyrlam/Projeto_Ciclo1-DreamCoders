@@ -7,11 +7,17 @@ const {
     approveSwap,
     rejectSwap,
     concludeSwap,
-    deleteSwap,
+    deleteBookIDSwap,
+    deleteChangeFORSwap,
     exchangeList,
 } = require('../repository/swap');
 const { collectorVerification } = require('../validators/book-validators');
-const { changeCollector, userBookList } = require('../repository/books');
+const {
+    changeCollector,
+    userBookList,
+    getBookByID,
+} = require('../repository/books');
+const { getUserByID } = require('../repository/users');
 
 async function createRequest(data, token) {
     const response = {
@@ -77,7 +83,7 @@ async function respRequest(rate, exchangeID, token) {
 
         // verificar se o id do usuário é o mesmo do colecionador
         const verifiedUser = await collectorVerification(
-            data.book_id,
+            data.change_for,
             token,
             client
         );
@@ -129,7 +135,7 @@ async function concludeRequest(exchangeID, token) {
 
         // verificar se o id do usuário é o mesmo do colecionador
         const verifiedUser = await collectorVerification(
-            data.book_id,
+            data.change_for,
             token,
             client
         );
@@ -189,8 +195,20 @@ async function deleteRequest(exchangeID, token) {
             return response;
         }
 
-        // deleta a requisição
-        await deleteSwap(exchangeID, client);
+        const bookID = await getBookByID(data.book_id, client);
+        const changeFOR = await getBookByID(data.change_for, client);
+
+        // deleta a requisição da lista
+        if (token.user_id === bookID.collector_id) {
+            await deleteBookIDSwap(exchangeID, client);
+        } else if (token.user_id === changeFOR.collector_id) {
+            await deleteChangeFORSwap(exchangeID, client);
+        } else {
+            rollback(client);
+            response.Error = 'Operação não autorizada';
+            response.status = 401;
+            return response;
+        }
 
         commit(client);
     } catch (error) {
@@ -231,11 +249,18 @@ async function listRequest(token) {
             for (let x = 0; x < requestList.length; x += 1) {
                 const request = requestList[x];
                 if (
-                    book.name === request.book_id ||
-                    (book.name === request.change_for &&
+                    (book.id === request.change_for &&
+                        request.change_for_collector_deleted_at === null) ||
+                    (book.id === request.book_id &&
+                        request.book_id_collector_deleted_at === null &&
                         (request.accepted_at !== null ||
                             request.rejected_at !== null))
                 ) {
+                    request.book_id = await getBookByID(request.book_id, client);
+                    request.change_for = await getBookByID(
+                        request.change_for,
+                        client
+                    );
                     if (
                         request.accepted_at === null &&
                         request.rejected_at === null
@@ -247,6 +272,20 @@ async function listRequest(token) {
                         request.accepted_at !== null &&
                         request.concluded_at === null
                     ) {
+                        let changeBook;
+                        if (book.id === request.change_for) {
+                            changeBook = request.book_id;
+                        } else {
+                            changeBook = request.change_for;
+                        }
+                        const user = await getUserByID(
+                            changeBook.collector_id,
+                            client
+                        );
+                        request.contact_for_negotiation = [
+                            user.email,
+                            user.telephone,
+                        ];
                         request.status = 'aguardando confirmação de troca';
                     } else {
                         request.status = 'troca concluída!';

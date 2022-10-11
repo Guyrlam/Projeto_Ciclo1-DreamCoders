@@ -10,10 +10,11 @@ const select = {
     requested_at,
     accepted_at,
     rejected_at,
-    concluded_at
+    concluded_at,
+    book_id_collector_deleted_at,
+    change_for_collector_deleted_at
     FROM exchanges
-    WHERE id = $1
-    AND deleted_at isnull`,
+    WHERE id = $1`,
     values: [],
 };
 
@@ -25,9 +26,10 @@ const list = {
     requested_at,
     accepted_at,
     rejected_at,
-    concluded_at
-    FROM exchanges
-    WHERE deleted_at isnull`,
+    concluded_at,
+    book_id_collector_deleted_at,
+    change_for_collector_deleted_at
+    FROM exchanges`,
 };
 
 const approve = {
@@ -45,8 +47,13 @@ const concluded = {
     values: [],
 };
 
-const deleted = {
-    text: 'UPDATE exchanges SET deleted_at = now() WHERE id = $1',
+const deletedBookID = {
+    text: 'UPDATE exchanges SET book_id_collector_deleted_at = now() WHERE id = $1',
+    values: [],
+};
+
+const deletedChangeFOR = {
+    text: 'UPDATE exchanges SET change_for_collector_deleted_at = now() WHERE id = $1',
     values: [],
 };
 
@@ -76,9 +83,14 @@ async function rejectSwap(exchangeID, client) {
     await client.query(reject);
 }
 
-async function deleteSwap(exchangeID, client) {
-    deleted.values = [exchangeID];
-    await client.query(deleted);
+async function deleteBookIDSwap(exchangeID, client) {
+    deletedBookID.values = [exchangeID];
+    await client.query(deletedBookID);
+}
+
+async function deleteChangeFORSwap(exchangeID, client) {
+    deletedChangeFOR.values = [exchangeID];
+    await client.query(deletedChangeFOR);
 }
 
 async function concludeSwap(exchangeID, client) {
@@ -92,6 +104,7 @@ module.exports = {
     approveSwap,
     rejectSwap,
     concludeSwap,
-    deleteSwap,
+    deleteBookIDSwap,
+    deleteChangeFORSwap,
     exchangeList,
 };
