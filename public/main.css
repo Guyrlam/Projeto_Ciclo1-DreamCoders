@@ -38,9 +38,15 @@ html {
     scroll-behavior: smooth;
 }
 
-body {
+body,
+header {
     /* background:  linear-gradient(var(--green), var(--dark-blue-green)); */
     background-color: var(--dark-blue-green);
+}
+
+header {
+    position: sticky;
+    top: 0;
 }
 
 .green-text {
@@ -52,6 +58,8 @@ body {
 .white-text {
     color: var(--white);
     font-family: 'Spectral SC', serif;
+    text-shadow: 5px -5px 40px var(--white);
+    /* transition: 2000ms; */
 }
 
 /* reseting anchors and put transitions */
@@ -100,8 +108,8 @@ main {
     padding: 3%;
     display: flex;
     justify-content: center;
+    /* opacity: 0; */
 }
-
 
 
 #header-middle {
@@ -124,6 +132,13 @@ main {
     border: none;
     padding-left: 3%;
     font-size: 15px;
+}
+
+#header-search-bar::placeholder {
+    opacity: 0.5;
+    transform: translateX(100px, 0);
+    transition: 500ms;
+    font-style: oblique(45);
 }
 
 #header-search-filter {

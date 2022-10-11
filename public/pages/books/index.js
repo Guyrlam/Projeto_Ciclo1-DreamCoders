@@ -1,6 +1,6 @@
 
 //import details from '../details/index.js'
-async function temp() {
+export async function temp() {
     const rawResponse = await fetch(`//localhost:8080/book`);
     const content = rawResponse.json();
     return content;
@@ -11,19 +11,17 @@ function list(data) {
     let ktem = `
     <section id="books">`;
     for (var i = 0; i < data.length; i++) {
-        ktem += `
- 
+        ktem +=
+            `
             <div class="book-feed">
-                    <a class="a-book-feed">
-                        <img src="${data[i].images[0]}" alt="" class="img-book-feed" id="${data[i].id}">
-                    </a>
-                    <p>${data[i].name}</p>
+                <a class="a-book-feed">
+                    <img src="${data[i].images[0]}" alt="" class="img-book-feed" id="${data[i].id}">
+                </a>
+                <p>${data[i].name}</p>
             </div>
-        `;
-
+            `;
     }
-    ktem += `</section>`;
-    return ktem;
+    return ktem += '</section>';
 }
 
 export default async function feed() {
