@@ -14,6 +14,7 @@ import profile from './pages/profile/index.js';
 import requestAdm from './pages/requests/adm/index.js';
 import requestsBookAdm from './pages/requests/adm/requestsBookAdm.js';
 import acceptbook from './pages/requests/approving/acceptBook.js';
+import rejectbook from './pages/requests/approving/rejectbook.js'
 import acceptuser from './pages/requests/approving/acceptUser.js';
 import rejectuser from './pages/requests/approving/rejectUser.js';
 import requestClient from './pages/requests/cliente/index.js';
@@ -21,6 +22,7 @@ import signup from './pages/signup/index.js';
 import postUser from './pages/signup/postUser.js';
 import collectUser from './user/user.js';
 import editBook from './pages/books/editBook/index.js';
+
 
 // Sweet Alert for sugar alerts
 
