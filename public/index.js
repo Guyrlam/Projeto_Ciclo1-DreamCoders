@@ -224,7 +224,7 @@ window.addEventListener('hashchange', async () => {
             break;
         case '#request':
             if (myUser.class == 'cliente') {
-                main.appendChild(requestClient());
+                main.appendChild(await requestClient());
             }
             if (myUser.class == 'administrador') {
                 main.appendChild(await requestAdm())
