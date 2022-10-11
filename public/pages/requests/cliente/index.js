@@ -28,8 +28,8 @@ export default async () => {
             Olá, ${reqSwap[i].change_for.collector}! ${reqSwap[i].book_id.collector} deseja trocar o seu livro ${reqSwap[i].change_for.name} por ${reqSwap[i].book_id.name}
         </p>
         <div>
-            <button id="requests-accept">Aceitar</button>
-            <button id="requests-reject">Rejeitar</button>
+            <button id="requests-accept_${reqSwap[i].id}" class="requestsCliente-accept">Aceitar</button>
+            <button id="requests-reject_${reqSwap[i].id}" class="requestsCliente-reject">Rejeitar</button>
         </div>
 
     </div>
