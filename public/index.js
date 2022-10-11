@@ -19,11 +19,13 @@ import acceptuser from './pages/requests/acccpet-reject/acceptUser.js';
 import rejectuser from './pages/requests/acccpet-reject/rejectUser.js';
 import requestsBookAdm from './pages/requests/requestsBookAdm.js';
 import acceptbook from './pages/requests/acccpet-reject/acceptBook.js';
+import editBook from './pages/books/editBook/index.js';
 
 const main = document.querySelector('#root');
 let myUser = {}
 let idUser = ''
 let myBooks = []
+let book = {}
 
 async function refreshData() {
     myUser = await collectUser(idUser)
@@ -48,7 +50,7 @@ document.querySelector('#toFeed').addEventListener('click', async () => {
     const books = document.querySelectorAll('.img-book-feed')
     for (let i in books) {
         books[i].addEventListener('click', async () => {
-
+            book = books[i]
             main.innerHTML = ''
             main.appendChild(details(bookData.data[i]));
             const solicitar = document.querySelector('#button-solicitar')
@@ -107,7 +109,7 @@ window.addEventListener('hashchange', async () => {
 
             for (let i in books) {
                 books[i].addEventListener('click', async () => {
-
+                    book = bookData.data[i]
                     main.innerHTML = ''
                     main.appendChild(details(bookData.data[i]));
                     const solicitar = document.querySelector('#button-solicitar')
@@ -267,7 +269,10 @@ window.addEventListener('hashchange', async () => {
 
             });
             break;
-        
+        case '#editBook':
+            main.innerHTML = ''
+            main.appendChild(await editBook(book))
+            break;
         case '#acess':
             window.location.hash = '#books';
             break;
@@ -294,7 +299,7 @@ window.addEventListener('hashchange', async () => {
     }
 });
 
-export { myUser };
+export { myUser, idUser };
 
 /*window.addEventListener('load', () => {
     main.appendChild(home())
