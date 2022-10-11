@@ -1,6 +1,7 @@
 // -- Page modules for SPA loadings --
 import addBook from './pages/books/addBook/index.js';
 import postBook from './pages/books/addBook/postBook.js';
+import editBook from './pages/books/editBook/index.js';
 import feed from './pages/books/index.js';
 import resquestBook from './pages/books/resquestBook/resquestBook.js';
 import details from './pages/details/index.js';
@@ -14,14 +15,13 @@ import profile from './pages/profile/index.js';
 import requestAdm from './pages/requests/adm/index.js';
 import requestsBookAdm from './pages/requests/adm/requestsBookAdm.js';
 import acceptbook from './pages/requests/approving/acceptBook.js';
-import rejectbook from './pages/requests/approving/rejectbook.js'
 import acceptuser from './pages/requests/approving/acceptUser.js';
+import rejectbook from './pages/requests/approving/rejectbook.js';
 import rejectuser from './pages/requests/approving/rejectUser.js';
 import requestClient from './pages/requests/cliente/index.js';
 import signup from './pages/signup/index.js';
 import postUser from './pages/signup/postUser.js';
 import collectUser from './user/user.js';
-import editBook from './pages/books/editBook/index.js';
 
 
 // Sweet Alert for sugar alerts
@@ -63,7 +63,7 @@ document.querySelector('#toFeed').addEventListener('click', async () => {
             const solicitar = document.querySelector('#button-solicitar')
             solicitar.addEventListener('click', () => {
                 if (idUser == '') {
-                    sweetAlert('Cadastre-se primeiro')
+                    alert('Cadastre-se primeiro.')
                 }
                 else {
                     main.innerHTML = ''

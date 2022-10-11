@@ -1,4 +1,10 @@
 
+/**
+* Cadastra um novo usuário na base de dados.
+*
+* @returns Retorna sucesso caso os dados do formulário sejam validados.
+* @type object
+*/
 export default async function postUser() {
     const formData = new FormData();
     const name = document.querySelector('#name-signup');
@@ -22,13 +28,13 @@ export default async function postUser() {
         method: 'POST',
         body: formData,
     });
-    if(password.value != repassword.value){
+    if (password.value != repassword.value) {
         const resp = {
             ERROR: 'As duas senhas precisam ser iguais!'
         }
         return resp
     }
-    
-    
+
+
     return resp.json();
 }

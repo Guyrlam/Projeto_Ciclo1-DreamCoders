@@ -1,29 +1,57 @@
-<head>
-    <link rel="stylesheet" href="../../main.css">
-</head>
+<!-- LOGIN -->
 <section>
     <div id="login">
         <div id="login-title">
-            <h1>Faça login em Túnel do Saber</h1>
+            <h1>
+                Faça login em Túnel do Saber
+            </h1>
 
-            <span>Sua primeira vez aqui? Crie uma conta!</span>
+            <span>
+                Sua primeira vez aqui? Crie uma conta!
+            </span>
             <a href="#signup">
-                <button>Cadastre-se</button>
+                <button id="login-cadastre-se">
+                    Cadastre-se
+                </button>
             </a>
         </div>
-        <div>
-            <form>
-                <div id="login-inputs">
-                    <label for="email-login">Endereço de E-mail</label>
-                    <input type="email" name="email-login" id="email-login" class="filling-login" required>
-                    <label for="email-login">Senha</label>
-                    <input type="password" name="password-login" id="password-login" class="filling-login" required>
-                    <div id="acessar">
-                        <button id="button-acessar">Acessar</button>
-                    </div>
-
+        <form>
+            <div id="login-inputs">
+                <label for="email-login">
+                    Endereço de E-mail
+                </label>
+                <input type="email" name="email-login" id="email-login" class="filling-login" required>
+                <label for="password-login">
+                    Senha
+                </label>
+                <input type="password" name="password-login" id="password-login" class="filling-login" required>
+                <div id="acessar">
+                    <a id="a-acessar">
+                        <button id="button-acessar" type="button">
+                            Acessar
+                        </button>
+                    </a>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </section>
+
+<!-- HEADER LOGIN -->
+<span id="hello-user">
+    <img src="./assets/icon-user.png" alt="avatar do perfil" id="icon-user">
+    Olá, Usuário!
+</span>
+
+<div id="dropdown-menu">
+    <button class="button-dropdown-menu" id="myprofile-button">
+        <a href="#profile">
+            Meu Perfil
+        </a>
+    </button>
+    <button class="button-dropdown-menu" id="requests-button">
+        <a href="#request">
+            Solicitações
+        </a>
+    </button>
+</div>
