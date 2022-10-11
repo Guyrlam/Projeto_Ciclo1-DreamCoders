@@ -68,27 +68,27 @@ document.querySelector('#toFeed').addEventListener('click', async () => {
                 else {
                     main.innerHTML = ''
                     main.appendChild(resquestBook(bookData.data[i]))
-                    const trocar = document.querySelector('#button-trocar')
-                    trocar.addEventListener('click', () => {
-                        console.log('troca')
-
-
-                    })
-
+                    
                     const mybooks = myUser.books
                     var select = document.getElementById('mybooks-troca');
-                    console.log(select)
 
 
-                    console.log(mybooks[0])
-                    select.addEventListener('change', () => {
+                    let bookToExchange = {}
+                    select.addEventListener('change', async () => {
                         var bookSelected = select.value;
                         for (let i in mybooks) {
                             if (mybooks[i].name == bookSelected) {
                                 document.querySelector('#img-troca').src = mybooks[i].image[0]
+                                bookToExchange = mybooks[i]
                             }
                         }
                     })
+                    const trocar = document.querySelector('#button-trocar')
+                    trocar.addEventListener('click', async () => {
+                        const resp = swap(bookData.data[i], bookToExchange)
+                        await console.log(resp)
+                    })
+
                 }
 
             })
@@ -143,8 +143,9 @@ window.addEventListener('hashchange', async () => {
                                 }
                             })
                             const trocar = document.querySelector('#button-trocar')
-                            trocar.addEventListener('click', () => {
-                                swap(bookData.data[i], bookToExchange)
+                            trocar.addEventListener('click', async () => {
+                                const resp = await swap(bookData.data[i], bookToExchange)
+                                await console.log(resp)
                             })
 
                         }

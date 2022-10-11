@@ -1,4 +1,4 @@
-export default async (book, nameSelect) => {
-    await console.log(book, nameSelect)
-
+export default (book, booktoexchange) => {
+    console.log(book, booktoexchange)
+    
 }
