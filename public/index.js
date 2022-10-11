@@ -1,3 +1,4 @@
+// -- Page modules for SPA loadings --
 import addBook from './pages/books/addBook/index.js';
 import postBook from './pages/books/addBook/postBook.js';
 import feed from './pages/books/index.js';
@@ -10,16 +11,18 @@ import login from './pages/login/index.js';
 import saveedit from './pages/profile/editProfile/editProfile.js';
 import editprofile from './pages/profile/editProfile/index.js';
 import profile from './pages/profile/index.js';
-import requestClient from './pages/requests/cliente/index.js';
 import requestAdm from './pages/requests/adm/index.js';
+import requestsBookAdm from './pages/requests/adm/requestsBookAdm.js';
+import acceptbook from './pages/requests/approving/acceptBook.js';
+import acceptuser from './pages/requests/approving/acceptUser.js';
+import rejectuser from './pages/requests/approving/rejectUser.js';
+import requestClient from './pages/requests/cliente/index.js';
 import signup from './pages/signup/index.js';
 import postUser from './pages/signup/postUser.js';
 import collectUser from './user/user.js';
-import acceptuser from './pages/requests/acccpet-reject/acceptUser.js';
-import rejectuser from './pages/requests/acccpet-reject/rejectUser.js';
-import requestsBookAdm from './pages/requests/adm/requestsBookAdm.js';
-import acceptbook from './pages/requests/acccpet-reject/acceptBook.js';
 import editBook from './pages/books/editBook/index.js';
+
+// Sweet Alert for sugar alerts
 
 const main = document.querySelector('#root');
 let myUser = {}
@@ -58,7 +61,7 @@ document.querySelector('#toFeed').addEventListener('click', async () => {
             const solicitar = document.querySelector('#button-solicitar')
             solicitar.addEventListener('click', () => {
                 if (idUser == '') {
-                    alert('Cadastre-se primeiro')
+                    sweetAlert('Cadastre-se primeiro')
                 }
                 else {
                     main.innerHTML = ''
@@ -96,7 +99,7 @@ if (main.childElementCount === 0) { main.appendChild(home()) };
 
 window.addEventListener('hashchange', async () => {
     main.innerHTML = ''
-
+    Object.assign(main.style, { opacity: 1, transition: '800ms' })
     switch (window.location.hash) {
         case '#books':
             main.appendChild(await feed());
@@ -218,28 +221,28 @@ window.addEventListener('hashchange', async () => {
             })
             break;
         case '#request':
-            if(myUser.class=='cliente'){
+            if (myUser.class == 'cliente') {
                 main.appendChild(requestClient());
             }
-            if(myUser.class=='administrador'){
+            if (myUser.class == 'administrador') {
                 main.appendChild(await requestAdm())
                 const acceptUser = document.querySelectorAll('.acceptUser-button')
                 const rejectUser = document.querySelectorAll('.rejectUser-button')
-                for(let i in acceptUser){
-                        acceptUser[i].addEventListener('click', async () => {
-                            const idUser = acceptUser[i].id.split(':')[1]
-                            const resp = await acceptuser(idUser)
-                            await console.log(resp)
-                        })
-                        rejectUser[i].addEventListener('click', async () => {
-                            const idUser =  rejectUser[i].id.split(':')[1]
-                            const resp = await rejectuser(idUser)
-                            await console.log(resp)
-                        })
+                for (let i in acceptUser) {
+                    acceptUser[i].addEventListener('click', async () => {
+                        const idUser = acceptUser[i].id.split('_')[1]
+                        const resp = await acceptuser(idUser)
+                        await console.log(resp)
+                    })
+                    rejectUser[i].addEventListener('click', async () => {
+                        const idUser = rejectUser[i].id.split('_')[1]
+                        const resp = await rejectuser(idUser)
+                        await console.log(resp)
+                    })
                 }
-                
+
             }
-            
+
             break;
         case '#signup':
             main.appendChild(signup());
@@ -285,24 +288,24 @@ window.addEventListener('hashchange', async () => {
             main.appendChild(await requestsBookAdm())
             const acceptBook = document.querySelectorAll('.acceptBook-button')
             const rejectBook = document.querySelectorAll('.rejectBook-button')
-                for(let i in acceptBook){
-                        acceptBook[i].addEventListener('click', async () => {
-                            const idBook = acceptBook[i].id.split(':')[1]
-                            const resp = await acceptbook(idBook)
-                            if(resp.status == '200'){
-                                alert('livro aceito')
-                                window.location.hash = "#books"
-                            }
-                        })
-                        rejectBook[i].addEventListener('click', async () => {
-                            const idBook =  rejectBook[i].id.split(':')[1]
-                            const resp = await rejectbook(idBook)
-                            if(resp.status == '200'){
-                                alert('livro rejeitado')
-                                window.location.hash = '#books'
-                            }
-                        })
-                }
+            for (let i in acceptBook) {
+                acceptBook[i].addEventListener('click', async () => {
+                    const idBook = acceptBook[i].id.split('_')[1]
+                    const resp = await acceptbook(idBook)
+                    if (resp.status == '200') {
+                        alert('Livro aceito.')
+                        window.location.hash = "#books"
+                    }
+                })
+                rejectBook[i].addEventListener('click', async () => {
+                    const idBook = rejectBook[i].id.split('_')[1]
+                    const resp = await rejectbook(idBook)
+                    if (resp.status == '200') {
+                        alert('Livro rejeitado.')
+                        window.location.hash = '#books'
+                    }
+                })
+            }
             break;
     }
 });

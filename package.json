@@ -1,5 +1,5 @@
 {
-    "name": "Projeto Ciclo1: DreamCoders",
+    "name": "projeto_ciclo1-dreamcoders",
     "version": "1.0.0",
     "description": "Projeto criado para a finalização do primeiro ciclo do Alpha Edtech.",
     "main": "./server/server.js",
@@ -40,7 +40,8 @@
         "fs-extra": "^10.1.0",
         "jsonwebtoken": "^8.5.1",
         "multer": "^1.4.5-lts.1",
-        "pg": "^8.8.0"
+        "pg": "^8.8.0",
+        "sweetalert": "^2.1.2"
     },
     "husky": {
         "hooks": {
