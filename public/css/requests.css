@@ -78,3 +78,33 @@
     margin-left: 30px;
     margin-bottom: 15px;
 }
+.acceptUser-button{
+    border: none;
+    border-radius: 25px;
+    width: 80px;
+    height: 30px;
+    background-color: var(--blue);
+    color: white;
+}
+.rejectUser-button{
+    border: none;
+    border-radius: 25px;
+    width: 80px;
+    height: 30px;
+    color: white;
+}
+.acceptBook-button{
+    border: none;
+    border-radius: 25px;
+    width: 80px;
+    height: 30px;
+    background-color: var(--blue);
+    color: white;
+}
+.rejectBook-button{
+    border: none;
+    border-radius: 25px;
+    width: 80px;
+    height: 30px;
+    color: white;
+}

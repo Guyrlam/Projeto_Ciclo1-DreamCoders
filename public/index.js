@@ -17,13 +17,15 @@ import postUser from './pages/signup/postUser.js';
 import collectUser from './user/user.js';
 import acceptuser from './pages/requests/acccpet-reject/acceptUser.js';
 import rejectuser from './pages/requests/acccpet-reject/rejectUser.js';
-import requestsBookAdm from './pages/requests/requestsBookAdm.js';
+import requestsBookAdm from './pages/requests/adm/requestsBookAdm.js';
 import acceptbook from './pages/requests/acccpet-reject/acceptBook.js';
 
 const main = document.querySelector('#root');
 let myUser = {}
 let idUser = ''
 let myBooks = []
+
+
 
 async function refreshData() {
     myUser = await collectUser(idUser)
@@ -259,7 +261,7 @@ window.addEventListener('hashchange', async () => {
                 if (resp.message == "Livro adicionado com sucesso") {
                     alert("Livro adicionado com sucesso.")
                     refreshData()
-                    window.location.hash = "#profile"
+                    window.location.hash = "#books"
                 }
                 else {
                     alert(resp.ERROR)
@@ -282,12 +284,18 @@ window.addEventListener('hashchange', async () => {
                         acceptBook[i].addEventListener('click', async () => {
                             const idBook = acceptBook[i].id.split(':')[1]
                             const resp = await acceptbook(idBook)
-                            await console.log(resp)
+                            if(resp.status == '200'){
+                                alert('livro aceito')
+                                window.location.hash = "#books"
+                            }
                         })
                         rejectBook[i].addEventListener('click', async () => {
                             const idBook =  rejectBook[i].id.split(':')[1]
                             const resp = await rejectbook(idBook)
-                            await console.log(resp)
+                            if(resp.status == '200'){
+                                alert('livro rejeitado')
+                                window.location.hash = '#books'
+                            }
                         })
                 }
             break;
