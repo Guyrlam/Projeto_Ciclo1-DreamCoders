@@ -14,7 +14,7 @@ export default async () => {
         `
 <div class="requests">
         <span class="name-type">Solititações de: ${reqBooks.data[i].name}</span>
-        <p></p>
+        <p>Colecionador: ${reqBooks.data[i].collector}</p>
         <div>
             <button class="acceptBook-button" id="acceptBook:${reqBooks.data[i].id}">Aceitar</button>
             <button class="rejectBook-button" id="rejectBook:${reqBooks.data[i].id}">Rejeitar</button>
