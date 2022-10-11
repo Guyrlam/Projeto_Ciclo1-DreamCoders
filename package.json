@@ -1,5 +1,5 @@
 {
-    "name": "Projeto Ciclo1: DreamCoders",
+    "name": "projeto_ciclo1-dreamcoders",
     "version": "1.0.0",
     "description": "Projeto criado para a finalização do primeiro ciclo do Alpha Edtech.",
     "main": "./server/server.js",
