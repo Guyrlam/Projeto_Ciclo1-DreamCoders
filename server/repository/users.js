@@ -8,6 +8,16 @@ const check = {
     AND deleted_at isnull`,
 };
 
+const checkAdmin = {
+    text: `SELECT
+    email,
+    telephone,
+    password
+    FROM user_profile
+    WHERE approved isnull
+    AND deleted_at isnull`,
+};
+
 const newUser = {
     text: 'INSERT INTO user_profile(name, image_id, class_id, email, telephone, password) VALUES($1, $2, $3, $4, $5, $6)',
     values: [],
@@ -91,6 +101,11 @@ async function checkUser(client) {
     return response.rows;
 }
 
+async function checkPending(client) {
+    const response = await client.query(checkAdmin);
+    return response.rows;
+}
+
 async function insertUser(array, client) {
     newUser.values = array;
     await client.query(newUser);
@@ -137,4 +152,5 @@ module.exports = {
     updateUser,
     getUserByID,
     removeUserByID,
+    checkPending,
 };

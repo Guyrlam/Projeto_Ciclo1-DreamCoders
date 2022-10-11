@@ -17,7 +17,7 @@ swapRoute.post('/', verifyToken, requestSwap);
 swapRoute.put('/:resp/:id', verifyToken, respSwap);
 
 // define a requisição como concluída
-swapRoute.put('/conclude/:id', verifyToken, finishSwap);
+swapRoute.put('/finish/conclude/:id', verifyToken, finishSwap);
 
 // deleta uma requisição
 swapRoute.delete('/:id', verifyToken, deleteSwap);

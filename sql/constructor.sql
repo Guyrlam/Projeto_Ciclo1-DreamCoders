@@ -62,7 +62,8 @@ CREATE TABLE public.Exchanges (
 	accepted_at timestamptz,
 	rejected_at timestamptz,
 	concluded_at timestamptz,
-	deleted_at timestamptz
+	book_id_collector_deleted_at timestamptz
+	change_for_collector_deleted_at timestamptz
 );
 
 CREATE TABLE public.Book_images (

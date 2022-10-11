@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const { checkUser } = require('../repository/users');
+const { checkUser, checkPending } = require('../repository/users');
 
 async function dataBaseVerification(email, telephone, client) {
     const response = {
@@ -7,6 +7,19 @@ async function dataBaseVerification(email, telephone, client) {
     };
 
     try {
+        const pendings = await checkPending(client);
+        pendings.forEach((el) => {
+            if (email === el.email) {
+                response.Error =
+                    'O email informado já está registrado em um perfil que está aguardando autorização para uso';
+                response.status = 400;
+            }
+            if (telephone === el.telephone) {
+                response.Error =
+                    'O telefone informado já está registrado em um perfil que está aguardando autorização para uso';
+                response.status = 400;
+            }
+        });
         const userData = await checkUser(client);
         userData.forEach((el) => {
             if (email === el.email) {
