@@ -131,15 +131,22 @@ main {
     outline: none;
     border: none;
     padding-left: 3%;
-    font-size: 15px;
+    font-size: 25px;
+    word-spacing: 20px;
 }
 
 #header-search-bar::placeholder {
+    font-size: 20px;
     opacity: 0.5;
-    transform: translateX(100px, 0);
-    transition: 500ms;
-    font-style: oblique(45);
+    font-style: italic;
+    word-spacing: .3rem;
+    letter-spacing: .1rem;
 }
+
+/* #header-search-bar::-webkit-search-cancel-button {
+    -webkit-appearance: searchfield-cancel-button;
+    width: 50px
+} */
 
 #header-search-filter {
     display: flex;

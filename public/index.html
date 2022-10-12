@@ -43,7 +43,7 @@
                     <img src="./assets/icon-filter.png" alt="" class="icon-search">
                 </div>
 
-                <input type="text" placeholder="O que você está procurando?" id="header-search-bar">
+                <input type="search" placeholder="O que você está procurando?" id="header-search-bar">
                 <button type="submit" id="header-search-button">
                     <img src="./assets/search-solid.webp" alt="inserir termo de pesquisa" class="icon-search">
                 </button>
@@ -74,6 +74,19 @@
     <main id="root">
     </main>
 
+    <section>
+        <div class="search-wrapper">
+            <label for="search">Search Users</label>
+            <input type="search" id="search" data-search>
+        </div>
+        <div class="book-cards" data-user-cards-container></div>
+        <template data-user-template>
+            <div class="card">
+                <div class="header" data-header></div>
+                <div class="body" data-body></div>
+            </div>
+        </template>
+    </section>
 
     <footer>
         <section class="contact-help-modal">
