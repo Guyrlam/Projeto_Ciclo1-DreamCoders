@@ -22,10 +22,10 @@ import requestClient from './pages/requests/cliente/index.js';
 import signup from './pages/signup/index.js';
 import postUser from './pages/signup/postUser.js';
 import collectUser from './user/user.js';
-import editBook from './pages/books/editBook/index.js';
 import swap from './pages/books/swap/swap.js';
 import approvedswap from './pages/requests/cliente/approvedSwap.js';
 import rejectswap from './pages/requests/cliente/rejectSwap.js';
+import concludeSwap from './pages/requests/concludeSwap.js';
 
 
 
@@ -73,7 +73,7 @@ document.querySelector('#toFeed').addEventListener('click', async () => {
                 else {
                     main.innerHTML = ''
                     main.appendChild(resquestBook(bookData.data[i]))
-                    
+
                     const mybooks = myUser.books
                     var select = document.getElementById('mybooks-troca');
 
@@ -92,6 +92,9 @@ document.querySelector('#toFeed').addEventListener('click', async () => {
                     trocar.addEventListener('click', async () => {
                         const resp = swap(bookData.data[i], bookToExchange)
                         await console.log(resp)
+                        alert(resp.message)
+                        window.location.hash="#books"
+
                     })
 
                 }
@@ -109,6 +112,7 @@ window.addEventListener('hashchange', async () => {
     Object.assign(main.style, { opacity: 1, transition: '800ms' })
     switch (window.location.hash) {
         case '#books':
+            refreshData()
             main.appendChild(await feed());
             async function temp() {
                 const rawResponse = await fetch(`//localhost:8080/book`);
@@ -132,7 +136,7 @@ window.addEventListener('hashchange', async () => {
                         else {
                             main.innerHTML = ''
                             main.appendChild(resquestBook(bookData.data[i]))
-                            
+
                             const mybooks = myUser.books
                             var select = document.getElementById('mybooks-troca');
 
@@ -151,6 +155,8 @@ window.addEventListener('hashchange', async () => {
                             trocar.addEventListener('click', async () => {
                                 const resp = await swap(bookData.data[i], bookToExchange)
                                 await console.log(resp)
+                                alert(resp.message)
+                                window.location.hash='#books'
                             })
 
                         }
@@ -232,16 +238,23 @@ window.addEventListener('hashchange', async () => {
                 main.appendChild(await requestClient());
                 const acceptSwap = document.querySelectorAll('.requestsCliente-accept')
                 const rejectSwap = document.querySelectorAll('requestsCliente-reject')
-                for(let k in acceptSwap){
+                for (let k in acceptSwap) {
                     acceptSwap[k].addEventListener('click', async () => {
                         const idSwap = acceptSwap[k].id.split('_')[1]
                         const resp = await approvedswap(idSwap)
                         await alert(resp.message)
+                        const resp1 = concludeSwap(idSwap)
+                        await console.log(resp1)
+                        await refreshData()
+
                     })
                     rejectSwap[k].addEventListener('click', async () => {
                         const idSwap = rejectSwap[k].id.split('_')[1]
                         const resp = await rejectswap(idSwap)
                         await alert(resp.message)
+                        const resp1 = concludeSwap(idSwap)
+                        await console.log(resp1)
+                        await refreshData
                     })
                 }
             }
@@ -253,12 +266,16 @@ window.addEventListener('hashchange', async () => {
                     acceptUser[i].addEventListener('click', async () => {
                         const idUser = acceptUser[i].id.split('_')[1]
                         const resp = await acceptuser(idUser)
-                        await console.log(resp)
+                        if (resp.status == 200) {
+                            alert('Usuário Aceito')
+                        }
                     })
                     rejectUser[i].addEventListener('click', async () => {
                         const idUser = rejectUser[i].id.split('_')[1]
                         const resp = await rejectuser(idUser)
-                        await console.log(resp)
+                        if (resp.status == 200) {
+                            alert('Usuário Rejeitado')
+                        }
                     })
                 }
 
@@ -303,6 +320,7 @@ window.addEventListener('hashchange', async () => {
             window.location.hash = '#books';
             break;
         case '#profile':
+            refreshData()
             renderProfile()
             break;
         case '#book-requests':

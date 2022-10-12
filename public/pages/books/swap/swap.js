@@ -10,5 +10,6 @@ export default async (book, booktoexchange) => {
             'book_id': booktoexchange.id
         })
     });
-    return resp.json()
+    
+    return await resp.json()
 }

@@ -19,14 +19,17 @@ export default async () => {
     let reqTemplate = ''
 
     for(let i in reqSwap){
-        reqTemplate+= `
+        if(reqSwap[i].status == "aguardando sua resposta"){
+            reqTemplate+= `
         <div class="requests">
         <span class="name-type">
             ${reqSwap[i].book_id.collector} : Troca de Livros!
         </span>
         <p>
-            Olá, ${reqSwap[i].change_for.collector}! ${reqSwap[i].book_id.collector} deseja trocar o seu livro ${reqSwap[i].change_for.name} por ${reqSwap[i].book_id.name}
+            Olá, ${reqSwap[i].change_for.collector}! ${reqSwap[i].book_id.collector} deseja trocar o seu livro "${reqSwap[i].change_for.name}" por "${reqSwap[i].book_id.name}"
         </p>
+        <p>Horário: ${reqSwap[i].requested_at}</P>
+        <p>Status: ${reqSwap[i].status}</P>
         <div>
             <button id="requests-accept_${reqSwap[i].id}" class="requestsCliente-accept">Aceitar</button>
             <button id="requests-reject_${reqSwap[i].id}" class="requestsCliente-reject">Rejeitar</button>
@@ -34,6 +37,8 @@ export default async () => {
 
     </div>
     `
+        }
+        
     }
 
     const template =
