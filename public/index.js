@@ -24,6 +24,8 @@ import postUser from './pages/signup/postUser.js';
 import collectUser from './user/user.js';
 import editBook from './pages/books/editBook/index.js';
 import swap from './pages/books/swap/swap.js';
+import approvedswap from './pages/requests/cliente/approvedSwap.js';
+import rejectswap from './pages/requests/cliente/rejectSwap.js';
 
 
 
@@ -228,6 +230,20 @@ window.addEventListener('hashchange', async () => {
         case '#request':
             if (myUser.class == 'cliente') {
                 main.appendChild(await requestClient());
+                const acceptSwap = document.querySelectorAll('.requestsCliente-accept')
+                const rejectSwap = document.querySelectorAll('requestsCliente-reject')
+                for(let k in acceptSwap){
+                    acceptSwap[k].addEventListener('click', async () => {
+                        const idSwap = acceptSwap[k].id.split('_')[1]
+                        const resp = await approvedswap(idSwap)
+                        await alert(resp.message)
+                    })
+                    rejectSwap[k].addEventListener('click', async () => {
+                        const idSwap = rejectSwap[k].id.split('_')[1]
+                        const resp = await rejectswap(idSwap)
+                        await alert(resp.message)
+                    })
+                }
             }
             if (myUser.class == 'administrador') {
                 main.appendChild(await requestAdm())
