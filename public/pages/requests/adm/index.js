@@ -12,15 +12,21 @@ export default async () => {
     for (let i in reqUsers.data) {
         reqTemplateUsers +=
             `
-        <div class="requests">
-                <span class="name-type">Solititações de: ${reqUsers.data[i].name}</span>
+            <div class="requests">
+                <span class="name-type">
+                    Solititações de: ${reqUsers.data[i].name}
+                </span>
                 <p></p>
                 <div>
-                    <button class="acceptUser-button" id="acceptUser_${reqUsers.data[i].id}">Aceitar</button>
-                    <button class="rejectUser-button" id="rejectUser_${reqUsers.data[i].id}">Rejeitar</button>
+                    <button class="acceptUser-button" id="acceptUser_${reqUsers.data[i].id}">
+                        Aceitar
+                    </button>
+                    <button class="rejectUser-button" id="rejectUser_${reqUsers.data[i].id}">
+                        Rejeitar
+                    </button>
                 </div>
-        </div>
-        `
+            </div>
+            `
     }
 
     const template =

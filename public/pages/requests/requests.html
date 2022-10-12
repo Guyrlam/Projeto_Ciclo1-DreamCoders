@@ -1,16 +1,100 @@
-<section>
-    <div id="page-requests">
-        <h1 id="title-requests">Solicitações</h1>
-        <div class="requests">
-                <span class="name-type">Jorge Jesus : Troca de Livros!</span>
-                <p>Olá, Mariana! Jorge Jesus deseja trocar o seu livro O Poder do HÁBITO por Sherlock Holmes: Um Estudo em Vermelho</p>
+<!--  CLIENTE  -->
+<section id="section-request">
+    <div id="div-page-requests">
+        <div id="page-requests">
+
+            <h1 id="title-requests">
+                Solicitações
+            </h1>
+            <div class="requests">
+                <span class="name-type">
+                    Jorge Jesus : Troca de Livros!
+                </span>
+                <p>
+                    Olá, Mariana! Jorge Jesus deseja trocar o seu livro O Poder do HÁBITO por Sherlock Holmes: Um Estudo
+                    em Vermelho
+                </p>
                 <div>
-                    <button id="requests-accept"></button>
-                    <button id="requests-reject"></button>
+                    <button id="requests-accept">
+                        Aceitar
+                    </button>
+                    <button id="requests-reject">
+                        Rejeitar
+                    </button>
                 </div>
+            </div>
+
         </div>
+    </div>
+</section>
+
+<!-- ADM -->
+<div class="requests">
+    <span class="name-type">
+        Solititações de: ${reqUsers.data[i].name}
+    </span>
+    <p></p>
+    <div>
+        <button class="acceptUser-button" id="acceptUser_${reqUsers.data[i].id}">
+            Aceitar
+        </button>
+        <button class="rejectUser-button" id="rejectUser_${reqUsers.data[i].id}">
+            Rejeitar
+        </button>
+    </div>
+</div>
 
 
+<section id="section-request">
+    <div id="div-page-requests">
+        <div id="page-requests">
 
-        
+            <h1 id="title-requests">
+                Solicitações de usuários
+                <a href="#book-requests">
+                    <button id="book-requests" class="button-switch-requests">
+                        VER SOLICITAÇÕES DE LIVROS
+                    </button>
+                </a>
+            </h1>
+            ${reqTemplateUsers}
+
+        </div>
+    </div>
+</section>
+
+<!-- BOOK-ADM -->
+<div class="requests">
+    <span class="name-type">
+        Solititações de: ${reqBooks.data[i].name}
+    </span>
+    <p>
+        Colecionador: ${reqBooks.data[i].collector}
+    </p>
+    <div>
+        <button class="acceptBook-button" id="acceptBook_${reqBooks.data[i].id}">
+            Aceitar
+        </button>
+        <button class="rejectBook-button" id="rejectBook_${reqBooks.data[i].id}">
+            Rejeitar
+        </button>
+    </div>
+</div>
+
+<section id="section-request">
+    <div id="div-page-requests">
+        <div id="page-requests">
+
+            <h1 id="title-requests">
+                Solicitações de livros
+                <a href="#request">
+                    <button id="book-requests" class="button-switch-requests">
+                        VER SOLICITAÇÕES DE USUÁRIOS
+                    </button>
+                </a>
+            </h1>
+            ${reqTemplateUsers}
+
+        </div>
+    </div>
 </section>

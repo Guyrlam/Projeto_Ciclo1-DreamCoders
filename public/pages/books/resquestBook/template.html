@@ -2,21 +2,37 @@
     <link rel="stylesheet" href="../../../main.css">
 </head>
 <section id="resquest-book">
-    <h1>Solicitar Livro</h1>
-    
+    <h1>
+        Solicitar Livro
+    </h1>
+
     <div id="trocadelivro">
-        <div class="xwv">Solicitar Troca de: </div>
-        <div class="xwv">
-            <img src="" alt="" width="99px" height="140px">
-            <p>nome do livro</p>
+        <div>
+            Solicitar Troca de:
         </div>
-        <div>Por: </div>
-        <div id="xwv">
-            <img src="" alt="" width="99px" height="140px">
+        <div>
+            <img src="${data.images[0]}" alt="" width="99px" height="140px">
+            <p>
+                ${data.name}
+            </p>
+        </div>
+        <div>
+            Por:
+        </div>
+        <div class="xwv">
+            <img src="" alt="" id="img-troca" width="99px" height="140px">
+
             <select name="Meus Livros" id="mybooks-troca">
-                <option value="Meus Livros">Meus Livros</option>
+                <option value="Meus Livros" selected disabled>
+                    Escolher Livro
+                </option>
+
+                ${optionsMyBook}
+
             </select>
         </div>
     </div>
-    <button id="button-trocar">Trocar</button>
+    <button id="button-trocar">
+        Trocar
+    </button>
 </section>

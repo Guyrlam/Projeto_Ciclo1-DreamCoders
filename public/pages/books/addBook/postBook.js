@@ -2,7 +2,7 @@ import { myUser } from "../../../index.js";
 
 export default async function postUser() {
     console.log('post user')
-    
+
     const formData = new FormData();
     const name = document.querySelector('#book-title');
     const details = document.querySelector('#book-detail');
@@ -15,9 +15,7 @@ export default async function postUser() {
                 return cboxs[i].value
             }
         }
-
     }
-
 
     const category = document.querySelector('#category');
     const synopsis = document.querySelector('#synopsis');

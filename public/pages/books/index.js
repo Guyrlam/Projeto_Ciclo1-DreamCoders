@@ -8,8 +8,8 @@ export async function temp() {
 }
 
 function list(data) {
-    let ktem = `
-    <section id="books">`;
+    let ktem = '<section id="books">'
+        ;
     for (var i = 0; i < data.length; i++) {
         ktem +=
             `
