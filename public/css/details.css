@@ -106,3 +106,6 @@ select{
     color: white;
     margin-top: 5px;
 }
+#img-troca{
+    border: solid grey 1px;
+}

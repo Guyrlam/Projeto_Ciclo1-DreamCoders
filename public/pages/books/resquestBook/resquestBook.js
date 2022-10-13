@@ -35,7 +35,7 @@ export default (data) => {
                     Por: 
                 </div>
                 <div class="xwv">
-                    <img src="" alt="" id="img-troca" width="99px" height="140px">
+                    <img src="../../../assets/swap.jpg" alt="" id="img-troca" width="99px" height="140px">
                     
                     <select name="Meus Livros" id="mybooks-troca">
                         <option value="Meus Livros" selected disabled>
