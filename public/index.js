@@ -7,6 +7,8 @@ import resquestBook from './pages/books/resquestBook/resquestBook.js';
 import swap from './pages/books/swap/swap.js';
 import details from './pages/details/index.js';
 import home from './pages/home/index.js';
+import search from './pages/home/search/index.js';
+import showBooksSearch from './pages/home/search/showBooksSearch.js';
 import acesso from './pages/login/acess.js';
 import headerLogin from './pages/login/headerLogin.js';
 import login from './pages/login/index.js';
@@ -26,8 +28,6 @@ import concludeSwap from './pages/requests/concludeSwap.js';
 import signup from './pages/signup/index.js';
 import postUser from './pages/signup/postUser.js';
 import collectUser from './user/user.js';
-import search from './pages/home/search/index.js';
-import showBooksSearch from './pages/home/search/showBooksSearch.js'
 
 
 // Sweet Alert for sugar alerts
@@ -106,7 +106,7 @@ document.querySelector('#toFeed').addEventListener('click', async () => {
     main.innerHTML = ''
     main.appendChild(await feed());
     async function temp() {
-        const rawResponse = await fetch(`//140.82.6.89:8080/book`);
+        const rawResponse = await fetch(`/book`);
         const content = rawResponse.json();
         return content;
     }
@@ -168,7 +168,7 @@ window.addEventListener('hashchange', async () => {
             refreshData()
             main.appendChild(await feed());
             async function temp() {
-                const rawResponse = await fetch(`//140.82.6.89:8080/book`);
+                const rawResponse = await fetch(`/book`);
                 const content = rawResponse.json();
                 return content;
             }

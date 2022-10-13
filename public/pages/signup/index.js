@@ -46,7 +46,7 @@ export default () => {
                             <label for="profile-photo-signup">
                                 Foto de perfil
                             </label>
-                            <input type="file" name="" accept="image/jpeg,image/png,image/svg+xml" id="profile-photo-signup" required>
+                            <input type="file" name="" accept="image/jpeg,image/png,image/svg+xml" id="profile-photo-signup">
                         </div>
 
                         <button id="signup-submit">

@@ -1,7 +1,7 @@
 export default async () => {
     console.log('admin template');
     const container = document.createElement('div');
-    const reqUsers = await fetch(`//140.82.6.89:8080/admin/users`)
+    const reqUsers = await fetch(`/admin/users`)
         .then(
             (res) => {
                 return res.json()

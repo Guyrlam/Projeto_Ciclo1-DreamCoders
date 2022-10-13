@@ -13,11 +13,11 @@ export default async (user) => {
     formData.append('image', photo.files[0]);
     formData.append('class', user.class)
 
-    const resp = await fetch(`//140.82.6.89:8080/user/${user.id}`, {
+    const resp = await fetch(`/user/${user.id}`, {
         method: 'PUT',
         body: formData
     });
     console.log(resp)
     return resp
-    
+
 }
