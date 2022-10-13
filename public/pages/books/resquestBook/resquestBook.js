@@ -7,7 +7,11 @@ export default (data) => {
     const mybooks = myUser.books
     let optionsMyBook = ''
     for (let i in mybooks) {
-        optionsMyBook += `<option value="${mybooks[i].name}">${mybooks[i].name}</option>`
+        optionsMyBook +=
+            `<option value="${mybooks[i].name}">
+                ${mybooks[i].name}
+            </option>
+            `
     }
 
     const template =

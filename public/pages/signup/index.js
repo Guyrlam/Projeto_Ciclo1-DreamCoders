@@ -30,15 +30,15 @@ export default () => {
                             <label for="email-signup">
                                 Endereço de E-mail
                             </label>
-                            <input type="email" name="email-login" id="email-signup" class="filling-signup">
+                            <input type="email" name="email-login" id="email-signup" class="filling-signup" required>
                             <label for="telephone-signup">
                                 Telefone
                             </label>
-                            <input type="telephone" name="telefone" id="telephone-signup" class="filling-signup">
+                            <input type="telephone" name="telefone" id="telephone-signup" class="filling-signup" required>
                             <label for="password-signup">
                                 Senha
                             </label>
-                            <input type="password" name="password-login" id="password-signup" class="filling-signup">
+                            <input type="password" name="password-login" id="password-signup" class="filling-signup" required>
                             <label for="confirm-password">
                                 Repita a Senha
                             </label>
@@ -46,7 +46,7 @@ export default () => {
                             <label for="profile-photo-signup">
                                 Foto de perfil
                             </label>
-                            <input type="file" name="" accept="image/jpeg,image/png,image/svg+xml" id="profile-photo-signup">
+                            <input type="file" name="" accept="image/jpeg,image/png,image/svg+xml" id="profile-photo-signup" required>
                         </div>
 
                         <button id="signup-submit">

@@ -4,6 +4,7 @@ import postBook from './pages/books/addBook/postBook.js';
 import editBook from './pages/books/editBook/index.js';
 import feed from './pages/books/index.js';
 import resquestBook from './pages/books/resquestBook/resquestBook.js';
+import swap from './pages/books/swap/swap.js';
 import details from './pages/details/index.js';
 import home from './pages/home/index.js';
 import acesso from './pages/login/acess.js';
@@ -18,14 +19,13 @@ import acceptbook from './pages/requests/approving/acceptBook.js';
 import acceptuser from './pages/requests/approving/acceptUser.js';
 import rejectbook from './pages/requests/approving/rejectbook.js';
 import rejectuser from './pages/requests/approving/rejectUser.js';
+import approvedswap from './pages/requests/cliente/approvedSwap.js';
 import requestClient from './pages/requests/cliente/index.js';
+import rejectswap from './pages/requests/cliente/rejectSwap.js';
+import concludeSwap from './pages/requests/concludeSwap.js';
 import signup from './pages/signup/index.js';
 import postUser from './pages/signup/postUser.js';
 import collectUser from './user/user.js';
-import swap from './pages/books/swap/swap.js';
-import approvedswap from './pages/requests/cliente/approvedSwap.js';
-import rejectswap from './pages/requests/cliente/rejectSwap.js';
-import concludeSwap from './pages/requests/concludeSwap.js';
 
 
 
@@ -93,7 +93,7 @@ document.querySelector('#toFeed').addEventListener('click', async () => {
                         const resp = swap(bookData.data[i], bookToExchange)
                         await console.log(resp)
                         alert(resp.message)
-                        window.location.hash="#books"
+                        window.location.hash = "#books"
 
                     })
 
@@ -156,7 +156,7 @@ window.addEventListener('hashchange', async () => {
                                 const resp = await swap(bookData.data[i], bookToExchange)
                                 await console.log(resp)
                                 alert(resp.message)
-                                window.location.hash='#books'
+                                window.location.hash = '#books'
                             })
 
                         }
