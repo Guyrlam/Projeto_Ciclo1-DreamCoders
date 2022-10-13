@@ -1,5 +1,5 @@
 export default async (value) => {
-    const req = await fetch(':8080/book');
+    const req = await fetch('/book');
     const result = await req.json();
     console.log(value);
     const list = [];

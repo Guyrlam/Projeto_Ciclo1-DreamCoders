@@ -1,6 +1,6 @@
 async function search(value) {
     const list = [];
-    const req = await fetch(':8080/book');
+    const req = await fetch('/book');
     const result = await req.json();
     for (let i = 0; i < result.data.length; i += 1) {
         const el = result.data[i];

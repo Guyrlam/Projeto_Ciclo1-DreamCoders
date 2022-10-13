@@ -2,7 +2,7 @@ export default async () => {
     console.log('requests template');
     const container = document.createElement('div');
 
-    const reqSwap = await fetch(`:8080/swap`)
+    const reqSwap = await fetch(`/swap`)
         .then((res) => {
             return res.json();
         })

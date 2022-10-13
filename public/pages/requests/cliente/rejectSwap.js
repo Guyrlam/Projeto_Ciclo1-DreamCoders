@@ -1,5 +1,5 @@
 export default async (id) => {
-    const resp = await fetch(`:8080/swap/rejected/${id}`, {
+    const resp = await fetch(`/swap/rejected/${id}`, {
         method: 'PUT',
         body: {},
     });

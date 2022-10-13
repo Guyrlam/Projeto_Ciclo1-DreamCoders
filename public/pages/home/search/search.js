@@ -14,7 +14,7 @@ searchInput.addEventListener('input', (e) => {
     });
 });
 
-fetch(`:8080/`)
+fetch(`/`)
     .then((res) => res.json())
     .then((data) => {
         books = data.map((book) => {
