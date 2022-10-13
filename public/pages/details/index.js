@@ -8,7 +8,7 @@ export default (data) => {
         editOrRequest =
             `
             <button id="button-editBook" class="edit-book">
-                <a href="#editBook">
+                <a>
                     Editar Livro
                 </a>
             </button>

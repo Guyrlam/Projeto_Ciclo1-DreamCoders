@@ -15,41 +15,32 @@ export default () => {
                 <label for="book-title">
                     Título do Livro:
                 </label>
-                <input type="text" name="book-title" id="book-title">
+                <input type="text" name="book-title" id="book-title" class="inputs-addBook">
 
                 <label for="book-detail">
                     Detalhes:
                 </label>
-                <input type="text" name="book-details" id="book-detail">
+                <input type="text" name="book-details" id="book-detail" class="inputs-addBook">
 
                 <label for="publisher">
                     Editora:
                 </label>
-                <select name="Editora" id="publisher">
-                    <option value="" selected disabled>(selecione)</option>
-                    <option value="Zahar">Zahar</option>
-                    <option value="Saraiva">Saraiva</option>
-                    <option value="Scipione">Scipione</option>
-                </select>
+                <input type="text" name="Editora" id="publisher" class="inputs-addBook">
+
+                </input>
 
                 <label for="writer">
                     Escritor:
                 </label>
-                <select name="Escritor" id="writer">
-                    <option value="" selected disabled>(selecione)</option>
-                    <option value="Arthur Conan Doyle">Arthur Conan Doyle</option>
-                    <option value="Augusto Cury">Augusto Cury</option>
-                    <option value="Eckhart Tolle">Eckhart Tolle</option>
-                </select>
+                <input type="text" name="Escritor" id="writer" class="inputs-addBook">
+
+                </input>
 
                 <label for="category">
                     Categoria:
                 </label>
-                <select name="Categoria" id="category">
-                    <option value="" selected disabled>(selecione)</option>
-                    <option value="autoajuda">Autoajuda</option>
-                    <option value="misterio">Mistério</option>
-                </select>
+                <input type="text" name="Categoria" id="category" class="inputs-addBook">
+                </input>
 
                 <fieldset title="Estado do livro." id="conditions">
                     <label for="conditions">
@@ -72,7 +63,7 @@ export default () => {
                 <label for="synopsis">
                     Sinopse:
                 </label>
-                <input type="text" name="book-synopsis" id="synopsis">
+                <input type="text" name="book-synopsis" id="synopsis" class="inputs-addBook">
 
                 <div id="div-input-photo-book">
                     <label for="pic-profile">
