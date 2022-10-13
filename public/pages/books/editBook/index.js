@@ -1,9 +1,8 @@
 export default async (data) => {
     await console.log('editBook template');
     const container = document.createElement('div');
-    await console.log('editando', data)
-    const template =
-        `
+    await console.log('editando', data);
+    const template = `
         <section id="editBook">
             <div>
                 <h2>

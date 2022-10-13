@@ -1,17 +1,13 @@
 export default async () => {
     console.log('admin template');
     const container = document.createElement('div');
-    const reqUsers = await fetch(`/admin/users`)
-        .then(
-            (res) => {
-                return res.json()
-            }
-        )
+    const reqUsers = await fetch(`//140.82.6.89:8080/admin/users`).then((res) => {
+        return res.json();
+    });
 
-    let reqTemplateUsers = ''
-    for (let i in reqUsers.data) {
-        reqTemplateUsers +=
-            `
+    let reqTemplateUsers = '';
+    for (const i in reqUsers.data) {
+        reqTemplateUsers += `
             <div class="requests">
                 <span class="name-type">
                     Solititações de: ${reqUsers.data[i].name}
@@ -26,11 +22,10 @@ export default async () => {
                     </button>
                 </div>
             </div>
-            `
+            `;
     }
 
-    const template =
-        `
+    const template = `
         <section id="section-request">
             <div id="div-page-requests">
                 <div id="page-requests">

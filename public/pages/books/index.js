@@ -1,18 +1,15 @@
-
-//import details from '../details/index.js'
+// import details from '../details/index.js'
 export async function temp() {
-    const rawResponse = await fetch(`/book`);
+    const rawResponse = await fetch(`//140.82.6.89:8080/book`);
     const content = rawResponse.json();
     return content;
-    //console.log(content);
+    // console.log(content);
 }
 
 function list(data) {
-    let ktem = '<section id="books">'
-        ;
-    for (var i = 0; i < data.length; i++) {
-        ktem +=
-            `
+    let ktem = '<section id="books">';
+    for (let i = 0; i < data.length; i++) {
+        ktem += `
             <div class="book-feed">
                 <a class="a-book-feed">
                     <img src="${data[i].images[0]}" alt="" class="img-book-feed" id="${data[i].id}">
@@ -21,21 +18,16 @@ function list(data) {
             </div>
             `;
     }
-    return ktem += '</section>';
+    return (ktem += '</section>');
 }
 
 export default async function feed() {
     const container = document.createElement('div');
 
-
     temp().then((data) => {
         container.innerHTML = list(data.data);
-    })
-    //container.innerHTML = template;
+    });
+    // container.innerHTML = template;
 
     return container;
-};
-
-
-
-
+}

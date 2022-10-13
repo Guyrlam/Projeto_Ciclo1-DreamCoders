@@ -29,193 +29,183 @@ import signup from './pages/signup/index.js';
 import postUser from './pages/signup/postUser.js';
 import collectUser from './user/user.js';
 
-
-
 const main = document.querySelector('#root');
-let myUser = {}
-let idUser = ''
-let myBooks = []
-let book = {}
-
+let myUser = {};
+let idUser = '';
+const myBooks = [];
+let book = {};
 
 async function refreshData() {
-    myUser = await collectUser(idUser)
-    myUser = myUser.data
-    mybooks = myUser.books
-    return myUser
+    myUser = await collectUser(idUser);
+    myUser = myUser.data;
+    mybooks = myUser.books;
+    return myUser;
 }
 async function refreshHeader() {
-    hLogin.innerHTML = ""
-    hLogin.appendChild(await headerLogin())
+    hLogin.innerHTML = '';
+    hLogin.appendChild(await headerLogin());
 }
 
-document.querySelector('#header-search-button').addEventListener('click', async () => {
-    const pesquisa = document.querySelector('#header-search-bar')
-    main.innerHTML = ''
-    main.appendChild(await showBooksSearch(pesquisa.value));
-    const bookData = await search(pesquisa.value)
-    const books = document.querySelectorAll('.img-book-feed')
-    for (let i in books) {
-        books[i].addEventListener('click', async () => {
-            book = bookData[i]
-            main.innerHTML = ''
-            main.appendChild(details(bookData[i]));
-            const solicitar = document.querySelector('#button-solicitar')
-            solicitar.addEventListener('click', () => {
-                if (idUser == '') {
-                    alert('Cadastre-se primeiro')
-                }
-                else {
-                    main.innerHTML = ''
-                    main.appendChild(resquestBook(bookData.data[i]))
+document
+    .querySelector('#header-search-button')
+    .addEventListener('click', async () => {
+        const pesquisa = document.querySelector('#header-search-bar');
+        main.innerHTML = '';
+        main.appendChild(await showBooksSearch(pesquisa.value));
+        const bookData = await search(pesquisa.value);
+        const books = document.querySelectorAll('.img-book-feed');
+        for (const i in books) {
+            books[i].addEventListener('click', async () => {
+                book = bookData[i];
+                main.innerHTML = '';
+                main.appendChild(details(bookData[i]));
+                const solicitar = document.querySelector('#button-solicitar');
+                solicitar.addEventListener('click', () => {
+                    if (idUser == '') {
+                        alert('Cadastre-se primeiro');
+                    } else {
+                        main.innerHTML = '';
+                        main.appendChild(resquestBook(bookData.data[i]));
 
-                    const mybooks = myUser.books
-                    var select = document.getElementById('mybooks-troca');
+                        const mybooks = myUser.books;
+                        const select = document.getElementById('mybooks-troca');
 
-
-                    let bookToExchange = {}
-                    select.addEventListener('change', async () => {
-                        var bookSelected = select.value;
-                        for (let i in mybooks) {
-                            if (mybooks[i].name == bookSelected) {
-                                document.querySelector('#img-troca').src = mybooks[i].image[0]
-                                bookToExchange = mybooks[i]
+                        let bookToExchange = {};
+                        select.addEventListener('change', async () => {
+                            const bookSelected = select.value;
+                            for (const i in mybooks) {
+                                if (mybooks[i].name == bookSelected) {
+                                    document.querySelector('#img-troca').src =
+                                        mybooks[i].image[0];
+                                    bookToExchange = mybooks[i];
+                                }
                             }
-                        }
-                    })
-                    const trocar = document.querySelector('#button-trocar')
-                    trocar.addEventListener('click', async () => {
-                        const resp = await swap(bookData.data[i], bookToExchange)
-                        await console.log(resp)
-                        alert(resp.message)
-                        window.location.hash = '#books'
-                    })
-
-                }
-
-            })
-
-
-        })
-    }
-})
+                        });
+                        const trocar = document.querySelector('#button-trocar');
+                        trocar.addEventListener('click', async () => {
+                            const resp = await swap(
+                                bookData.data[i],
+                                bookToExchange
+                            );
+                            await console.log(resp);
+                            alert(resp.message);
+                            window.location.hash = '#books';
+                        });
+                    }
+                });
+            });
+        }
+    });
 
 document.querySelector('#toFeed').addEventListener('click', async () => {
-    main.innerHTML = ''
+    main.innerHTML = '';
     main.appendChild(await feed());
     async function temp() {
-        const rawResponse = await fetch(`/book`);
+        const rawResponse = await fetch(`//140.82.6.89:8080/book`);
         const content = rawResponse.json();
         return content;
     }
-    const bookData = await temp()
-    const books = document.querySelectorAll('.img-book-feed')
-    for (let i in books) {
+    const bookData = await temp();
+    const books = document.querySelectorAll('.img-book-feed');
+    for (const i in books) {
         books[i].addEventListener('click', async () => {
-            consolge.log('oi')
-            book = books[i]
-            main.innerHTML = ''
+            consolge.log('oi');
+            book = books[i];
+            main.innerHTML = '';
             main.appendChild(details(bookData.data[i]));
-            const solicitar = document.querySelector('#button-solicitar')
+            const solicitar = document.querySelector('#button-solicitar');
             solicitar.addEventListener('click', () => {
                 if (idUser == '') {
-                    alert('Cadastre-se primeiro.')
-                }
-                else {
-                    main.innerHTML = ''
-                    main.appendChild(resquestBook(bookData.data[i]))
+                    alert('Cadastre-se primeiro.');
+                } else {
+                    main.innerHTML = '';
+                    main.appendChild(resquestBook(bookData.data[i]));
 
-                    const mybooks = myUser.books
-                    var select = document.getElementById('mybooks-troca');
+                    const mybooks = myUser.books;
+                    const select = document.getElementById('mybooks-troca');
 
-
-                    let bookToExchange = {}
+                    let bookToExchange = {};
                     select.addEventListener('change', async () => {
-                        var bookSelected = select.value;
-                        for (let i in mybooks) {
+                        const bookSelected = select.value;
+                        for (const i in mybooks) {
                             if (mybooks[i].name == bookSelected) {
-                                document.querySelector('#img-troca').src = mybooks[i].image[0]
-                                bookToExchange = mybooks[i]
+                                document.querySelector('#img-troca').src =
+                                    mybooks[i].image[0];
+                                bookToExchange = mybooks[i];
                             }
                         }
-                    })
-                    const trocar = document.querySelector('#button-trocar')
+                    });
+                    const trocar = document.querySelector('#button-trocar');
                     trocar.addEventListener('click', async () => {
-                        const resp = swap(bookData.data[i], bookToExchange)
-                        await console.log(resp)
-                        alert(resp.message)
-                        window.location.hash = "#books"
-
-                    })
-
+                        const resp = swap(bookData.data[i], bookToExchange);
+                        await console.log(resp);
+                        alert(resp.message);
+                        window.location.hash = '#books';
+                    });
                 }
-
-            })
-
-
-        })
+            });
+        });
     }
-})
-if (main.childElementCount === 0) { main.appendChild(home()) };
+});
+if (main.childElementCount === 0) {
+    main.appendChild(home());
+}
 
 window.addEventListener('hashchange', async () => {
-    main.innerHTML = ''
-    Object.assign(main.style, { opacity: 1, transition: '800ms' })
+    main.innerHTML = '';
+    Object.assign(main.style, { opacity: 1, transition: '800ms' });
     switch (window.location.hash) {
         case '#books':
-            refreshData()
+            refreshData();
             main.appendChild(await feed());
             async function temp() {
-                const rawResponse = await fetch(`/book`);
+                const rawResponse = await fetch(`//140.82.6.89:8080/book`);
                 const content = rawResponse.json();
                 return content;
             }
-            const bookData = await temp()
-            const books = document.querySelectorAll('.img-book-feed')
+            const bookData = await temp();
+            const books = document.querySelectorAll('.img-book-feed');
 
-
-            for (let i in books) {
+            for (const i in books) {
                 books[i].addEventListener('click', async () => {
-                    book = bookData.data[i]
-                    main.innerHTML = ''
+                    book = bookData.data[i];
+                    main.innerHTML = '';
                     main.appendChild(details(bookData.data[i]));
-                    const solicitar = document.querySelector('#button-solicitar')
+                    const solicitar = document.querySelector('#button-solicitar');
                     solicitar.addEventListener('click', () => {
                         if (idUser == '') {
-                            alert('Cadastre-se primeiro')
-                        }
-                        else {
-                            main.innerHTML = ''
-                            main.appendChild(resquestBook(bookData.data[i]))
+                            alert('Cadastre-se primeiro');
+                        } else {
+                            main.innerHTML = '';
+                            main.appendChild(resquestBook(bookData.data[i]));
 
-                            const mybooks = myUser.books
-                            var select = document.getElementById('mybooks-troca');
+                            const mybooks = myUser.books;
+                            const select = document.getElementById('mybooks-troca');
 
-
-                            let bookToExchange = {}
+                            let bookToExchange = {};
                             select.addEventListener('change', async () => {
-                                var bookSelected = select.value;
-                                for (let i in mybooks) {
+                                const bookSelected = select.value;
+                                for (const i in mybooks) {
                                     if (mybooks[i].name == bookSelected) {
-                                        document.querySelector('#img-troca').src = mybooks[i].image[0]
-                                        bookToExchange = mybooks[i]
+                                        document.querySelector('#img-troca').src =
+                                            mybooks[i].image[0];
+                                        bookToExchange = mybooks[i];
                                     }
                                 }
-                            })
-                            const trocar = document.querySelector('#button-trocar')
+                            });
+                            const trocar = document.querySelector('#button-trocar');
                             trocar.addEventListener('click', async () => {
-                                const resp = await swap(bookData.data[i], bookToExchange)
-                                await console.log(resp)
-                                alert(resp.message)
-                                window.location.hash = '#books'
-                            })
-
+                                const resp = await swap(
+                                    bookData.data[i],
+                                    bookToExchange
+                                );
+                                await console.log(resp);
+                                alert(resp.message);
+                                window.location.hash = '#books';
+                            });
                         }
-
-                    })
-
-
-                })
+                    });
+                });
             }
 
             break;
@@ -228,108 +218,110 @@ window.addEventListener('hashchange', async () => {
             const hLogin = document.querySelector('#header-login');
             acess.addEventListener('click', async () => {
                 const resp = await acesso();
-                await console.log(resp.logged)
-                idUser = resp.logged
+                await console.log(resp.logged);
+                idUser = resp.logged;
 
-                if (resp.message == "Usuário logado com sucesso") {
+                if (resp.message == 'Usuário logado com sucesso') {
+                    // Atribuindo valora a variavel do usuário
+                    myUser = await collectUser(idUser);
+                    myUser = myUser.data;
+                    console.log(myUser);
 
-                    //Atribuindo valora a variavel do usuário
-                    myUser = await collectUser(idUser)
-                    myUser = myUser.data
-                    console.log(myUser)
-
-                    hLogin.innerHTML = ""
-                    hLogin.appendChild(await headerLogin())
-                    const helloUser = document.querySelector('#hello-user')
-                    const dropdown = document.querySelector('#dropdown-menu')
-                    const myprofile = document.querySelector('#myprofile-button')
-                    const myrequest = document.querySelector('#requests-button')
+                    hLogin.innerHTML = '';
+                    hLogin.appendChild(await headerLogin());
+                    const helloUser = document.querySelector('#hello-user');
+                    const dropdown = document.querySelector('#dropdown-menu');
+                    const myprofile = document.querySelector('#myprofile-button');
+                    const myrequest = document.querySelector('#requests-button');
 
                     helloUser.addEventListener('mouseenter', async () => {
-                        dropdown.style.display = "flex"
-                        myprofile.addEventListener('click', async function renderProfile() {
-                            myUser = await collectUser(idUser)
-                            myUser = myUser.data
-                            main.innerHTML = ''
-                            main.appendChild(await profile(myUser))
-                            const editProfile = document.querySelector('#profile-button-edit')
-                            editProfile.addEventListener('click', () => {
-                                main.innerHTML = ''
-                                main.appendChild(editprofile(myUser))
-                                const saveEdit = document.querySelector('#save-edit-profile')
-                                saveEdit.addEventListener('click', async () => {
-                                    const resp = await saveedit(myUser)
-                                    if (resp.status == 200) {
-                                        alert('Perfil editado com sucesso!')
-                                        renderProfile()
-
-                                    }
-                                })
-                            })
-
-
-                        })
+                        dropdown.style.display = 'flex';
+                        myprofile.addEventListener(
+                            'click',
+                            async function renderProfile() {
+                                myUser = await collectUser(idUser);
+                                myUser = myUser.data;
+                                main.innerHTML = '';
+                                main.appendChild(await profile(myUser));
+                                const editProfile = document.querySelector(
+                                    '#profile-button-edit'
+                                );
+                                editProfile.addEventListener('click', () => {
+                                    main.innerHTML = '';
+                                    main.appendChild(editprofile(myUser));
+                                    const saveEdit =
+                                        document.querySelector('#save-edit-profile');
+                                    saveEdit.addEventListener('click', async () => {
+                                        const resp = await saveedit(myUser);
+                                        if (resp.status == 200) {
+                                            alert('Perfil editado com sucesso!');
+                                            renderProfile();
+                                        }
+                                    });
+                                });
+                            }
+                        );
                         myrequest.addEventListener('click', () => {
-                            window.location.hash = "#request"
-                        })
-                    })
+                            window.location.hash = '#request';
+                        });
+                    });
                     dropdown.addEventListener('mouseleave', async () => {
-                        dropdown.style.display = 'none'
-                    })
-                    window.location.hash = "#books"
+                        dropdown.style.display = 'none';
+                    });
+                    window.location.hash = '#books';
+                } else {
+                    alert(resp.ERROR);
                 }
-                else {
-                    alert(resp.ERROR)
-                }
-
-            })
+            });
             break;
         case '#request':
             if (myUser.class == 'cliente') {
                 main.appendChild(await requestClient());
-                const acceptSwap = document.querySelectorAll('.requestsCliente-accept')
-                const rejectSwap = document.querySelectorAll('requestsCliente-reject')
-                for (let k in acceptSwap) {
+                const acceptSwap = document.querySelectorAll(
+                    '.requestsCliente-accept'
+                );
+                const rejectSwap = document.querySelectorAll(
+                    'requestsCliente-reject'
+                );
+                for (const k in acceptSwap) {
                     acceptSwap[k].addEventListener('click', async () => {
-                        const idSwap = acceptSwap[k].id.split('_')[1]
-                        const resp = await approvedswap(idSwap)
-                        await alert(resp.message)
-                        const resp1 = concludeSwap(idSwap)
-                        await console.log(resp1)
-                        await refreshData()
-
-                    })
+                        const idSwap = acceptSwap[k].id.split('_')[1];
+                        const resp = await approvedswap(idSwap);
+                        await alert(resp.message);
+                        const resp1 = concludeSwap(idSwap);
+                        await console.log(resp1);
+                        await refreshData();
+                    });
                     rejectSwap[k].addEventListener('click', async () => {
-                        const idSwap = rejectSwap[k].id.split('_')[1]
-                        const resp = await rejectswap(idSwap)
-                        await alert(resp.message)
-                        const resp1 = concludeSwap(idSwap)
-                        await console.log(resp1)
-                        await refreshData
-                    })
+                        const idSwap = rejectSwap[k].id.split('_')[1];
+                        const resp = await rejectswap(idSwap);
+                        await alert(resp.message);
+                        const resp1 = concludeSwap(idSwap);
+                        await console.log(resp1);
+                        await refreshData;
+                    });
                 }
             }
             if (myUser.class == 'administrador') {
-                main.appendChild(await requestAdm())
-                const acceptUser = document.querySelectorAll('.acceptUser-button')
-                const rejectUser = document.querySelectorAll('.rejectUser-button')
-                for (let i in acceptUser) {
+                main.appendChild(await requestAdm());
+                const acceptUser = document.querySelectorAll('.acceptUser-button');
+                const rejectUser = document.querySelectorAll('.rejectUser-button');
+                for (const i in acceptUser) {
                     acceptUser[i].addEventListener('click', async () => {
-                        const idUser = acceptUser[i].id.split('_')[1]
-                        const resp = await acceptuser(idUser)
+                        const idUser = acceptUser[i].id.split('_')[1];
+                        const resp = await acceptuser(idUser);
                         if (resp.status == 200) {
-                            alert('Usuário Aceito')
+                            alert('Usuário Aceito');
                         }
-                    })
+                    });
                     rejectUser[i].addEventListener('click', async () => {
-                        const idUser = rejectUser[i].id.split('_')[1]
-                        const resp = await rejectuser(idUser)
+                        const idUser = rejectUser[i].id.split('_')[1];
+                        const resp = await rejectuser(idUser);
                         if (resp.status == 200) {
-                            alert('Usuário Rejeitado')
+                            alert('Usuário Rejeitado');
                         }
-                    })
+                    });
                 }
-
             }
 
             break;
@@ -338,63 +330,60 @@ window.addEventListener('hashchange', async () => {
             const submit = document.querySelector('#signup-submit');
             submit.addEventListener('click', async () => {
                 const resp = await postUser();
-                if (resp.message == "Usuário adicionado com sucesso") {
-                    alert("Cadastro realizado com sucesso")
-                    window.location.hash = "#login"
-                }
-                else {
-                    alert(resp.ERROR)
+                if (resp.message == 'Usuário adicionado com sucesso') {
+                    alert('Cadastro realizado com sucesso');
+                    window.location.hash = '#login';
+                } else {
+                    alert(resp.ERROR);
                 }
             });
             break;
-        case "#addBook":
-            main.appendChild(addBook())
+        case '#addBook':
+            main.appendChild(addBook());
             const save = document.querySelector('#save-new-book-button');
             save.addEventListener('click', async () => {
                 const resp = await postBook();
-                if (resp.message == "Livro adicionado com sucesso") {
-                    alert("Livro adicionado com sucesso.")
-                    refreshData()
-                    window.location.hash = "#books"
+                if (resp.message == 'Livro adicionado com sucesso') {
+                    alert('Livro adicionado com sucesso.');
+                    refreshData();
+                    window.location.hash = '#books';
+                } else {
+                    alert(resp.ERROR);
                 }
-                else {
-                    alert(resp.ERROR)
-                }
-
             });
             break;
         case '#editBook':
-            main.innerHTML = ''
-            main.appendChild(await editBook(book))
+            main.innerHTML = '';
+            main.appendChild(await editBook(book));
             break;
         case '#acess':
             window.location.hash = '#books';
             break;
         case '#profile':
-            refreshData()
-            renderProfile()
+            refreshData();
+            renderProfile();
             break;
         case '#book-requests':
-            main.appendChild(await requestsBookAdm())
-            const acceptBook = document.querySelectorAll('.acceptBook-button')
-            const rejectBook = document.querySelectorAll('.rejectBook-button')
-            for (let i in acceptBook) {
+            main.appendChild(await requestsBookAdm());
+            const acceptBook = document.querySelectorAll('.acceptBook-button');
+            const rejectBook = document.querySelectorAll('.rejectBook-button');
+            for (const i in acceptBook) {
                 acceptBook[i].addEventListener('click', async () => {
-                    const idBook = acceptBook[i].id.split('_')[1]
-                    const resp = await acceptbook(idBook)
+                    const idBook = acceptBook[i].id.split('_')[1];
+                    const resp = await acceptbook(idBook);
                     if (resp.status == '200') {
-                        alert('Livro aceito.')
-                        window.location.hash = "#books"
+                        alert('Livro aceito.');
+                        window.location.hash = '#books';
                     }
-                })
+                });
                 rejectBook[i].addEventListener('click', async () => {
-                    const idBook = rejectBook[i].id.split('_')[1]
-                    const resp = await rejectbook(idBook)
+                    const idBook = rejectBook[i].id.split('_')[1];
+                    const resp = await rejectbook(idBook);
                     if (resp.status == '200') {
-                        alert('Livro rejeitado.')
-                        window.location.hash = '#books'
+                        alert('Livro rejeitado.');
+                        window.location.hash = '#books';
                     }
-                })
+                });
             }
             break;
     }
@@ -402,6 +391,6 @@ window.addEventListener('hashchange', async () => {
 
 export { myUser, idUser };
 
-/*window.addEventListener('load', () => {
+/* window.addEventListener('load', () => {
     main.appendChild(home())
 } */

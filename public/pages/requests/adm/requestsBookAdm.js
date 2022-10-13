@@ -1,17 +1,13 @@
 export default async () => {
     console.log('requestsBookAdm template');
     const container = document.createElement('div');
-    const reqBooks = await fetch(`/admin/books`)
-        .then(
-            (res) => {
-                return res.json()
-            }
-        )
+    const reqBooks = await fetch(`//140.82.6.89:8080/admin/books`).then((res) => {
+        return res.json();
+    });
 
-    let reqTemplateUsers = ''
-    for (let i in reqBooks.data) {
-        reqTemplateUsers +=
-            `
+    let reqTemplateUsers = '';
+    for (const i in reqBooks.data) {
+        reqTemplateUsers += `
             <div class="requests">
                 <span class="name-type">
                     Solititações de: ${reqBooks.data[i].name}
@@ -28,11 +24,10 @@ export default async () => {
                     </button>
                 </div>
             </div>
-            `
+            `;
     }
 
-    const template =
-        `
+    const template = `
         <section id="section-request">
             <div id="div-page-requests">
                 <div id="page-requests">

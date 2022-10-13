@@ -2,20 +2,20 @@ export default (data) => {
     console.log('profile template');
     const container = document.createElement('div');
     function addmybooks(dataF) {
-        let template = ''
-        for (let i in dataF.books) {
-            template +=
-                `<img src="${dataF.books[i].image[0]}" alt="" class="books-profile">`
+        let template = '';
+        for (const i in dataF.books) {
+            template += `<img src="${dataF.books[i].image[0]}" alt="" class="books-profile">`;
         }
-        return template
+        return template;
     }
-    const mybooks = addmybooks(data)
-    const template =
-        `
+    const mybooks = addmybooks(data);
+    const template = `
         <section id="profile">
             <div id="profile-details">
                 <div>
-                    <img src="${data.image ?? '../../assets/no-pic-avatar.png'}" alt="" id="profile-photo">
+                    <img src="${
+                        data.image ?? '../../assets/no-pic-avatar.png'
+                    }" alt="" id="profile-photo">
                 </div>
                 <div id="profile-description">
                     <h1 class="profile-details-text">

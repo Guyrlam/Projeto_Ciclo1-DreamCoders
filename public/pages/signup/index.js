@@ -1,8 +1,7 @@
 export default () => {
     console.log('signup template');
     const container = document.createElement('div');
-    const template =
-        `
+    const template = `
         <section id=signuped>
             <div id="signup">
                 <div id="signup-title">

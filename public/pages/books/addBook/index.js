@@ -2,8 +2,7 @@ export default () => {
     console.log('add book');
     const container = document.createElement('div');
 
-    const template =
-        `
+    const template = `
         <section id="editBook">
             <div>
                 <h2>

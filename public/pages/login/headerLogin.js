@@ -1,7 +1,6 @@
 export default async function headerLogin() {
     const container = document.createElement('div');
-    const template =
-        `
+    const template = `
         <span id="hello-user">
             <img src="./assets/icon-user.png" alt="avatar do perfil" id="icon-user">
             Olá, Usuário!          
@@ -20,6 +19,6 @@ export default async function headerLogin() {
             </button>
         </div>
         `;
-    container.innerHTML = template
-    return container
+    container.innerHTML = template;
+    return container;
 }

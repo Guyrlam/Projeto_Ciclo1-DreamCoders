@@ -1,21 +1,20 @@
-import { myUser } from "../../../index.js";
+import { myUser } from '../../../index.js';
+
 export default (data) => {
     console.log('details template');
-    console.log(data)
+    console.log(data);
     const container = document.createElement('div');
 
-    const mybooks = myUser.books
-    let optionsMyBook = ''
-    for (let i in mybooks) {
-        optionsMyBook +=
-            `<option value="${mybooks[i].name}">
+    const mybooks = myUser.books;
+    let optionsMyBook = '';
+    for (const i in mybooks) {
+        optionsMyBook += `<option value="${mybooks[i].name}">
                 ${mybooks[i].name}
             </option>
-            `
+            `;
     }
 
-    const template =
-        `
+    const template = `
         <section id="resquest-book">
             <h1>
                 Solicitar Livro

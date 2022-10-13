@@ -1,30 +1,27 @@
-import { myUser } from "../../index.js";
-import isMyBook from "../books/isMyBook.js";
+import { myUser } from '../../index.js';
+import isMyBook from '../books/isMyBook.js';
+
 export default (data) => {
     console.log('details template');
-    let editOrRequest = ''
-    const botao = isMyBook(myUser, data)
+    let editOrRequest = '';
+    const botao = isMyBook(myUser, data);
     if (botao == true) {
-        editOrRequest =
-            `
+        editOrRequest = `
             <button id="button-editBook" class="edit-book">
                 <a>
                     Editar Livro
                 </a>
             </button>
-            `
-    }
-    else {
-        editOrRequest =
-            `
+            `;
+    } else {
+        editOrRequest = `
             <button id="button-solicitar">
                 Solicitar
             </button>
-            `
+            `;
     }
     const container = document.createElement('div');
-    const template =
-        `
+    const template = `
         <section id="details">
             <div id="book-photos">
                 <div id="small-photos-book">
