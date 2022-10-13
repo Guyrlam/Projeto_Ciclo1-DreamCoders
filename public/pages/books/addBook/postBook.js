@@ -39,7 +39,7 @@ export default async function postUser() {
     formData.append('collector', myUser.name);
     formData.append('collector_id', myUser.id)
 
-    const resp = await fetch((`//localhost:8080/book`), {
+    const resp = await fetch((`//140.82.6.89:8080/book`), {
         method: 'POST',
         body: formData
     });

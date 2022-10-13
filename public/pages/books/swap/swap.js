@@ -1,6 +1,6 @@
 export default async (book, booktoexchange) => {
     await console.log(book, booktoexchange)
-    const resp = await fetch(`//localhost:8080/swap`, {
+    const resp = await fetch(`//140.82.6.89:8080/swap`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
