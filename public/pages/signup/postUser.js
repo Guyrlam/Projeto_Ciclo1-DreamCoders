@@ -22,7 +22,7 @@ export default async function postUser() {
     formData.append('password', password.value);
     formData.append('class', classe);
 
-    const resp = await fetch(`//140.82.6.89:8080/user`, {
+    const resp = await fetch(`:8080/user`, {
         method: 'POST',
         body: formData,
     });

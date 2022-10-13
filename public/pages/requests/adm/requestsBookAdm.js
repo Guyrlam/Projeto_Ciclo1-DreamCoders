@@ -1,7 +1,7 @@
 export default async () => {
     console.log('requestsBookAdm template');
     const container = document.createElement('div');
-    const reqBooks = await fetch(`//140.82.6.89:8080/admin/books`).then((res) => {
+    const reqBooks = await fetch(`:8080/admin/books`).then((res) => {
         return res.json();
     });
 
