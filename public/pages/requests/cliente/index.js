@@ -3,7 +3,7 @@ export default async () => {
     console.log('requests template');
     const container = document.createElement('div');
 
-    const reqSwap = await fetch(`//140.82.6.89:8080/swap`)
+    const reqSwap = await fetch(`/swap`)
         .then(
             (res) => {
                 return res.json()
@@ -18,9 +18,9 @@ export default async () => {
 
     let reqTemplate = ''
 
-    for(let i in reqSwap){
-        if(reqSwap[i].status == "aguardando sua resposta"){
-            reqTemplate+= `
+    for (let i in reqSwap) {
+        if (reqSwap[i].status == "aguardando sua resposta") {
+            reqTemplate += `
         <div class="requests">
         <span class="name-type">
             ${reqSwap[i].book_id.collector} : Troca de Livros!
@@ -38,7 +38,7 @@ export default async () => {
     </div>
     `
         }
-        
+
     }
 
     const template =
