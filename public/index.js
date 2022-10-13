@@ -30,14 +30,12 @@ import postUser from './pages/signup/postUser.js';
 import collectUser from './user/user.js';
 
 
-// Sweet Alert for sugar alerts
 
 const main = document.querySelector('#root');
 let myUser = {}
 let idUser = ''
 let myBooks = []
 let book = {}
-
 
 
 async function refreshData() {
