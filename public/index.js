@@ -54,7 +54,7 @@ document.querySelector('#toFeed').addEventListener('click', async () => {
     main.innerHTML = ''
     main.appendChild(await feed());
     async function temp() {
-        const rawResponse = await fetch(`//localhost:8080/book`);
+        const rawResponse = await fetch(`//140.82.6.89:8080/book`);
         const content = rawResponse.json();
         return content;
     }
@@ -115,7 +115,7 @@ window.addEventListener('hashchange', async () => {
             refreshData()
             main.appendChild(await feed());
             async function temp() {
-                const rawResponse = await fetch(`//localhost:8080/book`);
+                const rawResponse = await fetch(`//140.82.6.89:8080/book`);
                 const content = rawResponse.json();
                 return content;
             }
