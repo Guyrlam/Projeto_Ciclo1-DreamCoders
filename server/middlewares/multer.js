@@ -3,8 +3,8 @@ const multer = require('multer');
 // multer configurations
 const diskStorage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, './server/images/uploads/');
-    },
+        cb(null, `./server/images/uploads/`);
+    },q
     filename: (req, file, cb) => {
         cb(null, new Date().toISOString().replace(/:/g, '-') + file.originalname);
     },

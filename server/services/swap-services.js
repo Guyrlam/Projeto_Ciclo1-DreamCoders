@@ -47,6 +47,23 @@ async function createRequest(data, token) {
             return verifiedUser;
         }
 
+        // verificar se o livro está em outra troca
+        const list = await exchangeList(client);
+        for (let i = 0; i < list.length; i += 1) {
+            const el = list[i];
+            if (
+                el.id === data.book_id &&
+                el.rejected_at !== null &&
+                el.concluded_at !== null
+            ) {
+                response.Error =
+                    'Este livro já está em um outro processo de troca. Aguarde a rejeição ou conclusão desse.';
+                response.status = 401;
+                rollback(client);
+                return response;
+            }
+        }
+
         const requestArray = [data.book_id, data.change_for];
 
         // adiciona livro ao banco de dados
@@ -157,6 +174,19 @@ async function concludeRequest(exchangeID, token) {
 
         // altera as coleções dos livros
         await changeCollector(data.book_id, data.change_for, client);
+
+        // verificar se o livro está em outra troca e a rejeita
+        const list = await exchangeList(client);
+        for (let i = 0; i < list.length; i += 1) {
+            const el = list[i];
+            if (
+                el.id === data.book_id &&
+                el.rejected_at !== null &&
+                el.concluded_at !== null
+            ) {
+                await rejectSwap(el.id, client);
+            }
+        }
 
         commit(client);
     } catch (error) {
