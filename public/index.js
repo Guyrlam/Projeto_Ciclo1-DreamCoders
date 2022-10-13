@@ -26,7 +26,8 @@ import concludeSwap from './pages/requests/concludeSwap.js';
 import signup from './pages/signup/index.js';
 import postUser from './pages/signup/postUser.js';
 import collectUser from './user/user.js';
-
+import search from './pages/home/search/index.js';
+import showBooksSearch from './pages/home/search/showBooksSearch.js'
 
 
 // Sweet Alert for sugar alerts
@@ -50,6 +51,57 @@ async function refreshHeader() {
     hLogin.appendChild(await headerLogin())
 }
 
+document.querySelector('#header-search-button').addEventListener('click', async () => {
+    const pesquisa = document.querySelector('#header-search-bar')
+    main.innerHTML = ''
+    main.appendChild(await showBooksSearch(pesquisa.value));
+    const bookData = await search(pesquisa.value)
+    const books = document.querySelectorAll('.img-book-feed')
+    for (let i in books) {
+        books[i].addEventListener('click', async () => {
+            book = bookData[i]
+            main.innerHTML = ''
+            main.appendChild(details(bookData[i]));
+            const solicitar = document.querySelector('#button-solicitar')
+            solicitar.addEventListener('click', () => {
+                if (idUser == '') {
+                    alert('Cadastre-se primeiro')
+                }
+                else {
+                    main.innerHTML = ''
+                    main.appendChild(resquestBook(bookData.data[i]))
+
+                    const mybooks = myUser.books
+                    var select = document.getElementById('mybooks-troca');
+
+
+                    let bookToExchange = {}
+                    select.addEventListener('change', async () => {
+                        var bookSelected = select.value;
+                        for (let i in mybooks) {
+                            if (mybooks[i].name == bookSelected) {
+                                document.querySelector('#img-troca').src = mybooks[i].image[0]
+                                bookToExchange = mybooks[i]
+                            }
+                        }
+                    })
+                    const trocar = document.querySelector('#button-trocar')
+                    trocar.addEventListener('click', async () => {
+                        const resp = await swap(bookData.data[i], bookToExchange)
+                        await console.log(resp)
+                        alert(resp.message)
+                        window.location.hash = '#books'
+                    })
+
+                }
+
+            })
+
+
+        })
+    }
+})
+
 document.querySelector('#toFeed').addEventListener('click', async () => {
     main.innerHTML = ''
     main.appendChild(await feed());
@@ -62,6 +114,7 @@ document.querySelector('#toFeed').addEventListener('click', async () => {
     const books = document.querySelectorAll('.img-book-feed')
     for (let i in books) {
         books[i].addEventListener('click', async () => {
+            consolge.log('oi')
             book = books[i]
             main.innerHTML = ''
             main.appendChild(details(bookData.data[i]));
