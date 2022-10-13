@@ -40,7 +40,6 @@
         "jsonwebtoken": "^8.5.1",
         "multer": "^1.4.5-lts.1",
         "pg": "^8.8.0",
-        "sweetalert": "^2.1.2"
     },
     "husky": {
         "hooks": {
