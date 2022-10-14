@@ -22,7 +22,7 @@ function userVerification(req, res, next) {
     try {
         if (!req.body) {
             throw new Error('Não foi possível ler os dados informados');
-        } else if (!req.image) {
+        } else if (!req.file) {
             throw new Error('Adicione uma imagem.');
         } else if (
             !req.body.name ||
