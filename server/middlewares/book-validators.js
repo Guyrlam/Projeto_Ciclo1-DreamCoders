@@ -2,6 +2,8 @@ function bookVerification(req, res, next) {
     try {
         if (!req.body) {
             throw new Error('Não foi possível ler os dados informados');
+        } else if (!req.image) {
+            throw new Error('Adicione uma imagem.');
         } else if (
             !req.body.name ||
             typeof req.body.name !== 'string' ||
