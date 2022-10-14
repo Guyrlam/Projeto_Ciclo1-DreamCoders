@@ -33,7 +33,7 @@ export default () => {
                             <label for="telephone-signup">
                                 Telefone
                             </label>
-                            <input type="telephone" name="telefone" id="telephone-signup" class="filling-signup" required>
+                            <input type="number" name="telefone" id="telephone-signup" class="filling-signup" required>
                             <label for="password-signup">
                                 Senha
                             </label>
