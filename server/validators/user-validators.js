@@ -54,7 +54,7 @@ function logVerification(data) {
             typeof data.password !== 'string' ||
             data.password.length < 6
         ) {
-            throw new Error('Senha inválida');
+            throw new Error('Senha inválida. Utilize ao menos 6 caracteres.');
         }
 
         return true;
@@ -79,12 +79,14 @@ async function logDBVerification(email, password, client) {
         });
 
         if (selected === undefined) {
-            response.Error = 'email ou senha incorretos';
+            response.Error =
+                'Email ou senha incorretos. Caso o cadastro deste perfil tenha sido realizado recentemente aguarde a autorização dos administradores para poder usá-lo.';
             response.status = 404;
         } else {
             const compare = await bcrypt.compare(password, selected.password);
             if (!compare) {
-                response.Error = 'email ou senha incorretos';
+                response.Error =
+                    'Email ou senha incorretos. Caso o cadastro deste perfil tenha sido realizado recentemente aguarde a autorização dos administradores para poder usá-lo.';
                 response.status = 404;
             }
         }

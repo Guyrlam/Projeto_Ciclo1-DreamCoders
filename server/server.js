@@ -1,5 +1,8 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const fs = require('fs');
+const https = require('https');
+const http = require('http');
 const { userRoute } = require('./routes/user-router');
 const { bookRoute } = require('./routes/book-router');
 const { adminRoute } = require('./routes/admin-router');
@@ -23,12 +26,22 @@ app.use('/admin', adminRoute);
 app.use('/swap', swapRoute);
 
 // server
-app.listen(process.env.NDPORT, () => {
-    // eslint-disable-next-line no-console
-    console.log(
-        '\x1b[3;7;38m%s\x1b[0m',
-        `Server started at http://${process.env.NDHOST}:${process.env.NDPORT}`
-    );
+const options = {
+    key: fs.readFileSync('key.pem'),
+    cert: fs.readFileSync('cert.pem'),
+};
+
+https.createServer(options, app).listen(process.env.NDPORT);
+
+app.use(function (request, response) {
+    if (!request.secure) {
+        response.redirect(`https://${request.headers.host}:443/${request.url}`);
+    }
 });
+
+console.log(
+    '\x1b[3;7;38m%s\x1b[0m',
+    `Server started at http://${process.env.NDHOST}:${process.env.NDPORT}`
+);
 
 module.exports = { app };

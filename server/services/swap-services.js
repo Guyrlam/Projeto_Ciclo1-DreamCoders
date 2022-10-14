@@ -295,13 +295,6 @@ async function listRequest(token) {
                         request.accepted_at === null &&
                         request.rejected_at === null
                     ) {
-                        request.status = 'aguardando sua resposta';
-                    } else if (request.rejected_at !== null) {
-                        request.status = 'proposta rejeitada';
-                    } else if (
-                        request.accepted_at !== null &&
-                        request.concluded_at === null
-                    ) {
                         let changeBook;
                         if (book.id === request.change_for) {
                             changeBook = request.book_id;
@@ -316,6 +309,13 @@ async function listRequest(token) {
                             user.email,
                             user.telephone,
                         ];
+                        request.status = 'aguardando sua resposta';
+                    } else if (request.rejected_at !== null) {
+                        request.status = 'proposta rejeitada';
+                    } else if (
+                        request.accepted_at !== null &&
+                        request.concluded_at === null
+                    ) {
                         request.status = 'aguardando confirmação de troca';
                     } else {
                         request.status = 'troca concluída!';
