@@ -24,7 +24,7 @@
     background: var(--white);
     color: var(--dark-blue-green);
     margin-top: 15px;
-    padding: 2%;
+    padding: 1%;
     justify-content:space-between;
     align-items: flex-start;
 }
