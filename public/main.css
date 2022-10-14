@@ -274,3 +274,25 @@ main {
     text-shadow: var(--black);
     letter-spacing: 1.5px;
 }
+#alert{
+    display: none;
+    position: fixed;
+    top: 200px;
+    left: 590px;
+    width:300px;
+    height: 200px;
+    background-color: #FFFAFA;
+    border-radius: 20px;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+    text-align: center;
+}
+#button-alert{
+    height: 40px;
+    width: 100px;
+    border: none;
+    border-radius: 20px;
+    background-color: #2A08FB;
+    color: white;
+}

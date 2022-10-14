@@ -39,7 +39,17 @@ let book = {};
 let em = ''
 let pass = ''
 
-
+function newAlert(msg){
+    const txtalert = document.querySelector('#text-alert')
+    const alert = document.querySelector('#alert')
+    const ok = document.querySelector('#button-alert')
+    txtalert.innerHTML = msg
+    alert.style.display = 'flex'
+    ok.addEventListener('click', () => {
+        alert.style.display = 'none'
+    })
+    return true
+}
 
 async function refreshData() {
     myUser = await collectUser(idUser);
@@ -68,7 +78,7 @@ document
                 const solicitar = document.querySelector('#button-solicitar');
                 solicitar.addEventListener('click', () => {
                     if (idUser == '') {
-                        alert('Cadastre-se primeiro');
+                        newAlert('Cadastre-se primeiro');
                     } else {
                         main.innerHTML = '';
                         main.appendChild(resquestBook(bookData.data[i]));
@@ -94,8 +104,11 @@ document
                                 bookToExchange
                             );
                             await console.log(resp);
-                            alert(resp.message);
-                            window.location.hash = '#books';
+                            
+                            newAlert("Troca solicitada com sucesso!");
+                            window.location.hash = '#profile';
+                            
+                            
                         });
                     }
                 });
@@ -123,7 +136,7 @@ document.querySelector('#toFeed').addEventListener('click', async () => {
             const solicitar = document.querySelector('#button-solicitar');
             solicitar.addEventListener('click', () => {
                 if (idUser == '') {
-                    alert('Cadastre-se primeiro.');
+                    newAlert('Cadastre-se primeiro.');
                 } else {
                     main.innerHTML = '';
                     main.appendChild(resquestBook(bookData.data[i]));
@@ -146,8 +159,8 @@ document.querySelector('#toFeed').addEventListener('click', async () => {
                     trocar.addEventListener('click', async () => {
                         const resp = swap(bookData.data[i], bookToExchange);
                         await console.log(resp);
-                        alert(resp.message);
-                        window.location.hash = '#books';
+                        newAlert("Troca Solicitada com sucesso!");
+                        
                     });
                 }
             });
@@ -181,7 +194,7 @@ window.addEventListener('hashchange', async () => {
                     const solicitar = document.querySelector('#button-solicitar');
                     solicitar.addEventListener('click', () => {
                         if (idUser == '') {
-                            alert('Cadastre-se primeiro');
+                            newAlert('Cadastre-se primeiro');
                         } else {
                             main.innerHTML = '';
                             main.appendChild(resquestBook(bookData.data[i]));
@@ -207,8 +220,8 @@ window.addEventListener('hashchange', async () => {
                                     bookToExchange
                                 );
                                 await console.log(resp);
-                                alert(resp.message);
-                                window.location.hash = '#books';
+                                newAlert("Troca solicitada com sucesso!");
+
                             });
                         }
                     });
@@ -270,7 +283,7 @@ window.addEventListener('hashchange', async () => {
                                     saveEdit.addEventListener('click', async () => {
                                         const resp = await saveedit(myUser);
                                         if (resp.status == 200) {
-                                            alert('Perfil editado com sucesso!');
+                                            newAlert('Perfil editado com sucesso!');
                                             renderProfile();
                                         }
                                     });
@@ -286,7 +299,7 @@ window.addEventListener('hashchange', async () => {
                     });
                     window.location.hash = '#books';
                 } else {
-                    alert(resp.ERROR);
+                    newAlert(resp.ERROR);
                 }
             });
             break;
@@ -303,15 +316,16 @@ window.addEventListener('hashchange', async () => {
                     acceptSwap[k].addEventListener('click', async () => {
                         const idSwap = acceptSwap[k].id.split('_')[1];
                         const resp = await approvedswap(idSwap);
-                        await alert(resp.message);
+                        await newAlert(resp.message);
                         const resp1 = concludeSwap(idSwap);
                         await console.log(resp1);
                         await refreshData();
+                        window.location.hash = "#books"
                     });
                     rejectSwap[k].addEventListener('click', async () => {
                         const idSwap = rejectSwap[k].id.split('_')[1];
                         const resp = await rejectswap(idSwap);
-                        await alert(resp.message);
+                        await newAlert(resp.message);
                         const resp1 = concludeSwap(idSwap);
                         await console.log(resp1);
                         await refreshData;
@@ -327,14 +341,14 @@ window.addEventListener('hashchange', async () => {
                         const idUser = acceptUser[i].id.split('_')[1];
                         const resp = await acceptuser(idUser);
                         if (resp.status == 200) {
-                            alert('Usuário Aceito');
+                            newAlert('Usuário Aceito');
                         }
                     });
                     rejectUser[i].addEventListener('click', async () => {
                         const idUser = rejectUser[i].id.split('_')[1];
                         const resp = await rejectuser(idUser);
                         if (resp.status == 200) {
-                            alert('Usuário Rejeitado');
+                            newAlert('Usuário Rejeitado');
                         }
                     });
                 }
@@ -347,10 +361,10 @@ window.addEventListener('hashchange', async () => {
             submit.addEventListener('click', async () => {
                 const resp = await postUser();
                 if (resp.message == 'Usuário adicionado com sucesso') {
-                    alert('Cadastro realizado com sucesso');
+                    newAlert('Cadastro realizado com sucesso');
                     window.location.hash = '#login';
                 } else {
-                    alert(resp.ERROR);
+                    newAlert(resp.ERROR);
                 }
             });
             break;
@@ -360,11 +374,12 @@ window.addEventListener('hashchange', async () => {
             save.addEventListener('click', async () => {
                 const resp = await postBook();
                 if (resp.message == 'Livro adicionado com sucesso') {
-                    alert('Livro adicionado com sucesso.');
+                    
                     refreshData();
+                    newAlert('Livro adicionado com sucesso.');
                     window.location.hash = '#books';
                 } else {
-                    alert(resp.ERROR);
+                    newAlert(resp.ERROR);
                 }
             });
             break;
@@ -391,7 +406,7 @@ window.addEventListener('hashchange', async () => {
                     const idBook = acceptBook[i].id.split('_')[1];
                     const resp = await acceptbook(idBook);
                     if (resp.status == '200') {
-                        alert('Livro aceito.');
+                        newAlert('Livro aceito.');
                         window.location.hash = '#books';
                     }
                 });
@@ -399,7 +414,7 @@ window.addEventListener('hashchange', async () => {
                     const idBook = rejectBook[i].id.split('_')[1];
                     const resp = await rejectbook(idBook);
                     if (resp.status == '200') {
-                        alert('Livro rejeitado.');
+                        newAlert('Livro rejeitado.');
                         window.location.hash = '#books';
                     }
                 });
