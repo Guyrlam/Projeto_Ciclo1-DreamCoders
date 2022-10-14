@@ -310,7 +310,7 @@ window.addEventListener('hashchange', async () => {
                     '.requestsCliente-accept'
                 );
                 const rejectSwap = document.querySelectorAll(
-                    'requestsCliente-reject'
+                    '.requestsCliente-reject'
                 );
                 for (const k in acceptSwap) {
                     acceptSwap[k].addEventListener('click', async () => {
@@ -325,10 +325,9 @@ window.addEventListener('hashchange', async () => {
                     rejectSwap[k].addEventListener('click', async () => {
                         const idSwap = rejectSwap[k].id.split('_')[1];
                         const resp = await rejectswap(idSwap);
-                        await newAlert(resp.message);
-                        const resp1 = concludeSwap(idSwap);
-                        await console.log(resp1);
-                        await refreshData;
+                        await newAlert("Troca Rejeitada");
+                        await refreshData();
+                        window.location.hash = "#books"
                     });
                 }
             }
