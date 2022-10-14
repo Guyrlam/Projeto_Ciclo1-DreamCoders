@@ -13,7 +13,9 @@ export default (myuser, book) => {
         if (myuser.books[i].collector_id == book.collector_id) {
             return true;
         }
-
-        return false;
+        else{
+            return false;
+        }
+        
     }
 };
