@@ -23,7 +23,7 @@ export default async () => {
         <p>
             Olá, ${reqSwap[i].change_for.collector}! ${reqSwap[i].book_id.collector} deseja trocar o seu livro "${reqSwap[i].change_for.name}" por "${reqSwap[i].book_id.name}"
         </p>
-        <p>Horário: ${reqSwap[i].requested_at}</P>
+        <p>Contato: ${reqSwap[i].contact_for_negotiation}</P>
         <p>Status: ${reqSwap[i].status}</P>
         <div>
             <button id="requests-accept_${reqSwap[i].id}" class="requestsCliente-accept">Aceitar</button>

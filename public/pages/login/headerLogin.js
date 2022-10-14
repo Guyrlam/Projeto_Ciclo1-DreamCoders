@@ -17,6 +17,11 @@ export default async function headerLogin() {
                     Solicitações
                 </a>
             </button>
+            <button class="button-dropdown-menu" id="logout-button">
+                <a href="#logout">
+                    Sair
+                </a>
+            </button>
         </div>
         `;
     container.innerHTML = template;

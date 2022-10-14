@@ -1,7 +1,6 @@
 import { em, pass } from "../../index.js";
+
 export default async () => {
-    const email = document.querySelector('#email-login');
-    const password = document.querySelector('#password-login');
     // console.log(email.value,password.value)
 
     // const formData = new FormData();
@@ -14,8 +13,8 @@ export default async () => {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: new URLSearchParams({
-            email: email.value,
-            password: password.value,
+            email: em,
+            password: pass,
         }),
     });
 
