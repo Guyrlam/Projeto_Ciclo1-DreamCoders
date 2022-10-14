@@ -10,11 +10,14 @@ export default async () => {
         reqTemplateUsers += `
             <div class="requests">
                 <span class="name-type">
-                    Solititações de: ${reqBooks.data[i].name}
+                    Solititações de: ${reqBooks.data[i].collector}
                 </span>
+                <div id="info-requestBooks">
                 <p>
-                    Colecionador: ${reqBooks.data[i].collector}
+                    Livro: ${reqBooks.data[i].name}
                 </p>
+                <img src="${reqBooks.data[i].images[0]}" width="101px" height="142px">
+                </div>
                 <div>
                     <button class="acceptBook-button" id="acceptBook_${reqBooks.data[i].id}">
                         Aceitar

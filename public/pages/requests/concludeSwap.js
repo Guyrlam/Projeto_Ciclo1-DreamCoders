@@ -3,6 +3,6 @@ export default async (id) => {
         method: 'PUT',
         body: {},
     });
-
+    
     return resp.json();
 };

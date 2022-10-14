@@ -28,12 +28,18 @@ import concludeSwap from './pages/requests/concludeSwap.js';
 import signup from './pages/signup/index.js';
 import postUser from './pages/signup/postUser.js';
 import collectUser from './user/user.js';
+import refresh from './pages/home/refresh.js';
+import logout from './pages/login/logout.js';
 
 const main = document.querySelector('#root');
 let myUser = {};
 let idUser = '';
-const myBooks = [];
+let mybooks = [];
 let book = {};
+let em = ''
+let pass = ''
+
+
 
 async function refreshData() {
     myUser = await collectUser(idUser);
@@ -97,6 +103,8 @@ document
         }
     });
 
+
+
 document.querySelector('#toFeed').addEventListener('click', async () => {
     main.innerHTML = '';
     main.appendChild(await feed());
@@ -109,7 +117,6 @@ document.querySelector('#toFeed').addEventListener('click', async () => {
     const books = document.querySelectorAll('.img-book-feed');
     for (const i in books) {
         books[i].addEventListener('click', async () => {
-            consolge.log('oi');
             book = books[i];
             main.innerHTML = '';
             main.appendChild(details(bookData.data[i]));
@@ -226,9 +233,18 @@ window.addEventListener('hashchange', async () => {
                     myUser = await collectUser(idUser);
                     myUser = myUser.data;
                     console.log(myUser);
+                    const email = document.querySelector('#email-login');
+                    const password = document.querySelector('#password-login');
+
 
                     hLogin.innerHTML = '';
                     hLogin.appendChild(await headerLogin());
+                    document.querySelector('#logout-button').addEventListener('click', async () => {
+                        document.cookie += '_deslogado'
+                        const resp = await logout()
+                        console.log(resp)
+                        window.location.reload()
+                    })
                     const helloUser = document.querySelector('#hello-user');
                     const dropdown = document.querySelector('#dropdown-menu');
                     const myprofile = document.querySelector('#myprofile-button');
@@ -363,6 +379,9 @@ window.addEventListener('hashchange', async () => {
             refreshData();
             renderProfile();
             break;
+        case '#logout':
+
+            break;
         case '#book-requests':
             main.appendChild(await requestsBookAdm());
             const acceptBook = document.querySelectorAll('.acceptBook-button');
@@ -386,11 +405,9 @@ window.addEventListener('hashchange', async () => {
                 });
             }
             break;
+
     }
 });
 
-export { myUser, idUser };
+export { myUser, idUser, em, pass };
 
-/* window.addEventListener('load', () => {
-    main.appendChild(home())
-} */

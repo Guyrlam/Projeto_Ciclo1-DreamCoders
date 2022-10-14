@@ -16,7 +16,7 @@
 }
 .requests{
     width:100%;
-    height: 164px;
+    height: 200px;
     border-radius: 15px;
     border: solid 1px;
     display: flex;
@@ -107,4 +107,25 @@
     width: 80px;
     height: 30px;
     color: white;
+}
+.requestsCliente-accept{
+    border: none;
+    border-radius: 25px;
+    width: 80px;
+    height: 30px;
+    color: white;
+}
+.requestsCliente-reject{
+    border: none;
+    border-radius: 25px;
+    width: 80px;
+    height: 30px;
+    color: white;
+}
+#info-requestBooks{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 500px;
+    justify-content: space-around;
 }
