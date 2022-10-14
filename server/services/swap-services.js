@@ -297,9 +297,9 @@ async function listRequest(token) {
                     ) {
                         let changeBook;
                         if (book.id === request.change_for) {
-                            changeBook = request.book_id;
-                        } else {
                             changeBook = request.change_for;
+                        } else {
+                            changeBook = request.book_id;
                         }
                         const user = await getUserByID(
                             changeBook.collector_id,
