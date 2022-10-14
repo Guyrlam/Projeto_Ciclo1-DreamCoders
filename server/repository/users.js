@@ -19,7 +19,7 @@ const checkAdmin = {
 };
 
 const newUser = {
-    text: 'INSERT INTO user_profile(name, image_id, class_id, email, telephone, password) VALUES($1, $2, $3, $4, $5, $6)',
+    text: 'INSERT INTO user_profile(name, image_id, class_id, email, telephone, password, approved) VALUES($1, $2, $3, $4, $5, $6, true)',
     values: [],
 };
 

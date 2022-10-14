@@ -1,5 +1,5 @@
 const insert = {
-    text: 'INSERT INTO Book(name, details, user_id, publisher, writer, condition, category, synopsis) VALUES($1, $2, $3, $4, $5, $6, $7, $8)',
+    text: 'INSERT INTO Book(name, details, user_id, publisher, writer, condition, category, synopsis, approved) VALUES($1, $2, $3, $4, $5, $6, $7, $8, true)',
     values: [],
 };
 
