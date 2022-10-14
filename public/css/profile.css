@@ -50,6 +50,7 @@ main > div {
     border-radius: 25px;
     border: none;
     color: var(--white);
+    display: none;
 }
 #save-edit-profile{
     width: 158px;

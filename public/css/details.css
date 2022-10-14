@@ -69,6 +69,7 @@
     border-radius: 25px;
     color: var(--white);
     font-size: 15px;
+    display: none;
 }
 
 #title-details-book {
