@@ -41,7 +41,7 @@ app.use(function (request, response) {
 
 console.log(
     '\x1b[3;7;38m%s\x1b[0m',
-    `Server started at http://${process.env.NDHOST}:${process.env.NDPORT}`
+    `Server started at https://${process.env.NDHOST}:${process.env.NDPORT}`
 );
 
 module.exports = { app };
