@@ -19,7 +19,7 @@ app.use(cookieParser());
 // routes
 app.use('/', express.static(`./public/`));
 app.use('/storage', express.static(`./server/images/storage/`));
-app.use('/uploads', verifyAdmToken, express.static(`./server/images/uploads/`));
+app.use('/uploads', express.static(`./server/images/uploads/`));
 app.use('/user', userRoute);
 app.use('/book', bookRoute);
 app.use('/admin', adminRoute);
